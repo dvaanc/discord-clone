@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Sidebar from './styles/Sidebar';
 import { ServerTitle, ServerSidebar } from './styles/Server-Sidebar';
-import { ServerRoomContainer, ServerNavBar } from './styles/ServerRoom'
+import { ServerContainer, ServerNavBar, ServerChat, ServerUserList, ServerChatRoomContainer } from './styles/ServerRoom'
+import svg1 from './images/svgexport-29.svg'
 function App() {
   return (
     <Container>
@@ -12,14 +13,22 @@ function App() {
       <ServerSidebar>
         <ServerTitle>
           <h5>Test Server</h5>
-          <img src="images/chevron-bottom.png" alt="" />
+  
         </ServerTitle>
       </ServerSidebar>
-      <ServerRoomContainer>
+      <ServerContainer>
         <ServerNavBar>
-          
+          <img src={ svg1 } alt="" />
         </ServerNavBar>
-      </ServerRoomContainer>
+        <ServerChatRoomContainer>
+          <ServerChat>
+
+          </ServerChat>
+          <ServerUserList>
+
+          </ServerUserList>
+        </ServerChatRoomContainer>
+        </ServerContainer>
     </Container>
   );
 }
@@ -29,6 +38,7 @@ const Container = styled.div`
   flex-direction: row;
   min-width: 100%;
   min-height: 100%;
-  background-color: #36393F;
+  /* background-color: #36393F; */
+  background-color: darkred;
 `
 export default App;

@@ -6,7 +6,8 @@ const Sidebar = styled.div`
   gap: 0.5rem;
   align-items: center;
   justify-content: space-evenly;
-  min-width: 3.5rem;
+  width: 62px;
+  flex-shrink: 0;
   height: 100%;
   background-color: #202225;
 `
