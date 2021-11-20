@@ -20,8 +20,8 @@ const UserStatusPanel = styled.div<{ opacity: number, }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 240px;
-  height: 300px;
+  width: 240px;
+  height: auto;
   max-height: calc(100vh - 32px);
   padding: 6px 8px;
   cursor: default;
@@ -30,9 +30,13 @@ const UserStatusPanel = styled.div<{ opacity: number, }>`
   opacity: ${ props => props.opacity };
   transition: opacity .08s ease-out;
   border-radius: 4px;
-  & div:nth-child(1) {
+  & div:first-child {
     border-bottom: 1px solid hsla(0,0%,100%,0.06);
     padding-bottom: 10px;
+  }
+  & div:last-child {
+    border-top: 1px solid hsla(0,0%,100%,0.06);
+    padding-top: 10px;
   }
 `
 const StatusItem = styled.div`
@@ -48,6 +52,20 @@ const StatusItem = styled.div`
   line-height: 18px;
   color: #b9bbbe;
   cursor: pointer;
+  & span {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 4px;
+    height: 100%;
+  }
+  & div {
+    & p:nth-child(2) {
+      font-size: 10px;
+    }
+  }
+`
+const StatusItemImageContainer = styled.span`
+
 `
 
 export { LayerContainer, UserStatusContainer, UserStatusPanel, StatusItem };

@@ -6,6 +6,7 @@ import { ServerContainer, ServerNavBar, ServerChat, ServerUserList, ServerChatRo
 import { LayerContainer, UserStatusContainer, UserStatusPanel, StatusItem } from './styles/LayerContainer';
 import svg1 from './images/channelHashIcon.svg'
 import svg2 from './images/svgexport-74.svg'
+import Image from './imagesObj';
 function App() {
   const [userStatusPanelOpactiy, setUserPanelOpacity] = React.useState(1 as number);
   return (
@@ -27,7 +28,6 @@ function App() {
       </ServerSidebar>
       <ServerContainer>
         <ServerNavBar>
-          <img src={ svg1 } alt="" />
         </ServerNavBar>
         <ServerChatRoomContainer>
           <ServerChat>
@@ -42,8 +42,43 @@ function App() {
           <UserStatusContainer>
             <UserStatusPanel opacity={userStatusPanelOpactiy}>
               <StatusItem>
-                <img src={svg2} alt="" />
+                <span>
+                <img src={Image.onlineStatusIcon} alt="" />
+                </span>
                 <p>Online</p>
+              </StatusItem>
+              <StatusItem>
+                <span>
+                  <img src={Image.idleStatusIcon} alt="" />
+                </span>
+                <p>Idle</p>
+              </StatusItem>
+              <StatusItem>
+                <span>
+                  <img src={Image.doNoDisturbStatusIcon} alt="" />
+                </span>
+                <div>
+                  <p>Do Not Disturb</p>
+                  <p>You will not receive any desktop notifications.</p>
+                </div>
+              </StatusItem>
+              <StatusItem>
+                <span>
+                  <img src={Image.invisibleStatusIcon} alt="" />
+                </span>
+                <div>
+                  <p>Invisible</p>
+                  <p>You will not appear online, but you will have full access to all of Discord.</p>
+                </div>
+              </StatusItem>
+              <StatusItem>
+                <span>
+                  <img src="" alt="" />
+                </span>
+                <h4>Edit Custom Status</h4>
+                <span>
+                  <img src={Image.deleteStatusIcon} alt="" />
+                </span>
               </StatusItem>
             </UserStatusPanel>
           </UserStatusContainer>
