@@ -5,7 +5,7 @@ const ServerSidebar = styled.nav`
   width: 272px;
   flex-shrink: 0;
   height: 100%;
-  background-color: #2F3136;
+  background-color: #2f3136;
 `
 const ServerTitle = styled.div`
   display: flex;
@@ -24,5 +24,26 @@ const ServerTitle = styled.div`
     cursor: pointer;
   }
 `
-
-export { ServerSidebar, ServerTitle };
+const ServerChannelList = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`
+const UserPanel = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  min-width: 100%;
+  flex-shrink: 0;
+  padding: 0 8px;
+  background-color: #292b2f;
+`
+const Avatar = styled.img`
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+`
+export { ServerSidebar, ServerTitle, ServerChannelList, UserPanel, Avatar };

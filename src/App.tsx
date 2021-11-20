@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Sidebar from './styles/Sidebar';
-import { ServerTitle, ServerSidebar } from './styles/Server-Sidebar';
-import { ServerContainer, ServerNavBar, ServerChat, ServerUserList, ServerChatRoomContainer } from './styles/ServerRoom'
-import svg1 from './images/svgexport-29.svg'
+import { ServerTitle, ServerSidebar, ServerChannelList, UserPanel, Avatar } from './styles/Server-Sidebar';
+import { ServerContainer, ServerNavBar, ServerChat, ServerUserList, ServerChatRoomContainer } from './styles/ServerRoom';
+import { LayerContainer, UserStatusContainer, UserStatusPanel, StatusItem } from './styles/LayerContainer';
+import svg1 from './images/channelHashIcon.svg'
+import svg2 from './images/svgexport-74.svg'
 function App() {
+  const [userStatusPanelOpactiy, setUserPanelOpacity] = React.useState(1 as number);
   return (
     <Container>
       <Sidebar>
@@ -15,6 +18,12 @@ function App() {
           <h5>Test Server</h5>
   
         </ServerTitle>
+        <ServerChannelList>
+
+        </ServerChannelList>
+        <UserPanel>
+          <Avatar src="" />
+        </UserPanel>
       </ServerSidebar>
       <ServerContainer>
         <ServerNavBar>
@@ -29,6 +38,16 @@ function App() {
           </ServerUserList>
         </ServerChatRoomContainer>
         </ServerContainer>
+        <LayerContainer>
+          <UserStatusContainer>
+            <UserStatusPanel opacity={userStatusPanelOpactiy}>
+              <StatusItem>
+                <img src={svg2} alt="" />
+                <p>Online</p>
+              </StatusItem>
+            </UserStatusPanel>
+          </UserStatusContainer>
+        </LayerContainer>
     </Container>
   );
 }

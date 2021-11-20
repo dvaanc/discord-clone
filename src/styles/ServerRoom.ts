@@ -27,13 +27,12 @@ const ServerChat = styled.div`
   height: 100%;
   flex-grow: 1;
   flex-shrink: 0;
-  width: 300px;
   overflow: hidden scroll;
 `
 const ServerUserList = styled.div`
   display: flex;
   flex-direction: column;
-  width: 240px;
+  min-width: 240px;
   flex-shrink: 0;
   height: 100%;
   background-color: #2F3136;
