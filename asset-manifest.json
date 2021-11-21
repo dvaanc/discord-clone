@@ -1,19 +1,21 @@
 {
   "files": {
     "main.css": "/discord-clone/static/css/main.59f303ea.chunk.css",
-    "main.js": "/discord-clone/static/js/main.0fe1b6f0.chunk.js",
-    "main.js.map": "/discord-clone/static/js/main.0fe1b6f0.chunk.js.map",
+    "main.js": "/discord-clone/static/js/main.dffe371e.chunk.js",
+    "main.js.map": "/discord-clone/static/js/main.dffe371e.chunk.js.map",
     "runtime-main.js": "/discord-clone/static/js/runtime-main.d0ec1cf0.js",
     "runtime-main.js.map": "/discord-clone/static/js/runtime-main.d0ec1cf0.js.map",
-    "static/js/2.9d8711e2.chunk.js": "/discord-clone/static/js/2.9d8711e2.chunk.js",
-    "static/js/2.9d8711e2.chunk.js.map": "/discord-clone/static/js/2.9d8711e2.chunk.js.map",
+    "static/js/2.612ec23c.chunk.js": "/discord-clone/static/js/2.612ec23c.chunk.js",
+    "static/js/2.612ec23c.chunk.js.map": "/discord-clone/static/js/2.612ec23c.chunk.js.map",
     "index.html": "/discord-clone/index.html",
     "static/css/main.59f303ea.chunk.css.map": "/discord-clone/static/css/main.59f303ea.chunk.css.map",
-    "static/js/2.9d8711e2.chunk.js.LICENSE.txt": "/discord-clone/static/js/2.9d8711e2.chunk.js.LICENSE.txt",
+    "static/js/2.612ec23c.chunk.js.LICENSE.txt": "/discord-clone/static/js/2.612ec23c.chunk.js.LICENSE.txt",
     "static/media/addReactionIcon.7741d7fb.svg": "/discord-clone/static/media/addReactionIcon.7741d7fb.svg",
+    "static/media/addSearchIcon.219e622f.svg": "/discord-clone/static/media/addSearchIcon.219e622f.svg",
     "static/media/bellIcon.28206142.svg": "/discord-clone/static/media/bellIcon.28206142.svg",
     "static/media/channelHashIcon.65757111.svg": "/discord-clone/static/media/channelHashIcon.65757111.svg",
     "static/media/chevronBottomIcon.36077ab7.svg": "/discord-clone/static/media/chevronBottomIcon.36077ab7.svg",
+    "static/media/clearHistoryIcon.33727c8e.svg": "/discord-clone/static/media/clearHistoryIcon.33727c8e.svg",
     "static/media/closeIcon.9cc5c638.svg": "/discord-clone/static/media/closeIcon.9cc5c638.svg",
     "static/media/closeIcon2.9c150d33.svg": "/discord-clone/static/media/closeIcon2.9c150d33.svg",
     "static/media/createChannelIcon.30ce1d2c.svg": "/discord-clone/static/media/createChannelIcon.30ce1d2c.svg",
@@ -32,6 +34,7 @@
     "static/media/idleStatusIcon.4b55cfee.svg": "/discord-clone/static/media/idleStatusIcon.4b55cfee.svg",
     "static/media/inboxIcon.81f773e4.svg": "/discord-clone/static/media/inboxIcon.81f773e4.svg",
     "static/media/invisibleStatusIcon.968cf6a7.svg": "/discord-clone/static/media/invisibleStatusIcon.968cf6a7.svg",
+    "static/media/learnMoreIcon.0ef221f8.svg": "/discord-clone/static/media/learnMoreIcon.0ef221f8.svg",
     "static/media/magnifyingGlassIcon.3454778b.svg": "/discord-clone/static/media/magnifyingGlassIcon.3454778b.svg",
     "static/media/memberListIcon.6629293f.svg": "/discord-clone/static/media/memberListIcon.6629293f.svg",
     "static/media/moreIcon.d6e4324e.svg": "/discord-clone/static/media/moreIcon.d6e4324e.svg",
@@ -54,8 +57,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.d0ec1cf0.js",
-    "static/js/2.9d8711e2.chunk.js",
+    "static/js/2.612ec23c.chunk.js",
     "static/css/main.59f303ea.chunk.css",
-    "static/js/main.0fe1b6f0.chunk.js"
+    "static/js/main.dffe371e.chunk.js"
   ]
 }
