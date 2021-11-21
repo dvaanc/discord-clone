@@ -4,4 +4,4 @@
 ## Project Overview
 Recreation of Discord on the web.
 
-### Live Preview: ****
+### Live Preview: **https://dvaanc.github.io/discord-clone/**

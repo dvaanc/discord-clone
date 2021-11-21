@@ -17,7 +17,7 @@ const ServerTitle = styled.div`
   padding-left: 35px;
   border-bottom: 1px solid #202225;
   font-size: 20px;
-  color: white;
+  color: #FFFFFF;
   transition: background-color .1s linear;
   &:hover {
     background-color: #33363C;
@@ -28,6 +28,36 @@ const ServerChannelList = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  padding: 20px 8px;
+`
+const ServerChannel = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%; 
+  height: 38px;
+  padding: 0 5px;
+  align-items: center;
+  color: #8e9297;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  &:hover {
+    background-color: #33363C;
+    color: #FFFFFF;
+  }
+  & div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    & span {
+      margin-right: 8px;
+    }
+    & p {
+      padding-bottom: 4px;
+    }
+  }
 `
 const UserPanel = styled.div`
   display: flex;
@@ -46,4 +76,11 @@ const Avatar = styled.img`
   background-color: white;
   cursor: pointer;
 `
-export { ServerSidebar, ServerTitle, ServerChannelList, UserPanel, Avatar };
+export { 
+  ServerSidebar, 
+  ServerTitle, 
+  ServerChannelList, 
+  UserPanel, 
+  Avatar, 
+  ServerChannel 
+};

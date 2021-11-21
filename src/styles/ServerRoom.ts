@@ -10,10 +10,54 @@ const ServerContainer = styled.div`
 const ServerNavBar = styled.nav`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
   flex-shrink: 0;
   height: 48px;
   width: 100%;
   border-bottom: 1px solid #202225;
+  color: #FFFFFF;
+  & span:first-child {
+    margin-right: 8px;
+  }
+  & h4 {
+    padding-bottom: 3px;
+  }
+`
+const ServerNavFlexStartContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    height: 100%;
+    z-index: 1;
+
+`
+const ServerNavFlexEndContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 400px;
+  height: 100%;
+  flex-shrink: 0;
+  gap: 15px;
+  z-index: 2;
+  & img:hover {
+    cursor: pointer;
+  }
+  & input[type="text"] {
+    height: 30px;
+    background-color: #202225;
+    border: none;
+    border-radius: 4px;
+    padding-left: 5px;
+    color: #FFFFFF;
+    &:focus {
+      outline: none;
+    }
+  }
 `
 const ServerChatRoomContainer = styled.div`
   display: flex;
@@ -39,4 +83,12 @@ const ServerUserList = styled.div`
 `
 // #b9bbbe
 // #dcddde
-export { ServerContainer, ServerNavBar, ServerChat, ServerUserList, ServerChatRoomContainer };
+export { 
+  ServerContainer, 
+  ServerNavBar, 
+  ServerChat, 
+  ServerUserList, 
+  ServerChatRoomContainer,
+  ServerNavFlexStartContainer,
+  ServerNavFlexEndContainer,
+};
