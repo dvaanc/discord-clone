@@ -22,7 +22,9 @@ const ServerNavBar = styled.nav`
     margin-right: 8px;
   }
   & h4 {
+    font-size: 16px;
     padding-bottom: 3px;
+    letter-spacing: 1px;
   }
 `
 const ServerNavFlexStartContainer = styled.div`
@@ -39,7 +41,7 @@ const ServerNavFlexEndContainer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  min-width: 400px;
+  min-width: 600px;
   height: 100%;
   flex-shrink: 0;
   gap: 15px;
@@ -47,15 +49,30 @@ const ServerNavFlexEndContainer = styled.div`
   & img:hover {
     cursor: pointer;
   }
+`
+const SearchInput = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #202225;
+  padding-right: 5px;
+  width: auto;
+  border-radius: 4p5;
+  & img {
+    height: 20px;
+  }
   & input[type="text"] {
-    height: 30px;
+    min-width: 150px;
+    height: 27px;
     background-color: #202225;
     border: none;
     border-radius: 4px;
     padding-left: 5px;
     color: #FFFFFF;
+    font-size: 16px;
     &:focus {
       outline: none;
+      min-width: 300px;
     }
   }
 `
@@ -91,4 +108,5 @@ export {
   ServerChatRoomContainer,
   ServerNavFlexStartContainer,
   ServerNavFlexEndContainer,
+  SearchInput,
 };

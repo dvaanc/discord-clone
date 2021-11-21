@@ -2,17 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import Sidebar from './styles/Sidebar';
 import { ServerTitle, ServerSidebar, ServerChannelList, UserPanel, Avatar, ServerChannel } from './styles/Server-Sidebar';
-import { ServerContainer, ServerNavBar, ServerChat, ServerUserList, ServerChatRoomContainer, ServerNavFlexStartContainer, ServerNavFlexEndContainer } from './styles/ServerRoom';
-import { LayerContainer, UserStatusContainer, UserStatusPanel, StatusItem } from './styles/LayerContainer';
-import svg1 from './images/channelHashIcon.svg'
-import svg2 from './images/svgexport-74.svg'
+import { ServerContainer, ServerNavBar, ServerChat, ServerUserList, ServerChatRoomContainer, ServerNavFlexStartContainer, ServerNavFlexEndContainer, SearchInput } from './styles/ServerRoom';
+import { LayerContainer, UserStatusContainer, UserStatusPanel, StatusItem, SearchPanel, SearchPanelItem } from './styles/LayerContainer';
 import Image from './imagesObj';
 function App() {
-  const [userStatusPanelOpactiy, setUserPanelOpacity] = React.useState(0 as number);
+  const [userStatusPanelDisplay, setUserPanelDisplay] = React.useState('none' as string);
+  const [searchPanelDisplay, setSearchPanelDisplay] = React.useState('none' as string);
+  const toggleUserStatusPanel = (e:React.MouseEvent): void => {
+    userStatusPanelDisplay === 'none' ? setUserPanelDisplay('flex') : setUserPanelDisplay('none');
+  }
   return (
     <Container>
       <Sidebar>
-
+        
       </Sidebar>
       <ServerSidebar>
         <ServerTitle>
@@ -31,7 +33,7 @@ function App() {
           </ServerChannel>
         </ServerChannelList>
         <UserPanel>
-          <Avatar src="" />
+          <Avatar onClick={toggleUserStatusPanel}/>
         </UserPanel>
       </ServerSidebar>
       <ServerContainer>
@@ -47,7 +49,10 @@ function App() {
             <img src={Image.bellIcon} alt="" />
             <img src={Image.pinIcon} alt="" />
             <img src={Image.memberListIcon} alt="" />
-            <input type="text" placeholder="Search" />
+            <SearchInput>
+              <input type="text" placeholder="Search" />
+              <img src={Image.magnifyingGlassIcon} alt="" />
+            </SearchInput>
             <img src={Image.inboxIcon} alt="" />
             <img src={Image.helpIcon} alt="" />
           </ServerNavFlexEndContainer>
@@ -63,7 +68,62 @@ function App() {
         </ServerContainer>
         <LayerContainer>
           <UserStatusContainer>
-            <UserStatusPanel opacity={userStatusPanelOpactiy}>
+            <SearchPanel display={searchPanelDisplay}>
+              <div>
+                <p>SEARCH OPTIONS</p>
+                <img src="" alt="" />
+              </div>
+            <SearchPanelItem>
+              <span>
+                <h4>from:</h4>
+                <p>user</p>
+              </span>
+              <img src={Image.addSearchIcon} alt="" />
+            </SearchPanelItem>
+            <SearchPanelItem>
+              <span>
+                <h4>mentions:</h4>
+                <p>user</p>
+              </span>
+              <img src={Image.addSearchIcon} alt="" />
+            </SearchPanelItem>
+            <SearchPanelItem>
+              <span>
+                <h4>has:</h4>
+                <p>link, embed or file</p>
+              </span>
+              <img src={Image.addSearchIcon} alt="" />
+            </SearchPanelItem>
+            <SearchPanelItem>
+              <span>
+                <h4>before:</h4>
+                <p>specific date</p>
+              </span>
+              <img src={Image.addSearchIcon} alt="" />
+            </SearchPanelItem>
+            <SearchPanelItem>
+              <span>
+                <h4>during:</h4>
+                <p>specific date</p>
+              </span>
+              <img src={Image.addSearchIcon} alt="" />
+            </SearchPanelItem>
+            <SearchPanelItem>
+              <span>
+                <h4>after:</h4>
+                <p>specific date</p>
+              </span>
+              <img src={Image.addSearchIcon} alt="" />
+            </SearchPanelItem>
+            <SearchPanelItem>
+              <span>
+                <h4>in:</h4>
+                <p>channel</p>
+              </span>
+              <img src={Image.addSearchIcon} alt="" />
+            </SearchPanelItem>
+            </SearchPanel>
+            <UserStatusPanel display={userStatusPanelDisplay}>
               <StatusItem>
                 <span>
                 <img src={Image.onlineStatusIcon} alt="" />

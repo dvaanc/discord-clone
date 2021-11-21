@@ -2,7 +2,7 @@ import styled from "styled-components";
 const ServerSidebar = styled.nav`
   display: flex;
   flex-direction: column;
-  width: 272px;
+  width: 260px;
   flex-shrink: 0;
   height: 100%;
   background-color: #2f3136;
@@ -69,7 +69,7 @@ const UserPanel = styled.div`
   padding: 0 8px;
   background-color: #292b2f;
 `
-const Avatar = styled.img`
+const Avatar = styled.div`
   height: 32px;
   width: 32px;
   border-radius: 50%;

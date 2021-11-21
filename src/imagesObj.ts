@@ -39,6 +39,9 @@ import idleStatusIcon from './images/idleStatusIcon.svg';
 import invisibleStatusIcon from './images/invisibleStatusIcon.svg';
 import unmuteIcon from './images/unmuteIcon.svg';
 import deleteStatusIcon from './images/deleteStatusIcon.svg';
+import learnMoreIcon from './images/learnMoreIcon.svg';
+import addSearchIcon from './images/addSearchIcon.svg';
+import clearHistoryIcon from './images/clearHistoryIcon.svg';
 
 const Image = {
   addReactionIcon,
@@ -82,7 +85,9 @@ const Image = {
   invisibleStatusIcon,
   unmuteIcon,
   deleteStatusIcon,
-  
+  learnMoreIcon,
+  addSearchIcon,
+  clearHistoryIcon,
 }
 
 export default Image;
