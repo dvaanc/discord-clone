@@ -27,17 +27,17 @@ const UserStatusPanel = styled.div<{ display: string, }>`
   cursor: default;
   background-color: #18191c;
   box-shadow: 0 8px 16px rgba(0,0,0,0.24);
-  
   transition: all .08s ease-out;
   border-radius: 4px;
-  & div:first-child {
+  /* & div:nth-child(1) {
     border-bottom: 1px solid hsla(0,0%,100%,0.06);
     padding-bottom: 10px;
-  }
-  & div:last-child {
+  } */
+  /* & div:nth-child(5) {
     border-top: 1px solid hsla(0,0%,100%,0.06);
     padding-top: 10px;
-  }
+    justify-content: space-between;
+  } */
 `
 const StatusItem = styled.div`
   display: flex;
@@ -52,9 +52,13 @@ const StatusItem = styled.div`
   line-height: 18px;
   color: #b9bbbe;
   cursor: pointer;
+  border-radius: 2px;
+  &:hover {
+      background-color: #4752C4;
+    }
   & span {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding-bottom: 4px;
     height: 100%;
   }
@@ -63,6 +67,11 @@ const StatusItem = styled.div`
       font-size: 10px;
     }
   }
+`
+const Seperator = styled.div`
+  height: 5px;
+  width: 100%;
+  border-bottom: 1px solid hsla(0,0%,100%,0.06);
 `
 // const StatusItemImageContainer = styled.span`
 
@@ -131,4 +140,5 @@ export {
   StatusItem,
   SearchPanel,
   SearchPanelItem,
+  Seperator
 };

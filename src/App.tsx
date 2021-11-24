@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Sidebar from './styles/Sidebar';
+import { Sidebar, SidebarItem, HomeButton, Icon, Pill } from './styles/Sidebar';
 import { ServerTitle, ServerSidebar, ServerChannelList, UserPanel, Avatar, ServerChannel } from './styles/Server-Sidebar';
 import { ServerContainer, ServerNavBar, ServerChat, ServerUserList, ServerChatRoomContainer, ServerNavFlexStartContainer, ServerNavFlexEndContainer, SearchInput } from './styles/ServerRoom';
-import { LayerContainer, UserStatusContainer, UserStatusPanel, StatusItem, SearchPanel, SearchPanelItem } from './styles/LayerContainer';
+import { LayerContainer, UserStatusContainer, UserStatusPanel, StatusItem, SearchPanel, SearchPanelItem, Seperator } from './styles/LayerContainer';
 import Image from './imagesObj';
 function App() {
   const [userStatusPanelDisplay, setUserPanelDisplay] = React.useState('none' as string);
@@ -14,7 +14,15 @@ function App() {
   return (
     <Container>
       <Sidebar>
-        
+        <SidebarItem>
+          <Pill />
+          <HomeButton>
+            <img src={Image.discordLogo} alt="" />
+          </HomeButton>
+        </SidebarItem>
+        <SidebarItem>
+          <Pill />
+        </SidebarItem>
       </Sidebar>
       <ServerSidebar>
         <ServerTitle>
@@ -130,6 +138,7 @@ function App() {
                 </span>
                 <p>Online</p>
               </StatusItem>
+              <Seperator />
               <StatusItem>
                 <span>
                   <img src={Image.idleStatusIcon} alt="" />
@@ -154,10 +163,8 @@ function App() {
                   <p>You will not appear online, but you will have full access to all of Discord.</p>
                 </div>
               </StatusItem>
-              <StatusItem>
-                <span>
-                  <img src="" alt="" />
-                </span>
+              <Seperator />
+              <StatusItem style={{ justifyContent: "space-between", alignItems: "center" }}>
                 <h4>Edit Custom Status</h4>
                 <span>
                   <img src={Image.deleteStatusIcon} alt="" />
