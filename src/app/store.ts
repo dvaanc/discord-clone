@@ -1,9 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-
+import userStatusPanelReducer from "../features/userStatusPanelSlice";
 export const store = configureStore({
   reducer: {
-    
+    userStatusPanel: userStatusPanelReducer,
   },
 })
 

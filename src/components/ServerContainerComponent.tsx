@@ -11,7 +11,7 @@ import {
 import Image from '../imagesObj';
 import React from 'react';
 
-const ServerContainerComponent = () => {
+export default function ServerContainerComponent() {
   return (
     <ServerContainer>
     <ServerNavBar>
@@ -45,5 +45,3 @@ const ServerContainerComponent = () => {
     </ServerContainer>
   )
 }
-
-export default ServerContainerComponent

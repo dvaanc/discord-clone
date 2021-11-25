@@ -13,7 +13,7 @@ interface LayerProps {
   searchPanelDisplay: boolean,
   userStatusPanelDisplay: boolean,
 }
-const LayerContainerComponent: React.FC<LayerProps> = ({ searchPanelDisplay, userStatusPanelDisplay }) => {
+export default function LayerContainerComponent({ searchPanelDisplay, userStatusPanelDisplay }: LayerProps) {
   return (
     <LayerContainer>
     <UserStatusContainer>
@@ -117,4 +117,3 @@ const LayerContainerComponent: React.FC<LayerProps> = ({ searchPanelDisplay, use
   )
 }
 
-export default LayerContainerComponent;

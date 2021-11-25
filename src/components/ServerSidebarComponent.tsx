@@ -11,8 +11,7 @@ import React from 'react';
 interface ServerSidebarProps {
   toggleUserStatusPanel(): void,
 }
-const ServerSidebarComponent:React.FC<ServerSidebarProps> = ({ toggleUserStatusPanel }) => {
-  
+export default function ServerSidebarComponent({ toggleUserStatusPanel }: ServerSidebarProps) {
   return(
   <ServerSidebar>
     <ServerTitle>
@@ -36,5 +35,3 @@ const ServerSidebarComponent:React.FC<ServerSidebarProps> = ({ toggleUserStatusP
   </ServerSidebar>
   )
 }
-
-export default ServerSidebarComponent; 

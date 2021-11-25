@@ -4,7 +4,7 @@ import Image from '../imagesObj';
 interface SidebarProps {
 
 }
-const SidebarComponent = ({}) => {
+export default function SidebarComponent() {
   return(
     <Sidebar>
       <SidebarItem>
@@ -20,5 +20,3 @@ const SidebarComponent = ({}) => {
     </Sidebar>
   )
 }
-
-export default SidebarComponent;
