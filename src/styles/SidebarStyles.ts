@@ -54,7 +54,6 @@ const HomeButton = styled(Icon)`
     background-color: #5865F2;
   }
 `
-
 const Pill = styled.span`
   position: relative;
   display: flex;
@@ -65,6 +64,20 @@ const Pill = styled.span`
   margin-left: -5px;
   background-color: white;
   border-radius: 0 4px 4px 0;
+  transition: height 0.15s ease-out;
+`
+const Seperator = styled.div`
+  width: 32px;
+  height: 4px;
+  background-color: #36393f;
+  border-radius: 25%;
 `
 // hsl(235,calc(var(--saturation-factor, 1)*85.6%),64.7%)
-export { Sidebar, SidebarItem, HomeButton, Icon, Pill };
+export {
+  Sidebar,
+  SidebarItem,
+  HomeButton, 
+  Icon, 
+  Pill, 
+  Seperator,
+};

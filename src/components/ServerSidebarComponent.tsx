@@ -8,12 +8,11 @@ import {
 } from '../styles/ServerSidebarStyles';
 import Image from '../imagesObj';
 import React from 'react';
-const ServerSidebarComponent = () => {
+interface ServerSidebarProps {
+  toggleUserStatusPanel(): void,
+}
+const ServerSidebarComponent:React.FC<ServerSidebarProps> = ({ toggleUserStatusPanel }) => {
   
-  // const toggleUserStatusPanel = (e:React.MouseEvent): void => {
-  //   userStatusPanelDisplay === 'none' ? setUserPanelDisplay('flex') : setUserPanelDisplay('none');
-  // }
-
   return(
   <ServerSidebar>
     <ServerTitle>
@@ -32,7 +31,7 @@ const ServerSidebarComponent = () => {
     </ServerChannelList>
 
     <UserPanel>
-      {/* <Avatar onClick={toggleUserStatusPanel}/> */}
+      <Avatar onClick={toggleUserStatusPanel}/>
     </UserPanel>
   </ServerSidebar>
   )
