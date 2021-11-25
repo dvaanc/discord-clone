@@ -16,8 +16,8 @@ const UserStatusContainer = styled.div`
   bottom: 57px;
   pointer-events: auto;
 `
-const UserStatusPanel = styled.div<{ display: string, }>`
-  display: ${props => props.display};
+const UserStatusPanel = styled.div<{ display: boolean, }>`
+  display: ${props => props.display === true ? 'flex' : 'none'};
   flex-direction: column;
   align-items: center;
   width: 240px;
@@ -76,11 +76,11 @@ const Seperator = styled.div`
 // const StatusItemImageContainer = styled.span`
 
 // `
-const SearchPanel = styled.div<{ display: string }>`
+const SearchPanel = styled.div<{ display: boolean }>`
   position: fixed;
   top: 45px;
   right: 20px;
-  display: ${props => props.display};
+  display: ${props => props.display === true ? 'flex' : 'none'};
   flex-direction: column;
   min-width: 380px;
   height: auto;

@@ -8,7 +8,7 @@ import {
 } from '../styles/ServerSidebarStyles';
 import Image from '../imagesObj';
 import React from 'react';
-function ServerSidebarComponent() {
+const ServerSidebarComponent = () => {
   
   // const toggleUserStatusPanel = (e:React.MouseEvent): void => {
   //   userStatusPanelDisplay === 'none' ? setUserPanelDisplay('flex') : setUserPanelDisplay('none');

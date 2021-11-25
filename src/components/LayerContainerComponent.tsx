@@ -9,11 +9,15 @@ import {
 } from '../styles/LayerContainerStyles';
 import Image from '../imagesObj';
 import React from 'react';
-function LayerContainerComponent() {
+interface LayerProps {
+  searchPanelDisplay: boolean,
+  userStatusPanelDisplay: boolean,
+}
+const LayerContainerComponent: React.FC<LayerProps> = ({ searchPanelDisplay, userStatusPanelDisplay }) => {
   return (
     <LayerContainer>
     <UserStatusContainer>
-      <SearchPanel display='flex'>
+      <SearchPanel display={searchPanelDisplay}>
         <div>
           <p>SEARCH OPTIONS</p>
           <img src="" alt="" />
@@ -68,7 +72,7 @@ function LayerContainerComponent() {
         <img src={Image.addSearchIcon} alt="" />
       </SearchPanelItem>
       </SearchPanel>
-      <UserStatusPanel display='flex'>
+      <UserStatusPanel display={userStatusPanelDisplay}>
         <StatusItem>
           <span>
           <img src={Image.onlineStatusIcon} alt="" />

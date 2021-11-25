@@ -11,7 +11,7 @@ import {
 import Image from '../imagesObj';
 import React from 'react';
 
-function ServerContainerComponent() {
+const ServerContainerComponent = () => {
   return (
     <ServerContainer>
     <ServerNavBar>

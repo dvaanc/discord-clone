@@ -1,6 +1,10 @@
 import { Sidebar, SidebarItem, HomeButton, Icon, Pill } from '../styles/SidebarStyles';
 import Image from '../imagesObj';
-function SidebarComponent() {
+
+interface SidebarProps {
+
+}
+const SidebarComponent = ({}) => {
   return(
     <Sidebar>
       <SidebarItem>
