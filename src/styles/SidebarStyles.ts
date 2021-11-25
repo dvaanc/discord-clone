@@ -22,7 +22,6 @@ const SidebarItem = styled.div`
     & span:first-child {
       height: 18px;
     }
-  
   }
 `
 const Icon = styled.div`
