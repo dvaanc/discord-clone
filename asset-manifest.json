@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/discord-clone/static/css/main.59f303ea.chunk.css",
-    "main.js": "/discord-clone/static/js/main.dffe371e.chunk.js",
-    "main.js.map": "/discord-clone/static/js/main.dffe371e.chunk.js.map",
+    "main.js": "/discord-clone/static/js/main.e899a2eb.chunk.js",
+    "main.js.map": "/discord-clone/static/js/main.e899a2eb.chunk.js.map",
     "runtime-main.js": "/discord-clone/static/js/runtime-main.d0ec1cf0.js",
     "runtime-main.js.map": "/discord-clone/static/js/runtime-main.d0ec1cf0.js.map",
     "static/js/2.612ec23c.chunk.js": "/discord-clone/static/js/2.612ec23c.chunk.js",
@@ -59,6 +59,6 @@
     "static/js/runtime-main.d0ec1cf0.js",
     "static/js/2.612ec23c.chunk.js",
     "static/css/main.59f303ea.chunk.css",
-    "static/js/main.dffe371e.chunk.js"
+    "static/js/main.e899a2eb.chunk.js"
   ]
 }
