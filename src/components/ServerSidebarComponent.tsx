@@ -8,10 +8,31 @@ import {
 } from '../styles/ServerSidebarStyles';
 import Image from '../imagesObj';
 import React from 'react';
-interface ServerSidebarProps {
-  toggleUserStatusPanel(): void,
-}
-export default function ServerSidebarComponent({ toggleUserStatusPanel }: ServerSidebarProps) {
+import { useDispatch } from 'react-redux';
+import { toggleUserStatusPanel } from '../features/userStatusPanelSlice';
+
+export default function ServerSidebarComponent() {
+  const [userStatusPanel, setDisplay] = React.useState(true);
+  const dispatch = useDispatch();
+  const setUserStatusPanel = (): void => {
+    if(!userStatusPanel) {
+      dispatch(toggleUserStatusPanel(userStatusPanel));
+      setDisplay(true);
+      return;
+    }
+    if(userStatusPanel) {
+      dispatch(toggleUserStatusPanel(userStatusPanel));
+      setDisplay(false);
+      return;
+    }
+    return;
+  }
+  
+  const onBlur = () => {
+    dispatch(toggleUserStatusPanel(userStatusPanel));
+    setDisplay(false);
+    return;
+  }
   return(
   <ServerSidebar>
     <ServerTitle>
@@ -30,7 +51,7 @@ export default function ServerSidebarComponent({ toggleUserStatusPanel }: Server
     </ServerChannelList>
 
     <UserPanel>
-      <Avatar onClick={toggleUserStatusPanel}/>
+      <Avatar onClick={setUserStatusPanel} onBlur={onBlur}/>
     </UserPanel>
   </ServerSidebar>
   )

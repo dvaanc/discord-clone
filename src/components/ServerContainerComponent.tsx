@@ -10,8 +10,13 @@ import {
 } from '../styles/ServerContainerStyles';
 import Image from '../imagesObj';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { toggleSearchPanel } from '../features/searchPanelSlice';
 
 export default function ServerContainerComponent() {
+  const dispatch = useDispatch();
+  const onFocus = () => dispatch(toggleSearchPanel(true));
+  const onBlur = () => dispatch(toggleSearchPanel(false));
   return (
     <ServerContainer>
     <ServerNavBar>
@@ -27,7 +32,7 @@ export default function ServerContainerComponent() {
         <img src={Image.pinIcon} alt="" />
         <img src={Image.memberListIcon} alt="" />
         <SearchInput>
-          <input type="text" placeholder="Search" />
+          <input type="text" onFocus={onFocus} onBlur={onBlur} placeholder="Search" />
           <img src={Image.magnifyingGlassIcon} alt="" />
         </SearchInput>
         <img src={Image.inboxIcon} alt="" />

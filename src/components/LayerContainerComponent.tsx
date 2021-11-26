@@ -9,15 +9,18 @@ import {
 } from '../styles/LayerContainerStyles';
 import Image from '../imagesObj';
 import React from 'react';
-interface LayerProps {
-  searchPanelDisplay: boolean,
-  userStatusPanelDisplay: boolean,
-}
-export default function LayerContainerComponent({ searchPanelDisplay, userStatusPanelDisplay }: LayerProps) {
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store'
+
+export default function LayerContainerComponent() {
+  const userStatusPanel = useSelector(
+    (state: RootState) => state.userStatusPanel.value);
+  const searchPanel = useSelector(
+    (state: RootState) => state.searchPanel.value);
   return (
     <LayerContainer>
     <UserStatusContainer>
-      <SearchPanel display={searchPanelDisplay}>
+      <SearchPanel display={searchPanel}>
         <div>
           <p>SEARCH OPTIONS</p>
           <img src="" alt="" />
@@ -72,7 +75,7 @@ export default function LayerContainerComponent({ searchPanelDisplay, userStatus
         <img src={Image.addSearchIcon} alt="" />
       </SearchPanelItem>
       </SearchPanel>
-      <UserStatusPanel display={userStatusPanelDisplay}>
+      <UserStatusPanel display={userStatusPanel}>
         <StatusItem>
           <span>
           <img src={Image.onlineStatusIcon} alt="" />
