@@ -7,11 +7,11 @@ import {
   ServerNavFlexStartContainer, 
   ServerNavFlexEndContainer, 
   SearchInput 
-} from '../styles/ServerContainerStyles';
-import Image from '../imagesObj';
+} from '../../styles/appStyles/ServerContainerStyles';
+import Image from '../../utility/imagesObj';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleSearchPanel } from '../features/searchPanelSlice';
+import { toggleSearchPanel } from '../../redux/features/searchPanelSlice';
 
 export default function ServerContainerComponent() {
   const dispatch = useDispatch();

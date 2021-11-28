@@ -1,16 +1,8 @@
-import { 
-  LayerContainer, 
-  UserStatusContainer, 
-  UserStatusPanel, 
-  StatusItem, 
-  SearchPanel, 
-  SearchPanelItem, 
-  Seperator 
-} from '../styles/LayerContainerStyles';
-import Image from '../imagesObj';
+import { LayerContainer, UserStatusContainer, UserStatusPanel, StatusItem, SearchPanel, SearchPanelItem, Seperator } from '../../styles/appStyles/LayerContainerStyles';
+import Image from '../../utility/imagesObj';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../app/store'
+import { RootState } from '../../redux/store'
 
 export default function LayerContainerComponent() {
   const userStatusPanel = useSelector(

@@ -5,11 +5,11 @@ import {
   UserPanel, 
   Avatar, 
   ServerChannel 
-} from '../styles/ServerSidebarStyles';
-import Image from '../imagesObj';
+} from '../../styles/appStyles/ServerSidebarStyles';
+import Image from '../../utility/imagesObj';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleUserStatusPanel } from '../features/userStatusPanelSlice';
+import { toggleUserStatusPanel } from '../../redux/features/userStatusPanelSlice';
 
 export default function ServerSidebarComponent() {
   const [userStatusPanel, setDisplay] = React.useState(true);

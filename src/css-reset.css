@@ -12,3 +12,11 @@ body > #root > div {
 html, body {
   font-family: 'Roboto', sans-serif;
 }
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}

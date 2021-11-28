@@ -1,5 +1,5 @@
-import { Sidebar, SidebarItem, HomeButton, Icon, Pill } from '../styles/SidebarStyles';
-import Image from '../imagesObj';
+import { Sidebar, SidebarItem, HomeButton, Icon, Pill } from '../../styles/appStyles/SidebarStyles';
+import Image from '../../utility/imagesObj';
 
 interface SidebarProps {
 
