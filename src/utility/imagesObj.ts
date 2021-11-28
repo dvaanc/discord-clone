@@ -42,7 +42,7 @@ import deleteStatusIcon from '../images/deleteStatusIcon.svg';
 import learnMoreIcon from '../images/learnMoreIcon.svg';
 import addSearchIcon from '../images/addSearchIcon.svg';
 import clearHistoryIcon from '../images/clearHistoryIcon.svg';
-
+import characterBackground from '../images/characterBackground.svg'
 const Image = {
   addReactionIcon,
   bellIcon,
@@ -88,6 +88,7 @@ const Image = {
   learnMoreIcon,
   addSearchIcon,
   clearHistoryIcon,
+  characterBackground,
 }
 
 export default Image;
