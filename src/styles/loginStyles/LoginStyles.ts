@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 const LoginContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -20,7 +19,7 @@ const CharacterBackground = styled.img`
 `
 const LoginFormContainer = styled.div`
   width: 480px;
-  height: 400px;
+  height: 415px;
   background-color: #36393f;
   z-index: 3;
   border-radius: 4px;
@@ -47,34 +46,63 @@ const InputGroup = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
+`
+const MessageField = styled.div<{err: boolean}>`
+  display: flex;
+  align-items: center;
+  color: ${props => props.err ? 'hsl(359, 82.6%, 59.4%)' : '#B9BBBE'};
+  margin-bottom: 8px;
   & label {
-    color: #B9BBBE;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  & input[type="text"] {
-    padding-left: 10px;
-    height: 42px;
-    border: none;
-    border-radius: 4px;
-    background-color: #E8F0FE;
-    font-size: 16px;
-    font-weight: none;
-    &:focus {
-      outline: none;
-    }
+  font-size: 12px;
+  font-weight: bold;
   }
 `
-const InputGroupTwo = styled(InputGroup)`
+const ErrMessage = styled.div<{err: boolean}>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  opacity: ${props => props.err ? 1 : 0};
+  font-size: 12px;
+  font-style: italic;
+  color: hsl(359, 82.6%, 59.4%);
+  & span {
+    margin: 0 5px;
+    height: 1px;
+    width: 4px;
+    background-color: hsl(359, 82.6%, 59.4%);
+  }
+`
+const LoginInput = styled.input<{err: boolean}>`
+  padding-left: 10px;
+  height: 45px;
+  border: none;
+  border-radius: 4px;
+  background-color: #313339;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: none;
+  border: 1px solid ${props => props.err ? 'hsl(359, 82.6%, 59.4%)' : 'rgba(0, 0, 0, 0.3)'};
+  transition: border-color .2s ease-in-out;
+  &:hover {
+    border-color: ${props => props.err ? 'hsl(359, 82.6%, 59.4%)' : '#040405'};
+  }
+  &:focus {
+    outline: none;
+    border-color: ${props => props.err ? 'hsl(359, 82.6%, 59.4%)' : 'hsl(197, 100%, 47.8%)'};
+  }
+`
+const ForgotPassButtonWrapper = styled.div `
+  display: flex; 
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 8px;
   & button {
-    color: #00AFF4;
-    margin-top: 8px;
+    color: #01ACF0;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     background-color: #36393F;
     border: none;
-    width: auto;
+    cursor: pointer;
     &:hover {
       text-decoration: underline;
     }
@@ -95,5 +123,47 @@ const LoginButton = styled.button`
   font-size: 14px;
   font-weight: 600;
   margin-top: 20px;
+  transition: background-color .17s ease,color .17s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: #4752C4;
+  }
 `
-export { CharacterBackground, LoginFormContainer, LoginContainer, LoginForm, InputGroup, InputGroupTwo, LoginButton };
+const RegisterWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 15px;
+  margin-top: 10px;
+  & p {
+    color: #72767d;
+    font-size: 14px;
+    margin-right: 5px;
+  }
+  & button {
+    color: #01ACF0;
+    text-decoration: none;
+    font-size: 13px;
+    background-color: #36393F;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
+export { 
+  CharacterBackground, 
+  LoginFormContainer, 
+  LoginContainer, 
+  LoginForm, 
+  InputGroup, 
+  LoginButton,
+  ForgotPassButtonWrapper,
+  RegisterWrapper,
+  ErrMessage,
+  MessageField,
+  LoginInput,
+};
