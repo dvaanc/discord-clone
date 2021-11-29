@@ -9,7 +9,7 @@ export default function Router() {
   return (
     <BrowserRouter basename="/discord-clone">
       <Routes>
-      <Route path="/" element={<Navigate replace to="/login" />} />
+      <Route path="/" element={<Navigate replace to="/app" />} />
         <Route path="/login" element={< Login />} />
         <Route path="/app" element={<App />} />
       </Routes>

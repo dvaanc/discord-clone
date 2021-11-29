@@ -1,7 +1,7 @@
 import React from 'react'
 import { LoginContainer, CharacterBackground } from '../../styles/loginStyles/LoginContainerStyles';
 import { LoginFormContainer, LoginForm, InputGroup, LoginButton, ForgotPassButtonWrapper, RegisterWrapper,ErrMessage,MessageField, LoginInput } from '../../styles/loginStyles/LoginFormContainer';
-import { RegisterFormContainer, RegisterForm, RegisterInput, DateOfBirth, DoBInput, DoBWrapper } from '../../styles/loginStyles/LoginRegisterFormContainer';
+import { RegisterFormContainer, RegisterForm, RegisterInput, DateOfBirth, DoBInput, DoBWrapper, RegisterButton, TermsOfServiceWrapper, MonthWrapper, DayWrapper, YearWrapper, MonthInput, DayInput, YearInput } from '../../styles/loginStyles/LoginRegisterFormContainer';
 
 import Image from '../../utility/imagesObj'
 export default function Login() {
@@ -72,7 +72,7 @@ export default function Login() {
         <ForgotPassButtonWrapper>
           <button>Forgot your password?</button>
           </ForgotPassButtonWrapper>
-        <LoginButton> Login</LoginButton>
+        <LoginButton>Login</LoginButton>
         <RegisterWrapper>
           <p>Need an account?</p>
           <button>Register</button>
@@ -113,20 +113,49 @@ export default function Login() {
           <RegisterInput err={showEmailErr} type="password" name="password" />
         </InputGroup>
         <DateOfBirth>
+          <label htmlFor="date-of-birth">DATE OF BIRTH</label>
           <DoBWrapper>
-            <DoBInput>
-
-            </DoBInput>
-            <DoBInput>
-              
-            </DoBInput>
-            <DoBInput>
-
-            </DoBInput>
+            <MonthInput>
+              <span>
+                <p>Select</p>
+              </span>
+              <span>
+                <img src={Image.chevronBottomIcon} alt="" />
+              </span>
+              <MonthWrapper></MonthWrapper>
+            </MonthInput>
+            <DayInput>
+              <span>
+                <p>Select</p>
+              </span>
+              <span>
+                <img src={Image.chevronBottomIcon} alt="" />
+              </span>
+              <DayWrapper></DayWrapper>
+            </DayInput>
+            <YearInput>
+              <span>
+                <p>Select</p>
+              </span>
+              <span>
+                <img src={Image.chevronBottomIcon} alt="" />
+              </span>
+              <YearWrapper></YearWrapper>
+            </YearInput>
           </DoBWrapper>
-
         </DateOfBirth>
+        <RegisterButton>Continue</RegisterButton>
+        <RegisterWrapper>
+          <button>Already have an account?</button>
+        </RegisterWrapper>
       </RegisterForm>
+      <TermsOfServiceWrapper>
+        <p>By registering, you agree to Discord's</p>
+        <button>Terms of Service</button>
+        <p>and</p>
+        <button>Privacy Policy</button>
+        <p>.</p>
+      </TermsOfServiceWrapper>
     </RegisterFormContainer>
   </LoginContainer>
   )
