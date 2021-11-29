@@ -1,21 +1,17 @@
-import styled from "styled-components";
-const LoginContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  min-width: 100%;
-  min-height: 100%;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-`
-const CharacterBackground = styled.img`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  object-fit: fill;
+import styled, { keyframes } from "styled-components";
+const LoadWindow = keyframes`
+  0% {
+    transform: scale(1.1) translateY(-60px) translateZ(20px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(15px);
+    opacity: 0.7
+  }
+  100% {
+    transform: scale(1) translateY(0px) translateZ(0px);
+    opacity 1;
+  }
 `
 const LoginFormContainer = styled.div`
   width: 480px;
@@ -25,7 +21,10 @@ const LoginFormContainer = styled.div`
   border-radius: 4px;
   padding: 30px;
   box-shadow: 0 2px 10px 0 rgb(0 0 0 / 20%);
+  animation: ${LoadWindow} 0.17s 0s both;
+  animation-delay: 0.1s;
 `
+
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -154,10 +153,8 @@ const RegisterWrapper = styled.div`
     }
   }
 `
-export { 
-  CharacterBackground, 
-  LoginFormContainer, 
-  LoginContainer, 
+
+export {
   LoginForm, 
   InputGroup, 
   LoginButton,
@@ -166,4 +163,6 @@ export {
   ErrMessage,
   MessageField,
   LoginInput,
-};
+  LoginFormContainer,
+  LoadWindow 
+}
