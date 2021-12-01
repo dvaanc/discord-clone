@@ -2,8 +2,12 @@ import React from 'react'
 import { LoginContainer, CharacterBackground } from '../../styles/loginStyles/LoginContainerStyles';
 import { LoginFormContainer, LoginForm, InputGroup, LoginButton, ForgotPassButtonWrapper, RegisterWrapper,ErrMessage,MessageField, LoginInput } from '../../styles/loginStyles/LoginFormContainer';
 import { RegisterFormContainer, RegisterForm, RegisterInput, DateOfBirth, DoBInput, DoBWrapper, RegisterButton, TermsOfServiceWrapper, MonthWrapper, DayWrapper, YearWrapper, MonthInput, DayInput, YearInput } from '../../styles/loginStyles/LoginRegisterFormContainer';
-
 import Image from '../../utility/imagesObj'
+
+interface DropUpMenu { 
+  month: boolean, 
+  day: boolean, 
+  year: boolean };
 export default function Login() {
   const [email, setEmail] = React.useState('' as string);
   const [pass, setPass] = React.useState('' as string);
@@ -11,6 +15,11 @@ export default function Login() {
   const [showPassErr, displayPassErr] = React.useState(false as boolean);
   const [emailErr, setEmailErr] = React.useState('test' as string);
   const [passErr, setPassErr] = React.useState('test' as string);
+  const [dropUpMenu, displayDropUpMenu] = React.useState({
+    month: false,
+    day: false,
+    year: false,
+  } as DropUpMenu)
   const submitForm = (e: React.FormEvent): void => {
     e.preventDefault();
     console.log(e);
@@ -41,6 +50,11 @@ export default function Login() {
         setEmailErr('Login or password is invalid.');
         setPassErr('Login or password is invalid.');
     }
+  }
+  const toggleDropUpMenu = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const target = e.currentTarget as Element;
+    console.log(target.id);
   }
   return (
   <LoginContainer>
@@ -115,32 +129,26 @@ export default function Login() {
         <DateOfBirth>
           <label htmlFor="date-of-birth">DATE OF BIRTH</label>
           <DoBWrapper>
-            <MonthInput>
+            <MonthInput id="month" onClick={toggleDropUpMenu}>
               <span>
                 <p>Select</p>
-              </span>
-              <span>
                 <img src={Image.chevronBottomIcon} alt="" />
               </span>
-              <MonthWrapper></MonthWrapper>
+              <MonthWrapper display={ dropUpMenu.month }></MonthWrapper>
             </MonthInput>
-            <DayInput>
+            <DayInput id="day" onClick={toggleDropUpMenu}>
               <span>
                 <p>Select</p>
-              </span>
-              <span>
                 <img src={Image.chevronBottomIcon} alt="" />
               </span>
-              <DayWrapper></DayWrapper>
+              <DayWrapper display={dropUpMenu.day}></DayWrapper>
             </DayInput>
-            <YearInput>
+            <YearInput id="year" onClick={toggleDropUpMenu} >
               <span>
                 <p>Select</p>
-              </span>
-              <span>
                 <img src={Image.chevronBottomIcon} alt="" />
               </span>
-              <YearWrapper></YearWrapper>
+              <YearWrapper display={dropUpMenu.year}></YearWrapper>
             </YearInput>
           </DoBWrapper>
         </DateOfBirth>

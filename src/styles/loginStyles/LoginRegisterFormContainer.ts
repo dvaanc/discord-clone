@@ -47,7 +47,8 @@ const DoBWrapper = styled.div`
   gap: 21px;
 `
 const DoBInput = styled.div`
-  display: flex;
+  position: relative;
+  display: inline-block;
   justify-content: space-between;
   height: 40px;
   padding: 0 10px;
@@ -70,30 +71,37 @@ const DoBInput = styled.div`
     color: rgb(114, 118, 125);
   }
 `
+const DoBDropDownMenu = styled.div`
+  display: none;
+  position: absolute;
+  height: 155px;
+  background-color: #313339;
+  z-index: 5;
+`
+const MonthWrapper = styled(DoBDropDownMenu)<{display: boolean}>`
+  display: ${props => props.display ? 'block' : 'none'};
+  width: 154px;
+  /* #313339; */
+`
+const DayWrapper = styled(DoBDropDownMenu)<{display: boolean}>`
+  display: ${props => props.display ? 'block' : 'none'};
+  width: 100px;
+`
+const YearWrapper = styled(DoBDropDownMenu)<{display: boolean}>`
+  display: ${props => props.display ? 'block' : 'none'};
+  width: 120px;
+`
 const MonthInput = styled(DoBInput)`
   width: 154px;
+  & p { margin-right: 65px; }
 `
 const DayInput = styled(DoBInput)`
+  & p { margin-right: 10px; }
   width: 100px;
 `
 const YearInput = styled(DoBInput)`
+  & p { margin-right: 30px; }
   width: 120px;
-`
-const MonthWrapper = styled.div`
-  height: 100px;
-  width: 154px;
-  background-color: darkblue;
-  /* #313339; */
-`
-const DayWrapper = styled.div`
-  height: 100px;
-  width: 100px;
-  background-color: darkblue;
-`
-const YearWrapper = styled.div`
-  height: 100px;
-  width: 120px;
-  background-color: darkblue;
 `
 const RegisterButton = styled(LoginButton)`
   height: 48px;
