@@ -1,13 +1,39 @@
 import React from 'react'
 import { LoginContainer, CharacterBackground } from '../../styles/loginStyles/LoginContainerStyles';
-import { LoginFormContainer, LoginForm, InputGroup, LoginButton, ForgotPassButtonWrapper, RegisterWrapper,ErrMessage,MessageField, LoginInput } from '../../styles/loginStyles/LoginFormContainer';
-import { RegisterFormContainer, RegisterForm, RegisterInput, DateOfBirth, DoBInput, DoBWrapper, RegisterButton, TermsOfServiceWrapper, MonthWrapper, DayWrapper, YearWrapper, MonthInput, DayInput, YearInput } from '../../styles/loginStyles/LoginRegisterFormContainer';
+import { 
+  LoginFormContainer, 
+  LoginForm, 
+  InputGroup, 
+  LoginButton, 
+  ForgotPassButtonWrapper, 
+  RegisterWrapper,
+  ErrMessage,
+  MessageField, 
+  LoginInput 
+} from '../../styles/loginStyles/LoginFormContainer';
+import { 
+  RegisterFormContainer, 
+  RegisterForm, 
+  RegisterInput, 
+  DateOfBirth, 
+  DoBInput, 
+  DoBWrapper, 
+  RegisterButton, 
+  TermsOfServiceWrapper, 
+  MonthWrapper, 
+  DayWrapper, 
+  YearWrapper, 
+  MonthInput, 
+  DayInput, 
+  YearInput, 
+  DropUpItem,
+} from '../../styles/loginStyles/LoginRegisterFormContainer';
 import Image from '../../utility/imagesObj'
+import { DateOfBirthObj } from '../../utility/DateOfBirthObj';
 
-interface DropUpMenu { 
-  month: boolean, 
-  day: boolean, 
-  year: boolean };
+interface DropUpMenuProps {
+  [key: string]: boolean; 
+}
 export default function Login() {
   const [email, setEmail] = React.useState('' as string);
   const [pass, setPass] = React.useState('' as string);
@@ -15,11 +41,7 @@ export default function Login() {
   const [showPassErr, displayPassErr] = React.useState(false as boolean);
   const [emailErr, setEmailErr] = React.useState('test' as string);
   const [passErr, setPassErr] = React.useState('test' as string);
-  const [dropUpMenu, displayDropUpMenu] = React.useState({
-    month: false,
-    day: false,
-    year: false,
-  } as DropUpMenu)
+  const [dropUpMenu, displayDropUpMenu] = React.useState({ month: false, day: false, year: false } as DropUpMenuProps);
   const submitForm = (e: React.FormEvent): void => {
     e.preventDefault();
     console.log(e);
@@ -55,6 +77,9 @@ export default function Login() {
     e.stopPropagation();
     const target = e.currentTarget as Element;
     console.log(target.id);
+    const inputType = target.id;
+    dropUpMenu[inputType] ? 
+    displayDropUpMenu({...dropUpMenu, [inputType]: false}) : displayDropUpMenu({...dropUpMenu, [inputType]: true});
   }
   return (
   <LoginContainer>
@@ -134,21 +159,27 @@ export default function Login() {
                 <p>Select</p>
                 <img src={Image.chevronBottomIcon} alt="" />
               </span>
-              <MonthWrapper display={ dropUpMenu.month }></MonthWrapper>
+              <MonthWrapper display={ dropUpMenu.month }>
+                { DateOfBirthObj.month.map((item) => <span>{item}</span>)}
+              </MonthWrapper>
             </MonthInput>
             <DayInput id="day" onClick={toggleDropUpMenu}>
               <span>
                 <p>Select</p>
                 <img src={Image.chevronBottomIcon} alt="" />
               </span>
-              <DayWrapper display={dropUpMenu.day}></DayWrapper>
+              <DayWrapper display={dropUpMenu.day}>
+              { DateOfBirthObj.day.map((item) => <DropUpItem>{item}</DropUpItem>)}
+              </DayWrapper>
             </DayInput>
             <YearInput id="year" onClick={toggleDropUpMenu} >
               <span>
                 <p>Select</p>
                 <img src={Image.chevronBottomIcon} alt="" />
               </span>
-              <YearWrapper display={dropUpMenu.year}></YearWrapper>
+              <YearWrapper display={dropUpMenu.year}>
+              { DateOfBirthObj.year.map((item) => <DropUpItem>{item}</DropUpItem>)}
+              </YearWrapper>
             </YearInput>
           </DoBWrapper>
         </DateOfBirth>
