@@ -7,7 +7,8 @@ import {
   ForgotPassButtonWrapper, 
 } from "./LoginFormContainer";
 
-const RegisterFormContainer = styled.div`
+const RegisterFormContainer = styled.div<{ display: boolean }>`
+  display: ${props => props.display ? 'block' : 'none' };
   width: 480px;
   height: 570px;
   padding: 32px;

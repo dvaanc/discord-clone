@@ -13,7 +13,8 @@ const LoadWindow = keyframes`
     opacity 1;
   }
 `
-const LoginFormContainer = styled.div`
+const LoginFormContainer = styled.div<{ display: boolean }>`
+  display: ${props => props.display ? 'block' : 'none' };
   width: 480px;
   height: 415px;
   background-color: #36393f;
