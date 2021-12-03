@@ -26,7 +26,7 @@ const RegisterForm = styled.form`
   & h2 {
     color: #FFFFFF;
     letter-spacing: 1px;
-    font-size: 26px;
+    font-size: 27px;
     margin-bottom: 10px;
   }
 `
