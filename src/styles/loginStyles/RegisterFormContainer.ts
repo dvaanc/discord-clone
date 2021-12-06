@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { 
   LoginInput, 
   InputGroup, 
@@ -49,9 +49,12 @@ const DoBWrapper = styled.div`
 `
 const DoBInput = styled.div`
   position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   height: 40px;
+  padding: 0 10px;
   border: none;
   border-radius: 4px;
   background-color: #313339;
@@ -61,16 +64,18 @@ const DoBInput = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.3);
   transition: border-color .2s ease-in-out;
   letter-spacing: 1px;
+  color: rgb(114, 118, 125);
   &:hover {
     border-color: #040405;
   }
-  & span {
+  /* & span {
     display: flex;
     padding: 0 10px;
     align-items: center;
     height: 100%;
     color: rgb(114, 118, 125);
-  }
+    background-color: darkblue;
+  } */
 `
 const DoBDropUpMenu = styled.div`
   display: none;
@@ -83,7 +88,7 @@ const DoBDropUpMenu = styled.div`
   overflow-y: scroll;
   & span {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     height: 40px;
     width: 100%;
@@ -109,11 +114,20 @@ const YearWrapper = styled(DoBDropUpMenu)<{display: boolean}>`
   display: ${props => props.display ? 'flex' : 'none'};
   width: 120px;
 `
+const MonthInput = styled(DoBInput)`
+  width: 154px;
+`
+const DayInput = styled(DoBInput)`
+  width: 100px;
+`
+const YearInput = styled(DoBInput)`
+  width: 120px;
+`
 const DropUpItem = styled.span`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 40px;
+    height: 80px;
     width: 100%;
     padding: 0 10px;
     color: #B9BBBE;
@@ -121,18 +135,6 @@ const DropUpItem = styled.span`
     &:hover {
       background-color: #36393F;
     }
-`
-const MonthInput = styled(DoBInput)`
-  width: 154px;
-  & p { margin-right: 65px; }
-`
-const DayInput = styled(DoBInput)`
-  & p { margin-right: 10px; }
-  width: 100px;
-`
-const YearInput = styled(DoBInput)`
-  & p { margin-right: 30px; }
-  width: 120px;
 `
 const RegisterButton = styled(LoginButton)`
   height: 48px;

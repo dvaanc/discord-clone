@@ -1,5 +1,21 @@
 import React from 'react'
-import { RegisterFormContainer, RegisterForm, RegisterInput, DateOfBirth, DoBInput, DoBWrapper, RegisterButton, TermsOfServiceWrapper, MonthWrapper, DayWrapper, YearWrapper, MonthInput, DayInput, YearInput, DropUpItem } from '../../styles/loginStyles/RegisterFormContainer';
+import {
+  RegisterFormContainer, 
+  RegisterForm, 
+  RegisterInput,
+  DateOfBirth, 
+  DoBInput, 
+  DoBWrapper, 
+  RegisterButton, 
+  TermsOfServiceWrapper, 
+  DropUpItem,
+  MonthWrapper,
+  DayWrapper, 
+  YearWrapper, 
+  MonthInput,
+  DayInput,
+  YearInput,
+} from '../../styles/loginStyles/RegisterFormContainer';
 import { InputGroup, RegisterWrapper, ErrMessage, MessageField } from '../../styles/loginStyles/LoginFormContainer';
 import { DateOfBirthObj } from '../../utility/DateOfBirthObj';
 import Image from '../../utility/imagesObj';
@@ -8,12 +24,15 @@ import { RootState } from '../../redux/store'
 import { useSelector } from 'react-redux';
 import { toggleLoginDisplay } from '../../redux/features/loginFormSlice';
 import { toggleRegisterDisplay } from '../../redux/features/registerFormSlice';
+import { isTemplateExpression } from 'typescript';
 
 
 interface DropUpMenuProps { 
   [key: string]: boolean;
 };
-
+interface DateOfBirthProps { 
+  [key: string]: string;
+};
 export default function RegisterFormComponent() {
   const dispatch = useDispatch();
   const registerForm = useSelector(
@@ -23,14 +42,28 @@ export default function RegisterFormComponent() {
   const [showPassErr, displayPassErr] = React.useState(false as boolean);
   const [emailErr, setEmailErr] = React.useState('test' as string);
   const [passErr, setPassErr] = React.useState('test' as string);
-  const [dropUpMenu, displayDropUpMenu] = React.useState({ month: false, day: false, year: false } as DropUpMenuProps);
-
+  const [dropUpMenu, displayDropUpMenu] = React.useState({ 
+    month: false, 
+    day: false, 
+    year: false 
+  } as DropUpMenuProps);
+  const [DateOfBirthInfo, setDoBInfo] = React.useState({
+    monthVal: 'Select',
+    dayVal: 'Select',
+    yearVal: 'Select',
+  } as DateOfBirthProps)
   const submitForm = (e: React.FormEvent): void => {
     e.preventDefault();
     console.log(e);
     if(checkEmptyFields()) return;
     displayPassErr(false);
     displayEmailErr(false);
+  }
+  const setDateOfBirthInfo = (e: React.MouseEvent) => {
+    const target = e.target as any;
+    const id = (target.parentNode as any).id;
+    const info = target.id;
+    setDoBInfo({...DateOfBirthInfo, [id]: info,  })
   }
   const setRegisterDisplay = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -60,11 +93,11 @@ export default function RegisterFormComponent() {
   const toggleDropUpMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
     const target = e.currentTarget as Element;
-    console.log(target.id);
     const inputType = target.id;
     dropUpMenu[inputType] ? 
     displayDropUpMenu({...dropUpMenu, [inputType]: false}) : displayDropUpMenu({...dropUpMenu, [inputType]: true});
   }
+
   return (
     <RegisterFormContainer display={registerForm}>
       <RegisterForm>
@@ -103,30 +136,24 @@ export default function RegisterFormComponent() {
           <label htmlFor="date-of-birth">DATE OF BIRTH</label>
           <DoBWrapper>
             <MonthInput id="month" onClick={toggleDropUpMenu}>
-              <span>
-                <p>Select</p>
-                <img src={Image.chevronBottomIcon} alt="" />
-              </span>
-              <MonthWrapper display={ dropUpMenu.month }>
-                { DateOfBirthObj.month.map((item) => <span>{item}</span>)}
+              <p>{DateOfBirthInfo.monthVal}</p>
+              <img src={Image.chevronBottomIcon} alt="" />
+              <MonthWrapper id="monthVal" display={ dropUpMenu.month } onClick={setDateOfBirthInfo}>
+                { DateOfBirthObj.month.map((item) => <DropUpItem id={item}>{item}</DropUpItem> )}
               </MonthWrapper>
             </MonthInput>
             <DayInput id="day" onClick={toggleDropUpMenu}>
-              <span>
-                <p>Select</p>
-                <img src={Image.chevronBottomIcon} alt="" />
-              </span>
-              <DayWrapper display={dropUpMenu.day}>
-              { DateOfBirthObj.day.map((item) => <DropUpItem>{item}</DropUpItem>)}
+              <p>{DateOfBirthInfo.dayVal}</p>
+              <img src={Image.chevronBottomIcon} alt="" />
+              <DayWrapper id="dayVal" display={dropUpMenu.day}>
+              { DateOfBirthObj.day.map((item) => <DropUpItem id={item}>{item}</DropUpItem>)}
               </DayWrapper>
             </DayInput>
             <YearInput id="year" onClick={toggleDropUpMenu} >
-              <span>
-                <p>Select</p>
-                <img src={Image.chevronBottomIcon} alt="" />
-              </span>
-              <YearWrapper display={dropUpMenu.year}>
-              { DateOfBirthObj.year.map((item) => <DropUpItem>{item}</DropUpItem>)}
+              <p>{DateOfBirthInfo.yearVal}</p>
+              <img src={Image.chevronBottomIcon} alt="" />
+              <YearWrapper id="yearVal" display={dropUpMenu.year}>
+              { DateOfBirthObj.year.map((item) => <DropUpItem id={item}>{item}</DropUpItem>)}
               </YearWrapper>
             </YearInput>
           </DoBWrapper>
