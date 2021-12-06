@@ -5,6 +5,7 @@ import { RootState } from '../../redux/store'
 import { useSelector } from 'react-redux';
 import { toggleLoginDisplay } from '../../redux/features/loginFormSlice';
 import { toggleRegisterDisplay } from '../../redux/features/registerFormSlice';
+import { Link } from 'react-router-dom';
 
 export default function LoginFormComponent() {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ export default function LoginFormComponent() {
       }
   }
   return (
-  <LoginFormContainer display={loginForm}>
+  <LoginFormContainer>
       <LoginForm onSubmit={submitLoginForm}>
           <h2>Welcome back!</h2>
           <h4>We're so excited to see you again!</h4>
@@ -87,7 +88,10 @@ export default function LoginFormComponent() {
               </LoginButton>
               <RegisterWrapper>
                   <p>Need an account?</p>
-                  <button onClick={setLoginDisplay}>Register</button>
+                  <Link to="/register">
+                    <button>Register</button>
+                  </Link>
+                  
               </RegisterWrapper>
       </LoginForm>
   </LoginFormContainer>

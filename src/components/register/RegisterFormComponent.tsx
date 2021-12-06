@@ -15,7 +15,7 @@ import {
   MonthInput,
   DayInput,
   YearInput,
-} from '../../styles/loginStyles/RegisterFormContainer';
+} from '../../styles/registerStyles/RegisterFormContainer';
 import { InputGroup, RegisterWrapper, ErrMessage, MessageField } from '../../styles/loginStyles/LoginFormContainer';
 import { DateOfBirthObj } from '../../utility/DateOfBirthObj';
 import Image from '../../utility/imagesObj';
@@ -24,8 +24,7 @@ import { RootState } from '../../redux/store'
 import { useSelector } from 'react-redux';
 import { toggleLoginDisplay } from '../../redux/features/loginFormSlice';
 import { toggleRegisterDisplay } from '../../redux/features/registerFormSlice';
-import { isTemplateExpression } from 'typescript';
-
+import { Link } from 'react-router-dom';
 
 interface DropUpMenuProps { 
   [key: string]: boolean;
@@ -100,7 +99,7 @@ export default function RegisterFormComponent() {
   }
 
   return (
-    <RegisterFormContainer display={registerForm}>
+    <RegisterFormContainer>
       <RegisterForm>
         <h2>Create an account</h2>
         <InputGroup>
@@ -111,7 +110,7 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="email" name="email" />
+          <RegisterInput err={showEmailErr} type="email" name="email" required />
         </InputGroup>
         <InputGroup>
           <MessageField err={showEmailErr}>
@@ -121,7 +120,7 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="text" name="user" />
+          <RegisterInput err={showEmailErr} type="text" name="user" required />
         </InputGroup>
         <InputGroup>
           <MessageField err={showEmailErr}>
@@ -131,10 +130,10 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="password" name="password" />
+          <RegisterInput err={showEmailErr} type="password" name="password" required/>
         </InputGroup>
         <DateOfBirth>
-          <label htmlFor="date-of-birth">DATE OF BIRTH</label>
+          <label htmlFor="date-of-birth">DA     TE OF BIRTH</label>
           <DoBWrapper>
             <MonthInput id="month" textColour={DateOfBirthInfo.monthVal} onClick={toggleDropUpMenu}>
               <p>{DateOfBirthInfo.monthVal}</p>
@@ -159,9 +158,11 @@ export default function RegisterFormComponent() {
             </YearInput>
           </DoBWrapper>
         </DateOfBirth>
-        <RegisterButton>Continue</RegisterButton>
+        <RegisterButton type="submit">Continue</RegisterButton>
         <RegisterWrapper>
-          <button onClick={setRegisterDisplay}>Already have an account?</button>
+          <Link to="/login">
+            <button>Already have an account?</button>
+          </Link>
         </RegisterWrapper>
       </RegisterForm>
       <TermsOfServiceWrapper>

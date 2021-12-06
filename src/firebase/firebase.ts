@@ -5,4 +5,4 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
+// createUserWithEmailAndPassword(auth, email, password)

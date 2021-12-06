@@ -5,10 +5,10 @@ import {
   LoadWindow, 
   LoginButton, 
   ForgotPassButtonWrapper, 
-} from "./LoginFormContainer";
+} from "../loginStyles/LoginFormContainer";
 
-const RegisterFormContainer = styled.div<{ display: boolean }>`
-  display: ${props => props.display ? 'block' : 'none' };
+const RegisterFormContainer = styled.div`
+  display: block;
   width: 480px;
   height: 570px;
   padding: 32px;
@@ -115,17 +115,17 @@ const YearInput = styled(DoBInput)`
   width: 120px;
 `
 const DropUpItem = styled.span`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 80px;
-    width: 100%;
-    padding: 0 10px;
-    color: #B9BBBE;
-    cursor: pointer;
-    &:hover {
-      background-color: #36393F;
-    }
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  padding: 0 10px;
+  color: #B9BBBE;
+  cursor: pointer;
+  &:hover {
+    background-color: #36393F;
+  }
 `
 const RegisterButton = styled(LoginButton)`
   height: 48px;
