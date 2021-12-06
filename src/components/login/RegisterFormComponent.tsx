@@ -51,7 +51,8 @@ export default function RegisterFormComponent() {
     monthVal: 'Select',
     dayVal: 'Select',
     yearVal: 'Select',
-  } as DateOfBirthProps)
+  } as DateOfBirthProps);
+
   const submitForm = (e: React.FormEvent): void => {
     e.preventDefault();
     console.log(e);
@@ -135,24 +136,24 @@ export default function RegisterFormComponent() {
         <DateOfBirth>
           <label htmlFor="date-of-birth">DATE OF BIRTH</label>
           <DoBWrapper>
-            <MonthInput id="month" onClick={toggleDropUpMenu}>
+            <MonthInput id="month" textColour={DateOfBirthInfo.monthVal} onClick={toggleDropUpMenu}>
               <p>{DateOfBirthInfo.monthVal}</p>
               <img src={Image.chevronBottomIcon} alt="" />
               <MonthWrapper id="monthVal" display={ dropUpMenu.month } onClick={setDateOfBirthInfo}>
                 { DateOfBirthObj.month.map((item) => <DropUpItem id={item}>{item}</DropUpItem> )}
               </MonthWrapper>
             </MonthInput>
-            <DayInput id="day" onClick={toggleDropUpMenu}>
+            <DayInput id="day"  textColour={DateOfBirthInfo.dayVal} onClick={toggleDropUpMenu}>
               <p>{DateOfBirthInfo.dayVal}</p>
               <img src={Image.chevronBottomIcon} alt="" />
-              <DayWrapper id="dayVal" display={dropUpMenu.day}>
+              <DayWrapper id="dayVal" display={dropUpMenu.day} onClick={setDateOfBirthInfo}>
               { DateOfBirthObj.day.map((item) => <DropUpItem id={item}>{item}</DropUpItem>)}
               </DayWrapper>
             </DayInput>
-            <YearInput id="year" onClick={toggleDropUpMenu} >
+            <YearInput id="year" textColour={DateOfBirthInfo.yearVal} onClick={toggleDropUpMenu} >
               <p>{DateOfBirthInfo.yearVal}</p>
               <img src={Image.chevronBottomIcon} alt="" />
-              <YearWrapper id="yearVal" display={dropUpMenu.year}>
+              <YearWrapper id="yearVal" display={dropUpMenu.year} onClick={setDateOfBirthInfo}>
               { DateOfBirthObj.year.map((item) => <DropUpItem id={item}>{item}</DropUpItem>)}
               </YearWrapper>
             </YearInput>

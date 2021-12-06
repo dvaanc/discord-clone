@@ -47,7 +47,7 @@ const DoBWrapper = styled.div`
   flex-direction: row;
   gap: 21px;
 `
-const DoBInput = styled.div`
+const DoBInput = styled.div<{textColour: string}>`
   position: relative;
   display: flex;
   flex-direction: row;
@@ -58,24 +58,15 @@ const DoBInput = styled.div`
   border: none;
   border-radius: 4px;
   background-color: #313339;
-  color: #FFFFFF;
+  color: ${ props => props.textColour === 'Select' ? 'rgb(114, 118, 125)' : '#FFFFFF' };
   font-size: 16px;
   font-weight: none;
   border: 1px solid rgba(0, 0, 0, 0.3);
   transition: border-color .2s ease-in-out;
   letter-spacing: 1px;
-  color: rgb(114, 118, 125);
   &:hover {
     border-color: #040405;
   }
-  /* & span {
-    display: flex;
-    padding: 0 10px;
-    align-items: center;
-    height: 100%;
-    color: rgb(114, 118, 125);
-    background-color: darkblue;
-  } */
 `
 const DoBDropUpMenu = styled.div`
   display: none;
