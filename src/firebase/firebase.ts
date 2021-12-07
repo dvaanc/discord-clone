@@ -12,5 +12,30 @@ const app = initializeApp({
 })
 
 export const auth = getAuth(app);
+const register = async (email: string, password: string) => {
+  try {
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(user);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.log(error.message)
+    }
+    console.log(`couldn't catch error`);
+  }
+}
+const login = async (email: string, password: string)=> {
+  try {
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    console.log(user);
+  } catch (error) {
+    if(error instanceof Error) {
+      console.log(error.message)
+    }
+    console.log(`couldn't catch error`);
+  }
+}  
+const logout = async () => {
 
+}
+export { register, login, logout }
 export default app;

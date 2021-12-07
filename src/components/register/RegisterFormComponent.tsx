@@ -19,9 +19,6 @@ import {
 import { InputGroup, RegisterWrapper, ErrMessage, MessageField } from '../../styles/loginStyles/LoginFormContainer';
 import { DateOfBirthObj } from '../../utility/DateOfBirthObj';
 import Image from '../../utility/imagesObj';
-import { useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store'
-import { useSelector } from 'react-redux';
 import { toggleLoginDisplay } from '../../redux/features/loginFormSlice';
 import { toggleRegisterDisplay } from '../../redux/features/registerFormSlice';
 import { Link } from 'react-router-dom';
@@ -33,10 +30,9 @@ interface DateOfBirthProps {
   [key: string]: string;
 };
 export default function RegisterFormComponent() {
-  const dispatch = useDispatch();
-  const registerForm = useSelector(
-    (state: RootState) => state.registerForm.value);
-  const [email, setEmail] = React.useState('' as string);
+  const [registerEmail, setRegisterEmail] = React.useState("" as string);
+  const [registerPassword, setRegisterPasword] = React.useState("" as string);
+  const [registerUser, setRegisterUser] = React.useState("" as string);
   const [showEmailErr, displayEmailErr] = React.useState(false as boolean); 
   const [showPassErr, displayPassErr] = React.useState(false as boolean);
   const [emailErr, setEmailErr] = React.useState('test' as string);
@@ -46,11 +42,20 @@ export default function RegisterFormComponent() {
     day: false, 
     year: false 
   } as DropUpMenuProps);
+
   const [DateOfBirthInfo, setDoBInfo] = React.useState({
     monthVal: 'Select',
     dayVal: 'Select',
     yearVal: 'Select',
   } as DateOfBirthProps);
+
+  const checkEmptyFields = (): boolean => {
+    if(registerEmail === '') {
+      // setErrMsg('emptyEmail');
+      displayEmailErr(true);
+    }
+    return true;
+  }
 
   const submitForm = (e: React.FormEvent): void => {
     e.preventDefault();
@@ -67,16 +72,8 @@ export default function RegisterFormComponent() {
   }
   const setRegisterDisplay = (e: React.MouseEvent) => {
     e.preventDefault();
-    dispatch(toggleRegisterDisplay(false));
-    dispatch(toggleLoginDisplay(true)); 
   }
-  const checkEmptyFields = (): boolean => {
-    if(email === '') {
-      setErrMsg('emptyEmail');
-      displayEmailErr(true);
-    }
-    return true;
-  }
+
   const setErrMsg = (str: string) => {
     switch(str) {
       case 'emptyEmail':
@@ -97,7 +94,9 @@ export default function RegisterFormComponent() {
     dropUpMenu[inputType] ? 
     displayDropUpMenu({...dropUpMenu, [inputType]: false}) : displayDropUpMenu({...dropUpMenu, [inputType]: true});
   }
-
+  const onChangeRegisterEmail = (e: React.ChangeEvent) => setRegisterEmail((e.target as HTMLInputElement).value);
+  const onChangeRegisterPassword = (e: React.ChangeEvent) => setRegisterPasword((e.target as HTMLInputElement).value);
+  const onChangeRegisterUser = (e: React.ChangeEvent) => setRegisterUser((e.target as HTMLInputElement).value);
   return (
     <RegisterFormContainer>
       <RegisterForm>
@@ -110,7 +109,7 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="email" name="email" required />
+          <RegisterInput err={showEmailErr} type="email" name="email" onChange={onChangeRegisterEmail} required />
         </InputGroup>
         <InputGroup>
           <MessageField err={showEmailErr}>
@@ -120,7 +119,7 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="text" name="user" required />
+          <RegisterInput err={showEmailErr} type="text" name="user" onChange={onChangeRegisterUser} required />
         </InputGroup>
         <InputGroup>
           <MessageField err={showEmailErr}>
@@ -130,7 +129,7 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="password" name="password" required/>
+          <RegisterInput err={showEmailErr} type="password" name="password" onChange={onChangeRegiserPassword} required/>
         </InputGroup>
         <DateOfBirth>
           <label htmlFor="date-of-birth">DA     TE OF BIRTH</label>

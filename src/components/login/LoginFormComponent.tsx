@@ -11,8 +11,8 @@ export default function LoginFormComponent() {
   const dispatch = useDispatch();
   const loginForm = useSelector(
     (state: RootState) => state.loginForm.value);
-  const [email, setEmail] = React.useState('' as string);
-  const [pass, setPass] = React.useState('' as string);
+    const [loginEmail, setLoginEmail] = React.useState("" as string);
+    const [loginPassword, setLoginPassword] = React.useState("" as string);
   const [showEmailErr, displayEmailErr] = React.useState(false as boolean); 
   const [showPassErr, displayPassErr] = React.useState(false as boolean);
   const [emailErr, setEmailErr] = React.useState('test' as string);
@@ -32,11 +32,11 @@ export default function LoginFormComponent() {
   }
   
   const checkEmptyLoginFields = (): boolean => {
-      if(email === '') {
+      if(loginEmail === '') {
       setErrMsg('emptyEmail');
       displayEmailErr(true);
       }
-      if(pass === '') {
+      if(loginPassword === '') {
       setErrMsg('emptyPass');
       displayPassErr(true);
       }
