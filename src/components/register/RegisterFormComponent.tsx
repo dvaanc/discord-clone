@@ -19,9 +19,9 @@ import {
 import { InputGroup, RegisterWrapper, ErrMessage, MessageField } from '../../styles/loginStyles/LoginFormContainer';
 import { DateOfBirthObj } from '../../utility/DateOfBirthObj';
 import Image from '../../utility/imagesObj';
-import { toggleLoginDisplay } from '../../redux/features/loginFormSlice';
-import { toggleRegisterDisplay } from '../../redux/features/registerFormSlice';
 import { Link } from 'react-router-dom';
+import { onAuthStateChanged, createUserWithEmailAndPassword } from '@firebase/auth';
+import { auth } from '../../firebase/firebase';
 
 interface DropUpMenuProps { 
   [key: string]: boolean;
@@ -42,27 +42,32 @@ export default function RegisterFormComponent() {
     day: false, 
     year: false 
   } as DropUpMenuProps);
-
   const [DateOfBirthInfo, setDoBInfo] = React.useState({
     monthVal: 'Select',
     dayVal: 'Select',
     yearVal: 'Select',
   } as DateOfBirthProps);
 
-  const checkEmptyFields = (): boolean => {
-    if(registerEmail === '') {
-      // setErrMsg('emptyEmail');
-      displayEmailErr(true);
-    }
-    return true;
-  }
+  onAuthStateChanged(auth, (currentUser) => {
+    console.log(currentUser);
+  })
 
-  const submitForm = (e: React.FormEvent): void => {
+  const register = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
+      console.log(user);
+    } catch (error) {
+      if(error instanceof Error) console.log(error.message);
+    }
+  };
+
+  const submitRegisterForm = (e: React.FormEvent): void => {
     e.preventDefault();
-    console.log(e);
-    if(checkEmptyFields()) return;
-    displayPassErr(false);
-    displayEmailErr(false);
+    // if(checkEmptyFields()) return;
+    // displayPassErr(false);
+    // displayEmailErr(false);
+    console.log(registerEmail, registerPassword)
+    register();
   }
   const setDateOfBirthInfo = (e: React.MouseEvent) => {
     const target = e.target as any;
@@ -73,7 +78,13 @@ export default function RegisterFormComponent() {
   const setRegisterDisplay = (e: React.MouseEvent) => {
     e.preventDefault();
   }
-
+  const checkEmptyFields = (): boolean => {
+    if(registerEmail === '') {
+      // setErrMsg('emptyEmail');
+      displayEmailErr(true);
+    }
+    return true;
+  }
   const setErrMsg = (str: string) => {
     switch(str) {
       case 'emptyEmail':
@@ -109,7 +120,7 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="email" name="email" onChange={onChangeRegisterEmail} required />
+          <RegisterInput err={showEmailErr} type="email" name="email" onChange={onChangeRegisterEmail} />
         </InputGroup>
         <InputGroup>
           <MessageField err={showEmailErr}>
@@ -119,7 +130,7 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="text" name="user" onChange={onChangeRegisterUser} required />
+          <RegisterInput err={showEmailErr} type="text" name="user" onChange={onChangeRegisterUser} />
         </InputGroup>
         <InputGroup>
           <MessageField err={showEmailErr}>
@@ -129,10 +140,10 @@ export default function RegisterFormComponent() {
               {emailErr}
             </ErrMessage>
           </MessageField>
-          <RegisterInput err={showEmailErr} type="password" name="password" onChange={onChangeRegiserPassword} required/>
+          <RegisterInput err={showEmailErr} type="password" name="password" onChange={onChangeRegisterPassword}/>
         </InputGroup>
         <DateOfBirth>
-          <label htmlFor="date-of-birth">DA     TE OF BIRTH</label>
+          <label htmlFor="date-of-birth">DATE OF BIRTH</label>
           <DoBWrapper>
             <MonthInput id="month" textColour={DateOfBirthInfo.monthVal} onClick={toggleDropUpMenu}>
               <p>{DateOfBirthInfo.monthVal}</p>
@@ -157,7 +168,7 @@ export default function RegisterFormComponent() {
             </YearInput>
           </DoBWrapper>
         </DateOfBirth>
-        <RegisterButton type="submit">Continue</RegisterButton>
+        <RegisterButton onClick={submitRegisterForm}>Continue</RegisterButton>
         <RegisterWrapper>
           <Link to="/login">
             <button>Already have an account?</button>

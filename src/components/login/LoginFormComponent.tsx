@@ -1,35 +1,63 @@
 import React from 'react'
-import { LoginFormContainer, LoginForm, InputGroup, LoginButton, ForgotPassButtonWrapper, RegisterWrapper, ErrMessage,MessageField, LoginInput } from '../../styles/loginStyles/LoginFormContainer';
+import { 
+  LoginFormContainer,
+  LoginForm,
+  InputGroup,
+  LoginButton,
+  ForgotPassButtonWrapper,
+  RegisterWrapper,
+  ErrMessage,
+  MessageField,
+  LoginInput 
+} from '../../styles/loginStyles/LoginFormContainer';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase/firebase';
+import { onAuthStateChanged, signInWithEmailAndPassword } from '@firebase/auth';
+import { setCurrentUser } from '../../redux/features/currentUserSlice';
 import { useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store'
-import { useSelector } from 'react-redux';
-import { toggleLoginDisplay } from '../../redux/features/loginFormSlice';
-import { toggleRegisterDisplay } from '../../redux/features/registerFormSlice';
-import { Link } from 'react-router-dom';
 
 export default function LoginFormComponent() {
   const dispatch = useDispatch();
-  const loginForm = useSelector(
-    (state: RootState) => state.loginForm.value);
-    const [loginEmail, setLoginEmail] = React.useState("" as string);
-    const [loginPassword, setLoginPassword] = React.useState("" as string);
+  const navigate = useNavigate();
+  const [loginEmail, setLoginEmail] = React.useState("" as string);
+  const [loginPassword, setLoginPassword] = React.useState("" as string);
   const [showEmailErr, displayEmailErr] = React.useState(false as boolean); 
   const [showPassErr, displayPassErr] = React.useState(false as boolean);
   const [emailErr, setEmailErr] = React.useState('test' as string);
   const [passErr, setPassErr] = React.useState('test' as string);
-  
+
+  onAuthStateChanged(auth, (currentUser) => {
+    console.log(currentUser);
+  });
+
   const submitLoginForm = (e: React.FormEvent): void => {
   e.preventDefault();
-  console.log(e);
-  if(checkEmptyLoginFields()) return;
-  displayPassErr(false);
-  displayEmailErr(false);
+  console.log(loginEmail, loginPassword);
+  // if(checkEmptyLoginFields()) return;
+  // displayPassErr(false);
+  // displayEmailErr(false);
+  login();
   }
-  const setLoginDisplay = (e: React.MouseEvent) => {
-    e.preventDefault();
-    dispatch(toggleLoginDisplay(false)); 
-    dispatch(toggleRegisterDisplay(true));
-  }
+
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      dispatch(setCurrentUser(user));
+      navigate("/app");
+      console.log(user);
+    } catch (error) {
+      if(error instanceof Error) console.log(error.message);
+    }
+  };
+  // const setLoginDisplay = (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   dispatch(toggleLoginDisplay(false)); 
+  //   dispatch(toggleRegisterDisplay(true));
+  // }
   
   const checkEmptyLoginFields = (): boolean => {
       if(loginEmail === '') {
@@ -55,6 +83,9 @@ export default function LoginFormComponent() {
           setPassErr('Login or password is invalid.');
       }
   }
+  const onChangeLoginEmail = (e: React.ChangeEvent) => setLoginEmail((e.target as HTMLInputElement).value);
+  const onChangeLoginPassword = (e: React.ChangeEvent) => setLoginPassword((e.target as HTMLInputElement).value);
+
   return (
   <LoginFormContainer>
       <LoginForm onSubmit={submitLoginForm}>
@@ -68,7 +99,7 @@ export default function LoginFormComponent() {
                       {emailErr}
                   </ErrMessage>
               </MessageField>
-              <LoginInput err={showEmailErr} type="email" name="email" />
+              <LoginInput err={showEmailErr} type="email" name="email" onChange={onChangeLoginEmail} />
           </InputGroup>
           <InputGroup>
               <MessageField err={showPassErr}>
@@ -78,14 +109,12 @@ export default function LoginFormComponent() {
                   {passErr}
               </ErrMessage>
               </MessageField>
-          <LoginInput err={showPassErr} type="password" name="pass" />
+          <LoginInput err={showPassErr} type="password" name="pass" onChange={onChangeLoginPassword} />
           </InputGroup>
               <ForgotPassButtonWrapper>
                   <button>Forgot your password?</button>
               </ForgotPassButtonWrapper>
-              <LoginButton>
-                  Login
-              </LoginButton>
+              <LoginButton type="submit" onSubmit={submitLoginForm}>Login</LoginButton>
               <RegisterWrapper>
                   <p>Need an account?</p>
                   <Link to="/register">

@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 // import { getFirestore, collection, getDocs, getDoc, doc, setDoc, Timestamp } from 'firebase/firestore/lite'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 const app = initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,18 +11,8 @@ const app = initializeApp({
   appId: process.env.REACT_APP_APP_ID,
 })
 
-export const auth = getAuth(app);
-const register = async (email: string, password: string) => {
-  try {
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(user);
-  } catch (error) {
-    if(error instanceof Error) {
-      console.log(error.message)
-    }
-    console.log(`couldn't catch error`);
-  }
-}
+const auth = getAuth(app);
+
 const login = async (email: string, password: string)=> {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
@@ -34,8 +24,6 @@ const login = async (email: string, password: string)=> {
     console.log(`couldn't catch error`);
   }
 }  
-const logout = async () => {
-
-}
-export { register, login, logout }
+const logout = async () => await signOut(auth);
+export { login, logout, auth }
 export default app;

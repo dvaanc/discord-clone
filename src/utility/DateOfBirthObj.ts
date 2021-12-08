@@ -13,5 +13,3 @@ export const DateOfBirthObj = {
     day: day(31),
     year: year(2021),
 }
-
-console.log(DateOfBirthObj.day);
