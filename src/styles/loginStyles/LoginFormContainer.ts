@@ -1,4 +1,31 @@
 import styled, { keyframes } from "styled-components";
+const LoadingDots = keyframes`
+    0% {
+      opacity: .2;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      opacity: .2;
+    }
+`
+const Loading = styled.div<{ display: true}>`
+  display: ${ props => props.display ? 'inline-block' : 'none'};
+  & span {
+    animation: ${LoadingDots};
+    animation-name: blink;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+  & span:nth-child(2) {
+    animation-delay: .2s;
+  }
+  & span:nth-child(3) {
+    animation-delay: .4s;
+  }
+`
 const LoadWindow = keyframes`
   0% {
     transform: scale(1.1) translateY(-60px) translateZ(20px);
@@ -165,5 +192,6 @@ export {
   MessageField,
   LoginInput,
   LoginFormContainer,
-  LoadWindow 
+  LoadWindow,
+  Loading,
 }

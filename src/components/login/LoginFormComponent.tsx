@@ -14,11 +14,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase/firebase';
 import { onAuthStateChanged, signInWithEmailAndPassword } from '@firebase/auth';
 import { setCurrentUser } from '../../redux/features/currentUserSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store'
 
 export default function LoginFormComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector(
+    (state: RootState) => state.currentUser.user);
   const [loginEmail, setLoginEmail] = React.useState("" as string);
   const [loginPassword, setLoginPassword] = React.useState("" as string);
   const [showEmailErr, displayEmailErr] = React.useState(false as boolean); 
@@ -26,16 +29,24 @@ export default function LoginFormComponent() {
   const [emailErr, setEmailErr] = React.useState('test' as string);
   const [passErr, setPassErr] = React.useState('test' as string);
 
-  onAuthStateChanged(auth, (currentUser) => {
+  React.useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
     console.log(currentUser);
+    dispatch(setCurrentUser(currentUser));
   });
-
+  }, [])
+  React.useEffect(() => {
+    console.log(currentUser);
+    if(currentUser !== null) {
+      navigate("/app");
+    }
+  }, [currentUser])
+  
   const submitLoginForm = (e: React.FormEvent): void => {
   e.preventDefault();
-  console.log(loginEmail, loginPassword);
+  displayEmailErr(false);
+  displayPassErr(false);
   // if(checkEmptyLoginFields()) return;
-  // displayPassErr(false);
-  // displayEmailErr(false);
   login();
   }
 
@@ -49,8 +60,13 @@ export default function LoginFormComponent() {
       dispatch(setCurrentUser(user));
       navigate("/app");
       console.log(user);
+      console.log('Successfully logged in')
     } catch (error) {
-      if(error instanceof Error) console.log(error.message);
+      if(error instanceof Error) {
+        console.log(error);
+        console.log(error.message);
+        setErrMsg(error.message);
+      } 
     }
   };
   // const setLoginDisplay = (e: React.MouseEvent) => {
@@ -60,28 +76,41 @@ export default function LoginFormComponent() {
   // }
   
   const checkEmptyLoginFields = (): boolean => {
-      if(loginEmail === '') {
-      setErrMsg('emptyEmail');
-      displayEmailErr(true);
-      }
-      if(loginPassword === '') {
-      setErrMsg('emptyPass');
-      displayPassErr(true);
-      }
-      return true;
+    if(loginEmail === '') setErrMsg('emptyEmail');
+    if(loginPassword === '') setErrMsg('emptyPass');
+    return true;
   }
   const setErrMsg = (str: string) => {
-      switch(str) {
+    switch(str) {
+      case 'Firebase: Error (auth/invalid-email).':
+        setEmailErr('Invalid/Wrong Email');
+        displayEmailErr(true);
+        break;
+      case 'Firebase: Error (auth/user-not-found).':
+        setEmailErr('Invalid/Wrong Email.');
+        displayEmailErr(true);
+        break;
+      case 'Firebase: Error (auth/wrong-password).':
+        setPassErr('Invalid/Wrong Password.');
+        displayPassErr(true);
+        break;
+      case 'Firebase: Error (auth/user-disabled).':
+        setPassErr('User account disabled.');
+        setEmailErr('User account disabled.');
+        break;
       case 'emptyEmail':
-          setEmailErr('This field is required');
-          break;
+        setEmailErr('This field is required');
+        displayEmailErr(true);
+        break;
       case 'emptyPass':
-          setPassErr('This field is required');
-          break;
+        setPassErr('This field is required');
+        displayPassErr(true);
+        break;
       case 'invalidFields':
-          setEmailErr('Login or password is invalid.');
-          setPassErr('Login or password is invalid.');
-      }
+        setEmailErr('Login or password is invalid.');
+        setPassErr('Login or password is invalid.');
+        break;
+    }
   }
   const onChangeLoginEmail = (e: React.ChangeEvent) => setLoginEmail((e.target as HTMLInputElement).value);
   const onChangeLoginPassword = (e: React.ChangeEvent) => setLoginPassword((e.target as HTMLInputElement).value);
@@ -99,7 +128,7 @@ export default function LoginFormComponent() {
                       {emailErr}
                   </ErrMessage>
               </MessageField>
-              <LoginInput err={showEmailErr} type="email" name="email" onChange={onChangeLoginEmail} />
+              <LoginInput err={showEmailErr} type="text" name="email" onChange={onChangeLoginEmail} />
           </InputGroup>
           <InputGroup>
               <MessageField err={showPassErr}>
