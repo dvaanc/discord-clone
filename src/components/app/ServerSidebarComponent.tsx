@@ -4,7 +4,10 @@ import {
   ServerChannelList, 
   UserPanel, 
   Avatar, 
-  ServerChannel 
+  ServerChannel, 
+  Username,
+  UserPanelIcons,
+  UsernameUserIconsWrapper
 } from '../../styles/appStyles/ServerSidebarStyles';
 import Image from '../../utility/imagesObj';
 import React from 'react';
@@ -14,6 +17,10 @@ import { toggleUserStatusPanel } from '../../redux/features/userStatusPanelSlice
 export default function ServerSidebarComponent() {
   const [userStatusPanel, setDisplay] = React.useState(true);
   const dispatch = useDispatch();
+  const [userPanelIcons, setUserPanelIcons] = React.useState({
+    mute: Image.unmuteIcon,
+    deafen: Image.undeafenIcon,
+  });
   const setUserStatusPanel = (): void => {
     if(!userStatusPanel) {
       dispatch(toggleUserStatusPanel(userStatusPanel));
@@ -27,11 +34,16 @@ export default function ServerSidebarComponent() {
     }
     return;
   }
-  
   const onBlur = () => {
     dispatch(toggleUserStatusPanel(userStatusPanel));
     setDisplay(false);
     return;
+  }
+  const toggleMute = () => {
+
+  }
+  const toggleDeafen = () => {
+    userPanelIcons.deafen === Image.undeafenIcon ? setUserPanelIcons({...userPanelIcons, deafen: })
   }
   return(
   <ServerSidebar>
@@ -51,7 +63,20 @@ export default function ServerSidebarComponent() {
     </ServerChannelList>
 
     <UserPanel>
-      <Avatar onClick={setUserStatusPanel} onBlur={onBlur}/>
+      <Avatar src={Image.defaultAvatar} onClick={setUserStatusPanel} onBlur={onBlur}/>
+      <UsernameUserIconsWrapper>
+        <Username>
+          <h5>TestUser</h5>
+          <span>
+            <p>Test Status</p>
+          </span>
+        </Username>
+        <UserPanelIcons>
+          <img src={userPanelIcons.mute} alt="" />
+          <img src={userPanelIcons.deafen} alt="" />
+          <img src={Image.userSettingsIcon} alt="" />
+        </UserPanelIcons>
+      </UsernameUserIconsWrapper>
     </UserPanel>
   </ServerSidebar>
   )

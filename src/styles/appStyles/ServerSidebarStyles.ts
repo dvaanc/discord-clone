@@ -66,15 +66,49 @@ const UserPanel = styled.div`
   height: 50px;
   min-width: 100%;
   flex-shrink: 0;
-  padding: 0 8px;
+  padding: 8px;
   background-color: #292b2f;
 `
-const Avatar = styled.div`
+const UsernameUserIconsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+`
+const Avatar = styled.img`
   height: 32px;
   width: 32px;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
+  margin-right: 8px;
+`
+const Username = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 32px;
+  & h5 {
+    color: #dcddde;
+  }
+  & p {
+    color: #b9bbbe;
+    font-size: 12px;
+  }
+`
+const UserPanelIcons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  & img {
+    height: 20px;
+    width: 20px;
+  }
 `
 export { 
   ServerSidebar, 
@@ -82,5 +116,8 @@ export {
   ServerChannelList, 
   UserPanel, 
   Avatar, 
-  ServerChannel 
+  ServerChannel,
+  Username,
+  UserPanelIcons,
+  UsernameUserIconsWrapper
 };
