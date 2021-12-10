@@ -108,6 +108,13 @@ const UserPanelIcons = styled.div`
   & img {
     height: 20px;
     width: 20px;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    -ms-user-drag: none;
+    user-drag: none;
   }
 `
 export { 

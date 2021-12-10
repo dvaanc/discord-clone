@@ -40,10 +40,17 @@ export default function ServerSidebarComponent() {
     return;
   }
   const toggleMute = () => {
-
+    userPanelIcons.mute === Image.unmuteIcon ? 
+    setUserPanelIcons({...userPanelIcons, mute: Image.muteMicIcon }) :
+    setUserPanelIcons({...userPanelIcons, mute: Image.unmuteIcon });
   }
   const toggleDeafen = () => {
-    userPanelIcons.deafen === Image.undeafenIcon ? setUserPanelIcons({...userPanelIcons, deafen: })
+    userPanelIcons.deafen === Image.undeafenIcon ? 
+    setUserPanelIcons({...userPanelIcons, deafen: Image.deafenIcon }) :
+    setUserPanelIcons({...userPanelIcons, deafen: Image.undeafenIcon });
+  }
+  const showUserSettingsOverlay = () => {
+
   }
   return(
   <ServerSidebar>
@@ -72,8 +79,8 @@ export default function ServerSidebarComponent() {
           </span>
         </Username>
         <UserPanelIcons>
-          <img src={userPanelIcons.mute} alt="" />
-          <img src={userPanelIcons.deafen} alt="" />
+          <img onClick={toggleMute} src={userPanelIcons.mute} alt="" />
+          <img onClick={toggleDeafen} src={userPanelIcons.deafen} alt="" />
           <img src={Image.userSettingsIcon} alt="" />
         </UserPanelIcons>
       </UsernameUserIconsWrapper>

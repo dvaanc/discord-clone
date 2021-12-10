@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LayerContainer = styled.div`
+const Overlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -13,10 +13,10 @@ const LayerContainer = styled.div`
 const UserStatusContainer = styled.div`
   position: fixed;
   left: 80px;
-  bottom: 57px;
+  bottom: 35px;
   pointer-events: auto;
 `
-const UserStatusPanel = styled.div<{ display: boolean, }>`
+const UserStatusPanel = styled.div<{ display: boolean }>`
   display: ${props => props.display === true ? 'flex' : 'none'};
   flex-direction: column;
   align-items: center;
@@ -134,7 +134,7 @@ const SearchPanelItem = styled.div`
 `
 
 export { 
-  LayerContainer,
+  Overlay,
   UserStatusContainer,
   UserStatusPanel,
   StatusItem,

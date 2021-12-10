@@ -44,6 +44,7 @@ import addSearchIcon from '../images/addSearchIcon.svg';
 import clearHistoryIcon from '../images/clearHistoryIcon.svg';
 import characterBackground from '../images/characterBackground.svg';
 import defaultAvatar from '../images/defaultAvatar.png';
+import deafenIcon from '../images/deafenIcon.svg';
 const Image = {
   addReactionIcon,
   bellIcon,
@@ -91,6 +92,7 @@ const Image = {
   clearHistoryIcon,
   characterBackground,
   defaultAvatar,
+  deafenIcon,
 }
 
 export default Image;
