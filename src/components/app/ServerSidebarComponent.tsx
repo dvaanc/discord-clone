@@ -11,34 +11,27 @@ import {
 } from '../../styles/appStyles/ServerSidebarStyles';
 import Image from '../../utility/imagesObj';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleUserStatusPanel } from '../../redux/features/userStatusPanelSlice';
+import { toggleUserSettingsPanel } from '../../redux/features/userSettingsPanelSlice';
+import { RootState } from '../../redux/store';
 
 export default function ServerSidebarComponent() {
-  const [userStatusPanel, setDisplay] = React.useState(true);
+  const userStatusPanel = useSelector(
+    (state: RootState) => state.userStatusPanel.value);
   const dispatch = useDispatch();
   const [userPanelIcons, setUserPanelIcons] = React.useState({
     mute: Image.unmuteIcon,
     deafen: Image.undeafenIcon,
   });
-  const setUserStatusPanel = (): void => {
-    if(!userStatusPanel) {
-      dispatch(toggleUserStatusPanel(userStatusPanel));
-      setDisplay(true);
-      return;
-    }
-    if(userStatusPanel) {
-      dispatch(toggleUserStatusPanel(userStatusPanel));
-      setDisplay(false);
-      return;
-    }
-    return;
+  const setUserStatusPanel = () => {
+  !userStatusPanel ? 
+  dispatch(toggleUserStatusPanel(true)) : 
+  dispatch(toggleUserStatusPanel(false));
   }
-  const onBlur = () => {
-    dispatch(toggleUserStatusPanel(userStatusPanel));
-    setDisplay(false);
-    return;
-  }
+  const displayUserSettingsPanel = () => dispatch(toggleUserSettingsPanel(true));
+  const onBlur = () => dispatch(toggleUserStatusPanel(false));
+
   const toggleMute = () => {
     userPanelIcons.mute === Image.unmuteIcon ? 
     setUserPanelIcons({...userPanelIcons, mute: Image.muteMicIcon }) :
@@ -81,7 +74,7 @@ export default function ServerSidebarComponent() {
         <UserPanelIcons>
           <img onClick={toggleMute} src={userPanelIcons.mute} alt="" />
           <img onClick={toggleDeafen} src={userPanelIcons.deafen} alt="" />
-          <img src={Image.userSettingsIcon} alt="" />
+          <img onClick={displayUserSettingsPanel} src={Image.userSettingsIcon} alt="" />
         </UserPanelIcons>
       </UsernameUserIconsWrapper>
     </UserPanel>

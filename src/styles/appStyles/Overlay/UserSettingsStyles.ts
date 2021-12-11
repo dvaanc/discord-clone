@@ -15,3 +15,8 @@ const UserSettingsLeftSidebar = styled.div`
 `
 const UserChangeSettings = styled.div`
 `
+export { 
+  UserSettingsContainer,
+  UserSettingsLeftSidebar,
+  UserChangeSettings,
+}
