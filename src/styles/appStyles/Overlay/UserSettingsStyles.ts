@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 const UserSettingsContainer = styled.div<{display: boolean}>`
   display: ${props => props.display ? 'flex' : 'none'};
+  position: fixed;
   flex-direction: row;
-  z-index: 10;
+  z-index: 99999;
   height: 100%;
   width: 100%;
+  background-color: blue;
 `
 const UserSettingsLeftSidebar = styled.div`
   display: flex;

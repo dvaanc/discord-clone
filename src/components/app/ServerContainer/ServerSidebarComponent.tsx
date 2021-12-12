@@ -8,13 +8,13 @@ import {
   Username,
   UserPanelIcons,
   UsernameUserIconsWrapper
-} from '../../styles/appStyles/ServerSidebarStyles';
-import Image from '../../utility/imagesObj';
+} from '../../../styles/appStyles/ServerContainer/ServerSidebarStyles';
+import Image from '../../../utility/imagesObj';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleUserStatusPanel } from '../../redux/features/userStatusPanelSlice';
-import { toggleUserSettingsPanel } from '../../redux/features/userSettingsPanelSlice';
-import { RootState } from '../../redux/store';
+import { toggleUserStatusPanel } from '../../../redux/features/userStatusPanelSlice';
+import { toggleUserSettingsPanel } from '../../../redux/features/userSettingsPanelSlice';
+import { RootState } from '../../../redux/store';
 
 export default function ServerSidebarComponent() {
   const userStatusPanel = useSelector(
@@ -42,9 +42,7 @@ export default function ServerSidebarComponent() {
     setUserPanelIcons({...userPanelIcons, deafen: Image.deafenIcon }) :
     setUserPanelIcons({...userPanelIcons, deafen: Image.undeafenIcon });
   }
-  const showUserSettingsOverlay = () => {
 
-  }
   return(
   <ServerSidebar>
     <ServerTitle>

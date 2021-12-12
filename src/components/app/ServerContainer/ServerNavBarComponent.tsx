@@ -1,24 +1,12 @@
-import { 
-  ServerContainer, 
-  ServerNavBar, 
-  ServerChat, 
-  ServerUserList, 
-  ServerChatRoomContainer, 
-  ServerNavFlexStartContainer, 
-  ServerNavFlexEndContainer, 
-  SearchInput 
-} from '../../styles/appStyles/ServerContainerStyles';
-import Image from '../../utility/imagesObj';
-import React from 'react';
+import Image from '../../../utility/imagesObj';
 import { useDispatch } from 'react-redux';
-import { toggleSearchPanel } from '../../redux/features/searchPanelSlice';
-
-export default function ServerContainerComponent() {
+import { toggleSearchPanel } from '../../../redux/features/searchPanelSlice';
+import { ServerNavBar, ServerNavFlexStartContainer, ServerNavFlexEndContainer, SearchInput } from '../../../styles/appStyles/ServerContainer/ServerNavBarStyles'
+export default function ServerNavBarComponent() {
   const dispatch = useDispatch();
   const onFocus = () => dispatch(toggleSearchPanel(true));
   const onBlur = () => dispatch(toggleSearchPanel(false));
   return (
-    <ServerContainer>
     <ServerNavBar>
       <ServerNavFlexStartContainer>
         <span>
@@ -39,14 +27,5 @@ export default function ServerContainerComponent() {
         <img src={Image.helpIcon} alt="" />
       </ServerNavFlexEndContainer>
     </ServerNavBar>
-    <ServerChatRoomContainer>
-      <ServerChat>
-
-      </ServerChat>
-      <ServerUserList>
-
-      </ServerUserList>
-    </ServerChatRoomContainer>
-    </ServerContainer>
   )
 }

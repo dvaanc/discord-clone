@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-const ServerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  background-color: #36393F;
-`
 const ServerNavBar = styled.nav`
   display: flex;
   flex-direction: row;
@@ -34,21 +27,18 @@ const ServerNavFlexStartContainer = styled.div`
     width: auto;
     height: 100%;
     z-index: 1;
-
 `
 const ServerNavFlexEndContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  min-width: 600px;
+  min-width: 450px;
   height: 100%;
   flex-shrink: 0;
   gap: 15px;
   z-index: 2;
-  & img:hover {
-    cursor: pointer;
-  }
+  & img:hover { cursor: pointer; }
 `
 const SearchInput = styled.div`
   display: flex;
@@ -70,43 +60,12 @@ const SearchInput = styled.div`
     padding-left: 5px;
     color: #FFFFFF;
     font-size: 16px;
-    &:focus {
-      outline: none;
-      min-width: 300px;
-    }
+    &:focus { outline: none; min-width: 300px; }
   }
 `
-const ServerChatRoomContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  width: 100%;
-`
-const ServerChat = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  flex-grow: 1;
-  flex-shrink: 0;
-  overflow: hidden scroll;
-`
-const ServerUserList = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-width: 240px;
-  flex-shrink: 0;
-  height: 100%;
-  background-color: #2F3136;
-`
-// #b9bbbe
-// #dcddde
-export { 
-  ServerContainer, 
-  ServerNavBar, 
-  ServerChat, 
-  ServerUserList, 
-  ServerChatRoomContainer,
+export {
+  ServerNavBar,
   ServerNavFlexStartContainer,
   ServerNavFlexEndContainer,
-  SearchInput,
-};
+  SearchInput
+}
