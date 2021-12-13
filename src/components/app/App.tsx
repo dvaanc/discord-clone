@@ -1,9 +1,8 @@
 import Container from '../../styles/appStyles/AppContainer';
 import SidebarComponent from './SidebarComponent';
-import ServerSidebarComponent from './ServerContainer/ServerSidebarComponent';
 import ServerContainerComponent from './ServerContainer/ServerContainerComponent';
 import LayerContainerComponent from './Overlay/Overlay';
-import UserMeSectionComponent from './UserMeSectionComponent';
+import UserMeSectionComponent from './UserSettingsContainer/UserMeSectionComponent';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
