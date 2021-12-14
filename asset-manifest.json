@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/discord-clone/static/css/main.daf9e408.chunk.css",
-    "main.js": "/discord-clone/static/js/main.969a1de8.chunk.js",
-    "main.js.map": "/discord-clone/static/js/main.969a1de8.chunk.js.map",
+    "main.js": "/discord-clone/static/js/main.d667a4fa.chunk.js",
+    "main.js.map": "/discord-clone/static/js/main.d667a4fa.chunk.js.map",
     "runtime-main.js": "/discord-clone/static/js/runtime-main.d0ec1cf0.js",
     "runtime-main.js.map": "/discord-clone/static/js/runtime-main.d0ec1cf0.js.map",
     "static/js/2.5634b4a9.chunk.js": "/discord-clone/static/js/2.5634b4a9.chunk.js",
@@ -50,10 +50,12 @@
     "static/media/serverBoostBadgeIcon.f1e56313.svg": "/discord-clone/static/media/serverBoostBadgeIcon.f1e56313.svg",
     "static/media/serverBoostBgIcon.71ad2734.svg": "/discord-clone/static/media/serverBoostBgIcon.71ad2734.svg",
     "static/media/serverFolderIcon.e8c130ad.svg": "/discord-clone/static/media/serverFolderIcon.e8c130ad.svg",
+    "static/media/smilePaperIcon.bd07014d.svg": "/discord-clone/static/media/smilePaperIcon.bd07014d.svg",
     "static/media/stickerIcon.bd07014d.svg": "/discord-clone/static/media/stickerIcon.bd07014d.svg",
     "static/media/threadIcon.86d6c0a1.svg": "/discord-clone/static/media/threadIcon.86d6c0a1.svg",
     "static/media/undeafenIcon.3ae27683.svg": "/discord-clone/static/media/undeafenIcon.3ae27683.svg",
     "static/media/unmuteIcon.bdc546f7.svg": "/discord-clone/static/media/unmuteIcon.bdc546f7.svg",
+    "static/media/uploadIcon.656f5be2.svg": "/discord-clone/static/media/uploadIcon.656f5be2.svg",
     "static/media/userSettingsIcon.a8205668.svg": "/discord-clone/static/media/userSettingsIcon.a8205668.svg",
     "static/media/voiceChannelIcon.6a26f0b2.svg": "/discord-clone/static/media/voiceChannelIcon.6a26f0b2.svg"
   },
@@ -61,6 +63,6 @@
     "static/js/runtime-main.d0ec1cf0.js",
     "static/js/2.5634b4a9.chunk.js",
     "static/css/main.daf9e408.chunk.css",
-    "static/js/main.969a1de8.chunk.js"
+    "static/js/main.d667a4fa.chunk.js"
   ]
 }
