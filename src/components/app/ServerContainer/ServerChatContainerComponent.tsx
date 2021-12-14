@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from '../../../utility/imagesObj'
 import { 
   ServerChatContainer, 
   ServerChat, 
@@ -7,7 +8,8 @@ import {
   MessageStatus,
   ServerInput, 
   ServerInputIcons, 
-  ServerInputContainer
+  ServerInputContainer,
+  UploadIconWrapper,
 } from '../../../styles/appStyles/ServerContainer/ServerChatContainerStyles'
 import ServerNavBarComponent from './ServerNavBarComponent'
 export default function ServerChatContainerComponent() {
@@ -18,9 +20,15 @@ export default function ServerChatContainerComponent() {
       </ServerChatRoomContainer>
       <ServerInputContainer>
         <ServerInputWrapper>
+          <UploadIconWrapper>
+            <img src={Image.uploadIcon} alt=""/>
+          </UploadIconWrapper>
+
           <ServerInput placeholder="Message #general" />
           <ServerInputIcons>
-
+            <img src={Image.giftIcon} alt="" />
+            <img src={Image.gifIcon} alt="" />
+            <img src={Image.smilePaperIcon} alt="" />
           </ServerInputIcons>
         </ServerInputWrapper>
         <MessageStatus>

@@ -4,7 +4,7 @@ const ServerChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-color: #36393F;
 `
 const ServerChatRoomContainer = styled.div`
@@ -23,27 +23,30 @@ const ServerChat = styled.div`
   flex-shrink: 0;
   overflow: hidden scroll;
 `
-const ServerInputContainer = styled.div`
+const ServerInputContainer = styled.form`
   padding: 0 20px;
 `
 const ServerInputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #40444B;
-  border: 8px;
   width: 100%;
   min-height: 44px;
   flex-grow: 1;
-  padding: 10px;
-
+  border-radius: 12px;
 `
-const ServerInputIcons = styled.div`
+const UploadIconWrapper = styled.span`
   display: flex;
-  justify-content: space-evenly;
-
+  align-items: center;
+  width: 80px;
+  min-height: 100%;
+  padding: 0 15px;
+  cursor: pointer;
 `
-const ServerInput = styled.textarea`
-  display: block;
+const ServerInput = styled.input`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #40444B;
   color: #FFFFFF;
   border: none;
@@ -51,13 +54,19 @@ const ServerInput = styled.textarea`
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   width: 100%;
-  min-height: 22px;
-  overflow: none;
-  resize: none;
+  min-height: 100%;
+  overflow-wrap: break-word;
   &:focus {
     border: none;
     outline: none;
   }
+`
+const ServerInputIcons = styled.div`
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+  min-width: 120px;
+  justify-content: space-evenly;
 `
 const MessageStatus = styled.div`
   display: flex;
@@ -76,5 +85,7 @@ export {
   MessageStatus, 
   ServerInput, 
   ServerInputIcons,
-  ServerInputContainer
+  ServerInputContainer,
+  UploadIconWrapper,
+
 };

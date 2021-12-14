@@ -6,7 +6,6 @@ const ServerNavBar = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
-  flex-shrink: 0;
   height: 48px;
   width: 100%;
   border-bottom: 1px solid #202225;
@@ -24,9 +23,10 @@ const ServerNavFlexStartContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: auto;
+    max-width: 100%;
     height: 100%;
     z-index: 1;
+    flex-shrink: 1;
 `
 const ServerNavFlexEndContainer = styled.div`
   display: flex;

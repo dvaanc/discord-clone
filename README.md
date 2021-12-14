@@ -9,6 +9,7 @@ I plan on making this web application mobile responsive once I finish the applic
 
 ## Special notes
  (Notes for myself and others who want to understand how and why I made these design choices);
+ subject to change
 ### Server data and management
 an example object holding data for a server
 
