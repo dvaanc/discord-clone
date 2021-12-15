@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/discord-clone/static/css/main.daf9e408.chunk.css",
-    "main.js": "/discord-clone/static/js/main.d667a4fa.chunk.js",
-    "main.js.map": "/discord-clone/static/js/main.d667a4fa.chunk.js.map",
+    "main.js": "/discord-clone/static/js/main.91eed017.chunk.js",
+    "main.js.map": "/discord-clone/static/js/main.91eed017.chunk.js.map",
     "runtime-main.js": "/discord-clone/static/js/runtime-main.d0ec1cf0.js",
     "runtime-main.js.map": "/discord-clone/static/js/runtime-main.d0ec1cf0.js.map",
-    "static/js/2.5634b4a9.chunk.js": "/discord-clone/static/js/2.5634b4a9.chunk.js",
-    "static/js/2.5634b4a9.chunk.js.map": "/discord-clone/static/js/2.5634b4a9.chunk.js.map",
+    "static/js/2.352769cf.chunk.js": "/discord-clone/static/js/2.352769cf.chunk.js",
+    "static/js/2.352769cf.chunk.js.map": "/discord-clone/static/js/2.352769cf.chunk.js.map",
     "index.html": "/discord-clone/index.html",
     "static/css/main.daf9e408.chunk.css.map": "/discord-clone/static/css/main.daf9e408.chunk.css.map",
-    "static/js/2.5634b4a9.chunk.js.LICENSE.txt": "/discord-clone/static/js/2.5634b4a9.chunk.js.LICENSE.txt",
+    "static/js/2.352769cf.chunk.js.LICENSE.txt": "/discord-clone/static/js/2.352769cf.chunk.js.LICENSE.txt",
     "static/media/addReactionIcon.7741d7fb.svg": "/discord-clone/static/media/addReactionIcon.7741d7fb.svg",
     "static/media/addSearchIcon.219e622f.svg": "/discord-clone/static/media/addSearchIcon.219e622f.svg",
     "static/media/bellIcon.28206142.svg": "/discord-clone/static/media/bellIcon.28206142.svg",
@@ -57,12 +57,13 @@
     "static/media/unmuteIcon.bdc546f7.svg": "/discord-clone/static/media/unmuteIcon.bdc546f7.svg",
     "static/media/uploadIcon.656f5be2.svg": "/discord-clone/static/media/uploadIcon.656f5be2.svg",
     "static/media/userSettingsIcon.a8205668.svg": "/discord-clone/static/media/userSettingsIcon.a8205668.svg",
-    "static/media/voiceChannelIcon.6a26f0b2.svg": "/discord-clone/static/media/voiceChannelIcon.6a26f0b2.svg"
+    "static/media/voiceChannelIcon.6a26f0b2.svg": "/discord-clone/static/media/voiceChannelIcon.6a26f0b2.svg",
+    "static/media/😀.7d1091ba.svg": "/discord-clone/static/media/😀.7d1091ba.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.d0ec1cf0.js",
-    "static/js/2.5634b4a9.chunk.js",
+    "static/js/2.352769cf.chunk.js",
     "static/css/main.daf9e408.chunk.css",
-    "static/js/main.d667a4fa.chunk.js"
+    "static/js/main.91eed017.chunk.js"
   ]
 }
