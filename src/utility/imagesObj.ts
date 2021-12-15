@@ -47,6 +47,7 @@ import defaultAvatar from '../images/defaultAvatar.png';
 import deafenIcon from '../images/deafenIcon.svg';
 import uploadIcon from '../images/uploadIcon.svg';
 import smilePaperIcon from '../images/smilePaperIcon.svg';
+import smileIcon from '../images/😀.svg';
 const Image = {
   addReactionIcon,
   bellIcon,
@@ -97,6 +98,7 @@ const Image = {
   deafenIcon,
   uploadIcon,
   smilePaperIcon,
+  smileIcon,
 }
 
 export default Image;

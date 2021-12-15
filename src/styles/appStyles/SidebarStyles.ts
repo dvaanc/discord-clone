@@ -72,6 +72,15 @@ const Seperator = styled.div`
   background-color: #36393f;
   border-radius: 25%;
 `
+const GreenButton = styled(HomeButton)`
+  &:hover {
+    background-color: #3ba55d;
+  }
+  & img {
+    height: 24px;
+    width: 24px;
+  }
+`
 // hsl(235,calc(var(--saturation-factor, 1)*85.6%),64.7%)
 export {
   Sidebar,
@@ -80,4 +89,5 @@ export {
   Icon, 
   Pill, 
   Seperator,
+  GreenButton,
 };

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from '../../../utility/imagesObj'
 import { 
   ServerChatContainer, 
@@ -8,33 +8,41 @@ import {
   MessageStatus,
   ServerInput, 
   ServerInputIcons, 
-  ServerInputContainer,
+  ServerInputFormContainer,
   UploadIconWrapper,
 } from '../../../styles/appStyles/ServerContainer/ServerChatContainerStyles'
 import ServerNavBarComponent from './ServerNavBarComponent'
 export default function ServerChatContainerComponent() {
+  const [chat, setChatMessage] = useState('' as string);
+  const handleFormInputSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    console.log(chat);
+  }
+  const handleChatInput = (e: React.ChangeEvent) => setChatMessage((e.target as HTMLInputElement).value);
+
   return (
     <ServerChatContainer>
       <ServerNavBarComponent />
       <ServerChatRoomContainer>
       </ServerChatRoomContainer>
-      <ServerInputContainer>
+      <ServerInputFormContainer onSubmit={handleFormInputSubmit}>
         <ServerInputWrapper>
           <UploadIconWrapper>
             <img src={Image.uploadIcon} alt=""/>
           </UploadIconWrapper>
 
-          <ServerInput placeholder="Message #general" />
+          <ServerInput placeholder="Message #general" onChange={handleChatInput} value={chat} />
           <ServerInputIcons>
             <img src={Image.giftIcon} alt="" />
             <img src={Image.gifIcon} alt="" />
             <img src={Image.smilePaperIcon} alt="" />
+            <img src={Image.smileIcon} alt="" />
           </ServerInputIcons>
         </ServerInputWrapper>
         <MessageStatus>
         test
         </MessageStatus> 
-      </ServerInputContainer>
+      </ServerInputFormContainer>
 
     </ServerChatContainer>
   )

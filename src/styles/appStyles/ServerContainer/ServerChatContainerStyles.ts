@@ -23,7 +23,7 @@ const ServerChat = styled.div`
   flex-shrink: 0;
   overflow: hidden scroll;
 `
-const ServerInputContainer = styled.form`
+const ServerInputFormContainer = styled.form`
   padding: 0 20px;
 `
 const ServerInputWrapper = styled.div`
@@ -65,8 +65,13 @@ const ServerInputIcons = styled.div`
   display: flex;
   align-items: center;
   min-height: 100%;
-  min-width: 120px;
-  justify-content: space-evenly;
+  min-width: 140px;
+  gap: 7px;
+  & img {
+    min-height: 24px;
+    width: 24px;
+    cursor: pointer;
+  }
 `
 const MessageStatus = styled.div`
   display: flex;
@@ -85,7 +90,7 @@ export {
   MessageStatus, 
   ServerInput, 
   ServerInputIcons,
-  ServerInputContainer,
+  ServerInputFormContainer,
   UploadIconWrapper,
 
-};
+};                            

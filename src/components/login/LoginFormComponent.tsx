@@ -31,12 +31,10 @@ export default function LoginFormComponent() {
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-    console.log(currentUser);
     dispatch(setCurrentUser(currentUser));
   });
   }, [])
   React.useEffect(() => {
-    console.log(currentUser);
     if(currentUser !== null) {
       navigate("/app");
     }
@@ -128,7 +126,7 @@ export default function LoginFormComponent() {
                       {emailErr}
                   </ErrMessage>
               </MessageField>
-              <LoginInput err={showEmailErr} type="text" name="email" onChange={onChangeLoginEmail} />
+              <LoginInput err={showEmailErr} type="text" name="email" onChange={onChangeLoginEmail} value={loginEmail} />
           </InputGroup>
           <InputGroup>
               <MessageField err={showPassErr}>
@@ -138,7 +136,7 @@ export default function LoginFormComponent() {
                   {passErr}
               </ErrMessage>
               </MessageField>
-          <LoginInput err={showPassErr} type="password" name="pass" onChange={onChangeLoginPassword} />
+          <LoginInput err={showPassErr} type="password" name="pass" onChange={onChangeLoginPassword} value={loginPassword}/>
           </InputGroup>
               <ForgotPassButtonWrapper>
                   <button>Forgot your password?</button>
