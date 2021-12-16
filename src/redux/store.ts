@@ -3,6 +3,7 @@ import userStatusPanelReducer from "./features/userStatusPanelSlice";
 import searchPanelReducer from "./features/searchPanelSlice";
 import currentUserReducer from "./features/currentUserSlice";
 import userSettingsPanelReducer from './features/userSettingsPanelSlice';
+import newServerPanelReducer from './features/newServerPanelSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     searchPanel: searchPanelReducer,
     currentUser: currentUserReducer,
     userSettingsPanel: userSettingsPanelReducer,
+    newServerPanel: newServerPanelReducer,
   },
 })
 

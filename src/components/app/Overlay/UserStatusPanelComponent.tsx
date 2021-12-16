@@ -1,4 +1,4 @@
-import {  UserStatusContainer, UserStatusPanel, StatusItem, Seperator } from '../../../styles/appStyles/Overlay/OverlayStyles';
+import {  UserStatusContainer, UserStatusPanel, StatusItem, Seperator } from '../../../styles/appStyles/Overlay/UserStatusPanelStyles';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store'
 import React from 'react'

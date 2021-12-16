@@ -48,6 +48,15 @@ import deafenIcon from '../images/deafenIcon.svg';
 import uploadIcon from '../images/uploadIcon.svg';
 import smilePaperIcon from '../images/smilePaperIcon.svg';
 import smileIcon from '../images/😀.svg';
+import createMyIcon from '../images/createMyIcon.svg';
+import createGamingIcon from '../images/createGamingIcon.svg';
+import createSchoolClubIcon from '../images/createSchoolClubIcon.svg';
+import createStudyGroupIcon from '../images/createStudyGroupIcon.svg';
+import createFriendsIcon from '../images/createFriendsIcon.svg';
+import createArtistsAndCreatorsIcon from '../images/createArtistsAndCreatorsIcon.svg';
+import createLocalCommunityIcon from '../images/createLocalCommunityIcon.svg';
+import chevronRightIcon from '../images/chevronRightIcon.svg'
+import closeServerPanelIcon from '../images/closeServerPanelIcon.svg';
 const Image = {
   addReactionIcon,
   bellIcon,
@@ -99,6 +108,15 @@ const Image = {
   uploadIcon,
   smilePaperIcon,
   smileIcon,
+  createMyIcon,
+  createGamingIcon,
+  createSchoolClubIcon,
+  createFriendsIcon,
+  createStudyGroupIcon,
+  createArtistsAndCreatorsIcon,
+  createLocalCommunityIcon,
+  chevronRightIcon,
+  closeServerPanelIcon,
 }
 
 export default Image;

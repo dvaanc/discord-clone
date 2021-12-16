@@ -1,4 +1,4 @@
-import { SearchPanel, SearchPanelItem } from '../../../styles/appStyles/Overlay/OverlayStyles';
+import { SearchPanel, SearchPanelItem } from '../../../styles/appStyles/Overlay/SearchPanelStyles';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store'
 import React from 'react'
