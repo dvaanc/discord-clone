@@ -7,7 +7,8 @@ import {
   ServerChannel, 
   Username,
   UserPanelIcons,
-  UsernameUserIconsWrapper
+  UsernameUserIconsWrapper,
+  ServerCategory
 } from '../../../styles/appStyles/ServerContainer/ServerSidebarStyles';
 import Image from '../../../utility/imagesObj';
 import React from 'react';
@@ -49,7 +50,11 @@ export default function ServerSidebarComponent() {
     <h5>Test Server</h5>
 
     </ServerTitle>
+
     <ServerChannelList>
+    <ServerCategory>
+      <h2>text channels</h2>
+    </ServerCategory>
       <ServerChannel>
       <div>
         <span>

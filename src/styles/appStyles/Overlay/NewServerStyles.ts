@@ -9,12 +9,15 @@ const NewServerModalContainer = styled.div<{ display: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgb(0, 0, 0);
+  opacity: ${props => props.display ? '1' : '0'};
   pointer-events: ${props => props.display ? 'all' : 'none'};
+  transition: opacity ease-in 1s;
 `
 
 const NewServerModalContent = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   width: 440px;
   height: 558px;
@@ -22,6 +25,7 @@ const NewServerModalContent = styled.div`
   background-color: #FFF;
   box-shadow: 0 0 0 1px rgba(185,187,190,.3),0 2px 10px 0 rgba(0,0,0,.1);
   border-radius: 4px;
+  z-index: 3;
 `
 const Section = styled.div`
   display: flex;
@@ -30,6 +34,7 @@ const Section = styled.div`
   width: 100%;
 `
 const SectionOne = styled(Section)`
+  position: relative;
   padding: 24px 16px 0;
   transition: box-shadow .1s ease-out,-webkit-box-shadow .1s ease-out;
   word-wrap: break-word;
@@ -49,20 +54,64 @@ const SectionOne = styled(Section)`
   & button {
     position: absolute;
     top: 12px;
-    right: 12;
+    right: 12px;
+    border: none;
+    background-color: #FFF;
+    opacity: .5;
+    color: #4f5660;
+    transition: opacity .2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
   }
 `
 const SectionTwo = styled(Section)`
-  padding: 0 8px 8px 16px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding: 180px 8px 8px 16px;
   margin-top: 24px;
+  overflow: hidden scroll;
+  height: 330px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(79,84,92,0.3) transparent;
 `
 const SectionThree = styled(Section)`
-
+  position: relative;
+  padding: 16px;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(246,246,247,.6);
+  backround-color: #f6f6f7;
+  & h3 {
+    margin-bottom: 8px;
+    color: #060607;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+  }
+  & button {
+    height: 38px;
+    min-width: 96px;
+    min-height: 38px;
+    color: #fff;
+    background-color: #747f8d;
+    align-self: stretch;
+    width: auto;
+    transition: background-color .17s ease,color .17s ease;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    &:hover {
+      background-color: #5E6772;
+    }
+  }
 `
 const Option = styled.button`
   display: flex;
   align-items: center;
   border-radius: 8px;
+  position: relative;
   border: 1px solid rgba(6,6,7,0.08);
   background-color: #fff;
   margin-bottom: 8px;
@@ -87,6 +136,15 @@ const Option = styled.button`
   }
 `
 
+const StartFromATemplate = styled.div`
+  text-transform: uppercase;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #4f5660;
+  font-weight: 800;
+`
 export {
   NewServerModalContainer,
   NewServerModalContent,
@@ -94,4 +152,5 @@ export {
   SectionOne,
   SectionTwo,
   SectionThree,
+  StartFromATemplate,
 }

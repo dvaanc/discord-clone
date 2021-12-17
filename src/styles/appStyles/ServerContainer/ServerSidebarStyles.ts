@@ -30,6 +30,29 @@ const ServerChannelList = styled.div`
   flex-grow: 1;
   padding: 20px 8px;
 `
+const ServerCategory = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 24px;
+  padding-right: 8px;
+  padding-left: 2px;
+  color: #8e9297;
+  text-transform: uppercase;
+  &:hover {
+    color: #D6D7D8;
+  }
+  & h2 {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: .25px;
+    font-weight: 600;
+    
+  }
+`
 const ServerChannel = styled.div`
   display: flex;
   flex-direction: row;
@@ -126,5 +149,6 @@ export {
   ServerChannel,
   Username,
   UserPanelIcons,
-  UsernameUserIconsWrapper
+  UsernameUserIconsWrapper,
+  ServerCategory,
 };

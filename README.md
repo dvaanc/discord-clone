@@ -15,7 +15,7 @@ an example object holding data for a server
 
 ```javascript
 
-const serverExample = {
+const serverExample = { 
     serverName: "Test Server",
     id: 123456, 
     channelData: [
