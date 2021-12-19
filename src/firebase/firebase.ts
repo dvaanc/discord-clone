@@ -22,11 +22,12 @@ const firebaseConfig = {
 //   appId: "1:536449829954:web:226f932be21dbe1771f1db"
 // };
 
+console.log(firebaseConfig)
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 const db = getFirestore(app);
-// const storage = getStorage(app);
+const storage = getStorage(app);
 const login = async (email: string, password: string)=> {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
@@ -39,5 +40,5 @@ const login = async (email: string, password: string)=> {
   }
 }  
 const logout = async () => await signOut(auth);
-export { login, logout, auth, db }
+export { login, logout, auth, db, storage }
 export default app;

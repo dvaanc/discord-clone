@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store'
 import { collection, getDocs } from 'firebase/firestore/lite';
 import { ref } from 'firebase/storage';
-// import { storage } from '../../firebase/firebase';
+import { storage } from '../../firebase/firebase';
 
 interface SidebarProps {
 

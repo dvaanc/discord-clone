@@ -1,5 +1,5 @@
 import { Overlay } from '../../../styles/appStyles/Overlay/OverlayStyles';
-import NewServerCompoennt from './NewServerPanelComponent';
+import NewServerCompoennt from './NewServerPanelComponent/NewServerPanelComponent';
 import SearchPanelComponent from './SearchPaneComponentl';
 import UserSettingsComponent from './UserSettingsComponent';
 import UserStatusPanelComponent from './UserStatusPanelComponent';
