@@ -15,14 +15,13 @@ const SectionOne = styled(Section)`
   & h3 {
     font-weight: 700;
     color: #060607;
-    font-size: 30px;
+    font-size: 26px;
     line-height: 30px;
   }
   & span {
     margin-top: 8px;
     color: #4f5660;
-    letter-spacing: 1px;
-    font-size: 16px;
+    font-size: 14px;
   }
   & button {
     position: absolute;
@@ -36,6 +35,7 @@ const SectionOne = styled(Section)`
     cursor: pointer;
     &:hover {
       opacity: 1;
+      color: #00000;
     }
   }
 `
