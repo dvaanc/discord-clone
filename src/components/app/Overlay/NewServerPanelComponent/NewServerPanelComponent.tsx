@@ -12,6 +12,7 @@ export default function NewServerCompoennt() {
   const dispatch = useDispatch();
   const newServerPanel = useSelector(
     (state: RootState) => state.newServerPanel.value);
+  const [height, setHeight] = useState('558' as string);
   const [server, setServer]  = useState({
     serverName: '',
     serverProfile: '',
@@ -25,19 +26,27 @@ export default function NewServerCompoennt() {
   useEffect(() => {
 
   }, [])
-  const renderServerContent = (contentType: number) => {
-    switch(contentType) {
-      case 0:
-        return <CreateAServerComponent />
-      case 1:
-        return <TellUsMoreComponent />
-      case 2:
-        break;
-      case 3:
-        break;
-    }
+  const handleCreateAServer = (e: React.MouseEvent) => {
+    console.log('test')
+    console.log(e);
+  }
+
+  const renderServerContent = () => {
+    if(slideshow[0]) {
+      return ( <CreateAServerComponent handleCreateAServer={handleCreateAServer} /> );
+    } 
+    if(slideshow[1]) {
+      return ( <TellUsMoreComponent />);
+    } 
+    // if(slideshow[2]) {
+    //   return ( <CreateAServerComponent />);
+    // } 
+    // if(slideshow[3]) {
+    //   return ( <CreateAServerComponent />);
+    // } 
   }
   
+
   const createServer = async (e: React.SyntheticEvent) => {
     try {
       const res = await setDoc(doc(db, 'servers'), {
@@ -66,12 +75,10 @@ export default function NewServerCompoennt() {
     // 405
   return (
     <NewServerModalContainer id="newServerModal" display={newServerPanel} onClick={hideNewServerPanel}>
-      <NewServerModalContent display={newServerPanel} height="558">
-      { slideshow.forEach((item: boolean, i: number) => {
-        if(item) {
-          renderServerContent(i)
-        }
-      })}
+      <NewServerModalContent display={newServerPanel} height={height}>
+        { renderServerContent() }
+        {/* <CreateAServerComponent /> */}
+        {/* <TellUsMoreComponent /> */}
 
       </NewServerModalContent>
     </NewServerModalContainer>

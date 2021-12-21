@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = { value: false }
+const initialState = { value: true }
 export const userSettingsPanelSlice = createSlice({
   name:"userSettings",
   initialState: initialState,

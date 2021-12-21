@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Sidebar, SidebarItem, HomeButton, Icon, Pill, GreenButton } from '../../styles/appStyles/SidebarStyles';
-import Image from '../../utility/imagesObj';
+import { Sidebar, SidebarItem, HomeButton, Icon, Pill, GreenButton } from '../../../styles/appStyles/SidebarStyles';
+import Image from '../../../utility/imagesObj';
 import { signOut } from "@firebase/auth"
 import { Link, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from '@firebase/auth';
-import { auth, db } from '../../firebase/firebase';
-import { toggleNewServerPanel } from '../../redux/features/newServerPanelSlice';
+import { auth, db } from '../../../firebase/firebase';
+import { toggleNewServerPanel } from '../../../redux/features/newServerPanelSlice';
 import { useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store'
+import { RootState } from '../../../redux/store'
 import { collection, getDocs } from 'firebase/firestore/lite';
 import { ref } from 'firebase/storage';
-import { storage } from '../../firebase/firebase';
+import { storage } from '../../../firebase/firebase';
 
 interface SidebarProps {
 
