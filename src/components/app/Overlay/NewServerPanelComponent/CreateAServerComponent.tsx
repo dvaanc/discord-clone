@@ -12,6 +12,10 @@ export default function CreateAServerComponent({ handleCreateAServer }: CreateAS
     e.stopPropagation();
     if((e.target as HTMLDivElement).id === 'newServerModal') return dispatch(toggleNewServerPanel(false));
   }
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    handleCreateAServer(e);
+  }
   return (
     <div>
       <SectionOne>
