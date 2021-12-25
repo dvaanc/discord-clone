@@ -43,9 +43,10 @@ const SkipQuestion = styled.span`
   font-size: 12px;
   line-height: 18px;
   color: #4f5660;
-  & a {
+  & span {
     color: #0C6FE1;
     text-decoration: none;
+    cursor: pointer;
     &:hover {
       text-decoration: underline;
     }

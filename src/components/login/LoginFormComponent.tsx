@@ -13,15 +13,14 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase/firebase';
 import { onAuthStateChanged, signInWithEmailAndPassword } from '@firebase/auth';
-import { setCurrentUser } from '../../redux/features/currentUserSlice';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store'
 
 export default function LoginFormComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector(
-    (state: RootState) => state.currentUser.user);
+
   const [loginEmail, setLoginEmail] = React.useState("" as string);
   const [loginPassword, setLoginPassword] = React.useState("" as string);
   const [showEmailErr, displayEmailErr] = React.useState(false as boolean); 
@@ -29,17 +28,7 @@ export default function LoginFormComponent() {
   const [emailErr, setEmailErr] = React.useState('test' as string);
   const [passErr, setPassErr] = React.useState('test' as string);
 
-  React.useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-    dispatch(setCurrentUser(currentUser));
-  });
-  }, [])
-  React.useEffect(() => {
-    if(currentUser !== null) {
-      navigate("/app");
-    }
-  }, [currentUser])
-  
+
   const submitLoginForm = (e: React.FormEvent): void => {
   e.preventDefault();
   displayEmailErr(false);
@@ -55,7 +44,6 @@ export default function LoginFormComponent() {
         loginEmail,
         loginPassword
       );
-      dispatch(setCurrentUser(user));
       navigate("/app");
       console.log(user);
       console.log('Successfully logged in')

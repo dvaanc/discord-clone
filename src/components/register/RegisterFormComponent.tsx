@@ -22,7 +22,7 @@ import Image from '../../utility/imagesObj';
 import { Link, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth';
 import { auth } from '../../firebase/firebase';
-import { setCurrentUser } from '../../redux/features/currentUserSlice';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store'
 
@@ -35,8 +35,6 @@ interface DateOfBirthProps {
 export default function RegisterFormComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector(
-    (state: RootState) => state.currentUser.user);
   const [registerEmail, setRegisterEmail] = React.useState("" as string);
   const [registerPassword, setRegisterPasword] = React.useState("" as string);
   const [registerUser, setRegisterUser] = React.useState("" as string);
@@ -55,18 +53,11 @@ export default function RegisterFormComponent() {
     yearVal: 'Select',
   } as DateOfBirthProps);
 
-  React.useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-    console.log(currentUser);
-    dispatch(setCurrentUser(currentUser));
+
+  onAuthStateChanged(auth, (currentUser) => {
+    if(currentUser !== null) return navigate("/app")
   });
-}, [])
-React.useEffect(() => {
-  console.log(currentUser);
-  if(currentUser !== null) {
-    navigate("/app");
-  }
-}, [currentUser])
+
 
 
   const register = async () => {

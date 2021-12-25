@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userStatusPanelReducer from "./features/userStatusPanelSlice";
 import searchPanelReducer from "./features/searchPanelSlice";
-import currentUserReducer from "./features/currentUserSlice";
+// import currentUserReducer from "./features/currentUserSlice";
 import userSettingsPanelReducer from './features/userSettingsPanelSlice';
 import newServerPanelReducer from './features/newServerPanelSlice';
 
@@ -9,7 +9,7 @@ export const store = configureStore({
   reducer: {
     userStatusPanel: userStatusPanelReducer,
     searchPanel: searchPanelReducer,
-    currentUser: currentUserReducer,
+    // currentUser: currentUserReducer,
     userSettingsPanel: userSettingsPanelReducer,
     newServerPanel: newServerPanelReducer,
   },

@@ -5,8 +5,9 @@ import CreateAServerComponent from './CreateAServerComponent';
 import TellUsMoreComponent from './TellUsMoreComponent';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import { doc, setDoc, serverTimestamp, arrayUnion } from 'firebase/firestore';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../../../firebase/firebase';
+import CustomizeYourServerComponent from './CustomizeYourServerComponent';
 
 export default function NewServerCompoennt() {
   const dispatch = useDispatch();
@@ -24,53 +25,60 @@ export default function NewServerCompoennt() {
   })
 
   const [slideshow, setSlideshow] = useState([true, false, false, false] as Array<boolean>);
-  // useEffect(() => {
-  //   const isMounted = true;
-  //   if(isMounted) {
-  //     if(!newServerPanel) {
-  //       return resetCreateServer();
-  //     };
-  //   }
-  // }, [newServerPanel])
+  useEffect(() => {
+    if(slideshow[0]) setHeight('558');
+    if(slideshow[1]) setHeight('396');
+    if(slideshow[2]) setHeight('405');
+    if(slideshow[3]) setHeight('436');
+  }, [slideshow])
+
   const handleCreateAServer = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     console.log(target.id)
     setServer({...server, serverType: target.id});
     cycleSlideShowUp();
-    setHeight('396')
   }
   const resetSlideshow = (): void => {
-    const resetArr: Array<boolean> = [];
-    slideshow.forEach((item: boolean) => {
-      if(slideshow.indexOf(item) === 0) return resetArr.push(item);
-      resetArr.push(item = false)
-    })
-    setSlideshow([...resetArr]);
+    const resetArr: Array<boolean> = [...slideshow];
+    resetArr.map((item: boolean) => item = false);
+    resetArr[0] = true;
+    setSlideshow(resetArr);
   }
   const cycleSlideShowUp = (): void => {
-    const index = slideshow.findIndex((item: boolean) => item === true )
-    setSlideshow([...slideshow, slideshow[index] = false, slideshow[index + 1] = true])
+    const arr: Array<boolean> = [...slideshow];
+    const index = arr.findIndex((item: boolean) => item === true )
+    arr[index] = false;
+    arr[index + 1] = true;
+    setSlideshow(arr);
   }
   const cycleSlideShowDown = (): void => {
-    const index = slideshow.findIndex((item: boolean) => item === true )
-    setSlideshow([...slideshow, slideshow[index] = false, slideshow[index + -1] = true])
+    const arr: Array<boolean> = [...slideshow];
+    const index = arr.findIndex((item: boolean) => item === true )
+    arr[index] = false;
+    arr[index - 1] = true;
+    setSlideshow(arr);
   }
   const renderServerContent = () => {
     if(slideshow[0]) {
       return ( <CreateAServerComponent handleCreateAServer={handleCreateAServer} /> );
     } 
     if(slideshow[1]) {
-      return ( <TellUsMoreComponent />);
+      return ( 
+        <TellUsMoreComponent 
+          cycleSlideShowUp={cycleSlideShowUp} 
+          cycleSlideShowDown={cycleSlideShowDown}
+          hideNewServerPanel={hideNewServerPanel}
+        />
+      );
     } 
-    // if(slideshow[2]) {
-    //   return ( <CreateAServerComponent />);
-    // } 
+    if(slideshow[2]) {
+      return ( <CustomizeYourServerComponent />);
+    } 
     // if(slideshow[3]) {
     //   return ( <CreateAServerComponent />);
     // } 
   }
   
-
   const createServer = async (e: React.SyntheticEvent) => {
     try {
       const res = await setDoc(doc(db, 'servers'), {
@@ -91,8 +99,9 @@ export default function NewServerCompoennt() {
     e.stopPropagation();
     if((e.target as HTMLDivElement).id === 'newServerModal') {
       dispatch(toggleNewServerPanel(false));
-      setHeight('558');
-      resetSlideshow();
+      setTimeout(() => {
+        resetSlideshow();
+      }, 300)
     }
   }
 
@@ -112,3 +121,7 @@ export default function NewServerCompoennt() {
     </NewServerModalContainer>
   )
 }
+  function cycleSlideShowUp() {
+    throw new Error('Function not implemented.');
+  }
+

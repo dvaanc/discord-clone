@@ -57,6 +57,7 @@ import createArtistsAndCreatorsIcon from '../images/createArtistsAndCreatorsIcon
 import createLocalCommunityIcon from '../images/createLocalCommunityIcon.svg';
 import chevronRightIcon from '../images/chevronRightIcon.svg'
 import closeServerPanelIcon from '../images/closeServerPanelIcon.svg';
+import uploadImageIcon from '../images/uploadImageIcon.svg';
 const Image = {
   addReactionIcon,
   bellIcon,
@@ -117,6 +118,7 @@ const Image = {
   createLocalCommunityIcon,
   chevronRightIcon,
   closeServerPanelIcon,
+  uploadImageIcon,
 }
 
 export default Image;

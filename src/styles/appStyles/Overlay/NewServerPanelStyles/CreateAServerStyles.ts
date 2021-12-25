@@ -3,7 +3,8 @@ import styled from "styled-components";
 const Section = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 100%;
 `
 const SectionOne = styled(Section)`
@@ -43,7 +44,7 @@ const SectionTwo = styled(Section)`
   display: flex;
   position: relative;
   flex-direction: column;
-  padding: 180px 8px 8px 16px;
+  padding: 8px 8px 16px;
   margin-top: 24px;
   overflow: hidden scroll;
   height: 330px;
