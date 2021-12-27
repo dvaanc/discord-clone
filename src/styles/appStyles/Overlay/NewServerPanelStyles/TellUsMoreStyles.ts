@@ -20,7 +20,6 @@ const TellUsMoreOptions = styled(Section)`
   position: relative;
 `
 const TellUsMoreSectionThree = styled(Section)`
-  margin-right: auto;
   padding: 16px;
   background-color: #f6f6f7;
 	box-shadow: inset 0 1px 0 rgba(246,246,247,.6);
@@ -34,6 +33,7 @@ const TellUsMoreSectionThree = styled(Section)`
     border: none;
     color: #00000;
     font-size: 14px;
+    margin-right: auto;
   }
 `
 const SkipQuestion = styled.span`
