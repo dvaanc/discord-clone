@@ -54,8 +54,8 @@ export default function CustomizeYourServerComponent({
         </ServerNameInputContainer>
       </SectionTwo>
       <SectionThree>
-      <button onClick={cycleSlideShowDown}>Back</button>
-      <button>Create</button>
+        <button onClick={cycleSlideShowDown}>Back</button>
+        <button>Create</button>
       </SectionThree>
     </div>
   )

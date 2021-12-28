@@ -6,8 +6,9 @@ interface TellUsMoreProps {
   hideNewServerPanel(e: React.MouseEvent): void,
   cycleSlideShowDown(e: React.MouseEvent): void,
   cycleSlideShowUp(e: React.MouseEvent): void,
+  handleServerType(e: React.MouseEvent): void,
 }
-export default function TellUsMoreComponent({ hideNewServerPanel, cycleSlideShowDown, cycleSlideShowUp }: TellUsMoreProps) {
+export default function TellUsMoreComponent({ hideNewServerPanel, cycleSlideShowDown, cycleSlideShowUp, handleServerType }: TellUsMoreProps) {
   return (
     <div>
       <SectionOne>
@@ -18,15 +19,15 @@ export default function TellUsMoreComponent({ hideNewServerPanel, cycleSlideShow
         </button>
       </SectionOne>
       <TellUsMoreOptions>
-        <Option>
-          <img src={Image.createArtistsAndCreatorsIcon} alt="" />
-          <h4>For a club or community</h4>
-          <img src={Image.chevronRightIcon} alt="" />
+        <Option id="communityServer" onClick={handleServerType}>
+          <img id="communityServer" src={Image.createArtistsAndCreatorsIcon} alt="" />
+          <h4 id="communityServer">For a club or community</h4>
+          <img id="communityServer" src={Image.chevronRightIcon} alt="" />
         </Option>
-        <Option>
-          <img src={Image.createLocalCommunityIcon} alt="" />
-          <h4>For me and my friends</h4>
-          <img src={Image.chevronRightIcon} alt="" />
+        <Option id="privateServer" onClick={handleServerType}>
+          <img id="privateServer" src={Image.createLocalCommunityIcon} alt="" />
+          <h4 id="privateServer">For me and my friends</h4>
+          <img id="privateServer" src={Image.chevronRightIcon} alt="" />
         </Option>
         <SkipQuestion>Not sure? You can <span onClick={cycleSlideShowUp}>skip this question</span> for now.</SkipQuestion>
       </TellUsMoreOptions>

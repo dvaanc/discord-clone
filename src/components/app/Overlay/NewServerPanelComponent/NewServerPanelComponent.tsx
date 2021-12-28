@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../../../firebase/firebase';
+import { templates } from '../../../../utility/serverTemplates';
 import CustomizeYourServerComponent from './CustomizeYourServerComponent';
 
 export default function NewServerCompoennt() {
@@ -22,12 +23,14 @@ export default function NewServerCompoennt() {
     serverTemplate: '',
     serverType: '',
     channels: {
-    },
+      // textChannels:
+      // voiceChannels:
+    } as any,
   })
 
   const [slideshow, setSlideshow] = useState([true, false, false, false] as Array<boolean>);
   useEffect(() => {
-    console.log(server.serverProfile);
+    console.log(server)
 
   }, [server])
   useEffect(() => {
@@ -61,13 +64,17 @@ export default function NewServerCompoennt() {
     const target = e.target as HTMLElement
     console.log(target.id);
     setServer({...server, serverType: target.id});
+    cycleSlideShowUp();
   }
   const handleCreateAServer = (e: React.MouseEvent): void => {
     e.stopPropagation();
     const target = e.target as HTMLElement;
-    console.log(target.id)
+    console.log(target.id);
     setServer({...server, serverTemplate: target.id});
     cycleSlideShowUp();
+  }
+  const applyServerTemplate = (): void => {
+    
   }
   const resetSlideshow = (): void => {
     // const resetArr: Array<boolean> = [...slideshow];
@@ -102,6 +109,7 @@ export default function NewServerCompoennt() {
           cycleSlideShowUp={cycleSlideShowUp} 
           cycleSlideShowDown={cycleSlideShowDown}
           hideNewServerPanel={hideNewServerPanel}
+          handleServerType={handleServerType}
         />
       );
     } 

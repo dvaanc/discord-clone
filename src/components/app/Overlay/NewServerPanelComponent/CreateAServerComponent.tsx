@@ -53,10 +53,10 @@ export default function CreateAServerComponent({ handleCreateAServer }: CreateAS
           <h4 id="createFriends">Friends</h4>
           <img id="createFriends" src={Image.chevronRightIcon} alt="" />
         </Option>
-        <Option id="creatArtists&Creators" onClick={handleCreateAServer}>
-          <img id="createFriends" src={Image.createArtistsAndCreatorsIcon} alt="" />
-          <h4 id="createFriends">Artists & Creators</h4>
-          <img id="createFriends" src={Image.chevronRightIcon} alt="" />
+        <Option id="creatArtistsAndCreators" onClick={handleCreateAServer}>
+          <img id="creatArtistsAndCreators" src={Image.createArtistsAndCreatorsIcon} alt="" />
+          <h4 id="creatArtistsAndCreators">Artists & Creators</h4>
+          <img id="creatArtistsAndCreators" src={Image.chevronRightIcon} alt="" />
         </Option>
       </SectionTwo>
       <SectionThree>
