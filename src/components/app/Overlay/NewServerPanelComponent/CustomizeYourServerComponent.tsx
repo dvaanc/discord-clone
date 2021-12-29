@@ -7,27 +7,27 @@ interface CustomizeYourServerProps {
   handleCustomizeServerName(e: React.ChangeEvent): void,
   cycleSlideShowDown(e: React.MouseEvent): void,
   handleCustomizeServerImage(e: React.ChangeEvent): void,
+  createServerFirebase(): Promise<void>,
   checkImage: boolean,
   serverName: string,
-  serverProfile: string,
+  serverProfile: string | null,
 }
 export default function CustomizeYourServerComponent({ 
   hideNewServerPanel, 
   handleCustomizeServerName, 
   cycleSlideShowDown,
-  handleCustomizeServerImage,                                                                                                                                                                           
+  handleCustomizeServerImage,
+  createServerFirebase,                                                                                                                                                                   
   serverName,
   serverProfile,
   checkImage,
   }: CustomizeYourServerProps) {
-    const [currentImage, setCurrentImage] = useState(Image.uploadImageIcon);
+    const [currentImage, setCurrentImage] = useState(Image.uploadImageIcon as string);
+
     useEffect(() => {
-      checkImage ? setCurrentImage(serverProfile) : setCurrentImage(Image.uploadImageIcon);
-    }, [checkImage])
-    // useEffect(() => {
-    //   if(serverProfile === '') setCurrentImage(Image.uploadImageIcon);
-    //   setCurrentImage(serverProfile);
-    // }, [serverProfile])
+      if(serverProfile === null) return setCurrentImage(Image.uploadImageIcon);
+      if(serverProfile !== null) return setCurrentImage(serverProfile);
+    }, [serverProfile])
   return (
     <div>
       <SectionOne style={{ padding: '24px 24px 0'}}>
@@ -55,7 +55,7 @@ export default function CustomizeYourServerComponent({
       </SectionTwo>
       <SectionThree>
         <button onClick={cycleSlideShowDown}>Back</button>
-        <button>Create</button>
+        <button onClick={createServerFirebase}>Create</button>
       </SectionThree>
     </div>
   )

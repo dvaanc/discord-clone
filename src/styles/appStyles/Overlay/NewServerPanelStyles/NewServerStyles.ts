@@ -18,7 +18,7 @@ const NewServerModalContainer = styled.div<{ display: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   background-color: rgb(0, 0, 0, 0.75);
   opacity: ${props => props.display ? '1' : '0'};
@@ -35,10 +35,11 @@ const NewServerModalContent = styled.div<{ display: boolean, height: string }>`
   overflow: hidden;
   background-color: #FFF;
   box-shadow: 0 0 0 1px rgba(185,187,190,.3),0 2px 10px 0 rgba(0,0,0,.1);
+  opacity: ${props => props.display ? '1' : '0'};
   border-radius: 4px;
   z-index: 3;
   transform: ${ props => props.display ? 'scale(1)' : 'scale(0.8)'};
-  transition: transform ease-in-out .15s;
+  transition: transform ease-in-out .15s, height linear .1s, opacity ease-in .15s;
   /* animation-name: ${LoadNewServerModalContent};
   animation-duration: .15s; */
 `

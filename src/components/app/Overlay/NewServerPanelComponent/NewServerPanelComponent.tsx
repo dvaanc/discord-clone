@@ -1,12 +1,13 @@
-import React, { useState, useEffect, ReactComponentElement } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toggleNewServerPanel } from '../../../../redux/features/newServerPanelSlice';
 import { NewServerModalContainer, NewServerModalContent } from '../../../../styles/appStyles/Overlay/NewServerPanelStyles/NewServerStyles';
 import CreateAServerComponent from './CreateAServerComponent';
 import TellUsMoreComponent from './TellUsMoreComponent';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../../../firebase/firebase';
+import { doc, addDoc, setDoc, Timestamp, collection, getFirestore } from 'firebase/firestore';
+import { ref, uploadBytes } from 'firebase/storage';
+import { db, storage } from '../../../../firebase/firebase';
 import { templates } from '../../../../utility/serverTemplates';
 import CustomizeYourServerComponent from './CustomizeYourServerComponent';
 
@@ -18,14 +19,11 @@ export default function NewServerCompoennt() {
   const [checkImage, setCheckImage] = useState(false as boolean);
   const [server, setServer]  = useState({
     serverName: '',
-    serverProfile: '',
-    creationDate: '',
+    serverProfile: null as string | null,
+    creationDate: '' as any,
     serverTemplate: '',
     serverType: '',
-    channels: {
-      // textChannels:
-      // voiceChannels:
-    } as any,
+    channelList: '' as any,
   })
 
   const [slideshow, setSlideshow] = useState([true, false, false, false] as Array<boolean>);
@@ -33,6 +31,13 @@ export default function NewServerCompoennt() {
     console.log(server)
 
   }, [server])
+  // useEffect(() => {
+  //   if(server.serverProfile!== null) {
+  //     fetch(server.serverProfile)
+  //       .then((res) => res.blob())
+  //       .then(blob => console.log(blob.type));
+  //   }
+  // }, [server.serverProfile])
   useEffect(() => {
     if(slideshow[0]) setHeight('558');
     if(slideshow[1]) setHeight('396');
@@ -40,17 +45,55 @@ export default function NewServerCompoennt() {
     if(slideshow[3]) setHeight('436');
   }, [slideshow])
 
+  const cycleSlideShowUp = (): void => {
+    const arr: Array<boolean> = [...slideshow];
+    const index = arr.findIndex((item: boolean) => item === true )
+    arr[index] = false;
+    arr[index + 1] = true;
+    setSlideshow(arr);
+  }
+
+  const cycleSlideShowDown = (): void => {
+    const arr: Array<boolean> = [...slideshow];
+    const index = arr.findIndex((item: boolean) => item === true )
+    arr[index] = false;
+    arr[index - 1] = true;
+    setSlideshow(arr);
+  }
+
+  const handleCreateAServer = (e: React.MouseEvent): void => {
+    e.stopPropagation();
+    const target = e.target as HTMLElement;
+    const templateName = target.id;
+    setServer
+    ({...server, 
+      serverTemplate: target.id,
+      channelList: {
+        textChannels: templates[templateName].textChannels,
+        voiceChannels: templates[templateName].voiceChannels,
+      }
+    });
+    cycleSlideShowUp();
+  }
+
+  const handleServerType = (e: React.MouseEvent): void => {
+    const target = e.target as HTMLElement
+    console.log(target.id);
+    setServer({...server, serverType: target.id});
+    cycleSlideShowUp();
+  }
+
   const handleCustomizeServerName = (e: React.ChangeEvent): void => {
     const target = e.target as HTMLInputElement;
     console.log(target.value);
     setServer({...server, serverName: target.value})
   }
+
   const handleCustomizeServerImage = (e: React.ChangeEvent): void => {
     const target = e.target as HTMLInputElement;
     if (target.files && target.files[0]) {
-      const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
       const img = target.files[0];
-      console.log(img);
+      console.log(img.type);
       if(img && img['type'].split('/')[0] === 'image') {
         setServer({...server, serverProfile: URL.createObjectURL(img) });
         setCheckImage(true);
@@ -60,45 +103,61 @@ export default function NewServerCompoennt() {
       setCheckImage(false);
     }
   }
-  const handleServerType = (e: React.MouseEvent): void => {
-    const target = e.target as HTMLElement
-    console.log(target.id);
-    setServer({...server, serverType: target.id});
-    cycleSlideShowUp();
+
+  const createServerFirebase = async(): Promise<void> => {
+    try {
+      const newServerRef = await addDoc(collection(db, "servers"), {
+        serverName: server.serverName,
+        serverProfile: server.serverProfile,
+        creationDate: Timestamp.now(),
+        serverTemplate: server.serverTemplate,
+        serverType: server.serverType,
+        channels: server.channelList,
+      });
+      console.log(newServerRef.id);
+    } catch(error) { if(error instanceof Error) return console.log(error) };
+    /* 
+    1. addDoc to firestore with a auto generated ID with serverProfile key with an empty string.
+    2. then upload image to firebase storage into a folder with the id of doc from step 1.
+    3. then update doc from step 1 with a reference to the firebase storage image.
+    */
+
   }
-  const handleCreateAServer = (e: React.MouseEvent): void => {
+  const uploadServerProfile = async(docID: string): Promise<void> => {
+    try {
+      const storageRef = ref(storage, `serverAssets/${docID}/serverProfile.png`);
+    } catch(error) { if(error instanceof Error) return console.log(error) };
+  }
+  const hideNewServerPanel = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const target = e.target as HTMLElement;
-    console.log(target.id);
-    setServer({...server, serverTemplate: target.id});
-    cycleSlideShowUp();
+    if((e.target as HTMLDivElement).id === 'newServerModal') {
+      dispatch(toggleNewServerPanel(false));
+      setTimeout(() => {
+        resetSlideshow();
+        resetServerData();
+      }, 300)
+    }
   }
-  const applyServerTemplate = (): void => {
-    
-  }
+
   const resetSlideshow = (): void => {
-    // const resetArr: Array<boolean> = [...slideshow];
-    // resetArr.map((item: boolean) => item = false);
-    // resetArr[0] = true;
     slideshow.forEach((item) => item = false);
     slideshow[0] = true;
     setHeight('558');
     setSlideshow(slideshow);
   }
-  const cycleSlideShowUp = (): void => {
-    const arr: Array<boolean> = [...slideshow];
-    const index = arr.findIndex((item: boolean) => item === true )
-    arr[index] = false;
-    arr[index + 1] = true;
-    setSlideshow(arr);
+
+  const resetServerData = () => {
+    setCheckImage(false);
+    setServer({
+      serverName: '',
+      serverProfile: null,
+      creationDate: '',
+      serverTemplate: '',
+      serverType: '',
+      channelList: {} as any,
+    })
   }
-  const cycleSlideShowDown = (): void => {
-    const arr: Array<boolean> = [...slideshow];
-    const index = arr.findIndex((item: boolean) => item === true )
-    arr[index] = false;
-    arr[index - 1] = true;
-    setSlideshow(arr);
-  }
+
   const renderServerContent = () => {
     if(slideshow[0]) {
       return ( <CreateAServerComponent handleCreateAServer={handleCreateAServer} /> );
@@ -123,6 +182,7 @@ export default function NewServerCompoennt() {
         checkImage={checkImage}
         serverName={server.serverName}
         serverProfile={server.serverProfile}
+        createServerFirebase={createServerFirebase}
         />
         );
     } 
@@ -130,34 +190,6 @@ export default function NewServerCompoennt() {
     //   return ( <CreateAServerComponent />);
     // } 
   }
-  
-  const createServer = async (e: React.SyntheticEvent) => {
-    try {
-      const res = await setDoc(doc(db, 'servers'), {
-        serverName: server.serverName,
-        serverProfile: server.serverProfile,
-        creationDate: server.creationDate,
-        serverTemplate: server.serverTemplate,
-        serverType: server.serverType,
-        channels: server.channels,
-      })
-      .then((res) => console.log(res))
-    }
-    catch(error) { 
-      if(error instanceof Error) console.log(error) 
-    }
-  }
-  const hideNewServerPanel = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if((e.target as HTMLDivElement).id === 'newServerModal') {
-      dispatch(toggleNewServerPanel(false));
-      setTimeout(() => {
-        resetSlideshow();
-      }, 300)
-    }
-  }
-
-
     // 436
     // 558
     // 396
@@ -166,14 +198,8 @@ export default function NewServerCompoennt() {
     <NewServerModalContainer id="newServerModal" display={newServerPanel} onClick={hideNewServerPanel}>
       <NewServerModalContent display={newServerPanel} height={height}>
         { renderServerContent() }
-        {/* <CreateAServerComponent /> */}
-        {/* <TellUsMoreComponent /> */}
-
       </NewServerModalContent>
     </NewServerModalContainer>
   )
 }
-  function cycleSlideShowUp() {
-    throw new Error('Function not implemented.');
-  }
 

@@ -113,4 +113,4 @@ export const templates = {
       },
     ],
   },
-}
+} as any
