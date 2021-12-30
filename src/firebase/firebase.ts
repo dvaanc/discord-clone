@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore/lite'
+import { getFirestore } from 'firebase/firestore/lite';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { getStorage } from 'firebase/storage'
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,

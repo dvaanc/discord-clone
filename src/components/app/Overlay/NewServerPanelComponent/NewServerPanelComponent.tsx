@@ -5,11 +5,12 @@ import CreateAServerComponent from './CreateAServerComponent';
 import TellUsMoreComponent from './TellUsMoreComponent';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import { doc, addDoc, setDoc, Timestamp, collection, getFirestore } from 'firebase/firestore';
+import { doc, addDoc, setDoc, Timestamp, collection, getFirestore } from 'firebase/firestore/lite';
 import { ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../../../../firebase/firebase';
 import { templates } from '../../../../utility/serverTemplates';
 import CustomizeYourServerComponent from './CustomizeYourServerComponent';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function NewServerCompoennt() {
   const dispatch = useDispatch();
@@ -23,7 +24,6 @@ export default function NewServerCompoennt() {
     creationDate: '' as any,
     serverTemplate: '',
     serverType: '',
-    channelList: '' as any,
   })
 
   const [slideshow, setSlideshow] = useState([true, false, false, false] as Array<boolean>);
@@ -68,10 +68,6 @@ export default function NewServerCompoennt() {
     setServer
     ({...server, 
       serverTemplate: target.id,
-      channelList: {
-        textChannels: templates[templateName].textChannels,
-        voiceChannels: templates[templateName].voiceChannels,
-      }
     });
     cycleSlideShowUp();
   }
@@ -106,23 +102,45 @@ export default function NewServerCompoennt() {
 
   const createServerFirebase = async(): Promise<void> => {
     try {
-      const newServerRef = await addDoc(collection(db, "servers"), {
+      console.log(db);
+      const newServerRef: any = await addDoc(collection(db, 'servers'), {
         serverName: server.serverName,
         serverProfile: server.serverProfile,
         creationDate: Timestamp.now(),
         serverTemplate: server.serverTemplate,
         serverType: server.serverType,
-        channels: server.channelList,
-      });
+      })
       console.log(newServerRef.id);
+      const id = newServerRef.id 
+      console.log(id)
+      createChannelsFirebase(id, server.serverType);
+
     } catch(error) { if(error instanceof Error) return console.log(error) };
     /* 
     1. addDoc to firestore with a auto generated ID with serverProfile key with an empty string.
     2. then upload image to firebase storage into a folder with the id of doc from step 1.
     3. then update doc from step 1 with a reference to the firebase storage image.
     */
-
   }
+  const createChannelsFirebase = async(docID: string, serverType: string): Promise<void> => {
+    try {
+      const textChannelRef = await addDoc(collection(db, `servers/${docID}/textChannels/${templates[serverType].textChannels.category}`), {
+        messages: [],
+        archived: [],
+        userPermissions: [],
+        channelID: `${uuidv4()}`,
+        channelName: '',
+      });
+      console.log(`text channel success ${textChannelRef.id}`);
+      const voiceChannelsRef = await addDoc(collection(db, `servers/${docID}/voiceChannels`), {
+        currentUsers: [],
+        userPermissions: [],
+        channelID: `${uuidv4()}`,
+      })
+      console.log(`voice channel success ${voiceChannelsRef.id}`);
+    } catch(error) { if (error instanceof Error) return console.log(error) };
+  }
+
   const uploadServerProfile = async(docID: string): Promise<void> => {
     try {
       const storageRef = ref(storage, `serverAssets/${docID}/serverProfile.png`);
@@ -154,7 +172,6 @@ export default function NewServerCompoennt() {
       creationDate: '',
       serverTemplate: '',
       serverType: '',
-      channelList: {} as any,
     })
   }
 
