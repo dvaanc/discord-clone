@@ -7,7 +7,7 @@ const UserStatusContainer = styled.div`
   pointer-events: auto;
 `
 const UserStatusPanel = styled.div<{ display: boolean }>`
-  display: ${props => props.display === true ? 'flex' : 'none'};
+  display: ${props => props.display ? 'flex' : 'none'};
   flex-direction: column;
   align-items: center;
   width: 240px;

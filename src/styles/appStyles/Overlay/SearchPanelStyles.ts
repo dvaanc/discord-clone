@@ -4,7 +4,7 @@ const SearchPanel = styled.div<{ display: boolean }>`
   position: fixed;
   top: 45px;
   right: 20px;
-  display: ${props => props.display === true ? 'flex' : 'none'};
+  display: ${props => props.display ? 'flex' : 'none'};
   flex-direction: column;
   min-width: 380px;
   height: auto;

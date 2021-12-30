@@ -23,7 +23,7 @@ export default function SidebarComponent() {
   // const currentUser = useSelector(
   //   (state: RootState) => state.currentUser.user);
     onAuthStateChanged(auth, (currentUser) => {
-    if(currentUser) return console.log(currentUser.uid)
+    // if(currentUser) return console.log(currentUser.uid)
     if(currentUser === null ) navigate("/login");
   });
   useEffect(() => {
@@ -44,9 +44,9 @@ export default function SidebarComponent() {
     }
     getServers();
   }, [])
-  useEffect(() => {
-    console.log(servers)
-  }, [servers])
+  // useEffect(() => {
+  //   console.log(servers)
+  // }, [servers])
 
 //   useEffect(() => {
 //     onAuthStateChanged(auth, (currentUser) => {

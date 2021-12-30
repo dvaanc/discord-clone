@@ -45,8 +45,8 @@ export default function LoginFormComponent() {
         loginPassword
       );
       navigate("/app");
-      console.log(user);
-      console.log('Successfully logged in')
+      // console.log(user);
+      // console.log('Successfully logged in')
     } catch (error) {
       if(error instanceof Error) {
         console.log(error);

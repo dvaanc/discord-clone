@@ -27,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
-console.log(db )
+// console.log(db )
 const login = async (email: string, password: string)=> {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);

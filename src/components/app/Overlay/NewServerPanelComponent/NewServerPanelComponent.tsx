@@ -27,15 +27,15 @@ export default function NewServerCompoennt() {
   })
 
   const [slideshow, setSlideshow] = useState([true, false, false, false] as Array<boolean>);
-  useEffect(() => {
-    console.log(server)
+  // useEffect(() => {
+  //   console.log(server)
 
-  }, [server])
+  // }, [server])
   // useEffect(() => {
   //   if(server.serverProfile!== null) {
   //     fetch(server.serverProfile)
   //       .then((res) => res.blob())
-  //       .then(blob => console.log(blob.type));
+  //       .then((blob) => console.log(blob.type));
   //   }
   // }, [server.serverProfile])
   useEffect(() => {
@@ -74,14 +74,12 @@ export default function NewServerCompoennt() {
 
   const handleServerType = (e: React.MouseEvent): void => {
     const target = e.target as HTMLElement
-    console.log(target.id);
     setServer({...server, serverType: target.id});
     cycleSlideShowUp();
   }
 
   const handleCustomizeServerName = (e: React.ChangeEvent): void => {
     const target = e.target as HTMLInputElement;
-    console.log(target.value);
     setServer({...server, serverName: target.value})
   }
 
@@ -89,7 +87,6 @@ export default function NewServerCompoennt() {
     const target = e.target as HTMLInputElement;
     if (target.files && target.files[0]) {
       const img = target.files[0];
-      console.log(img.type);
       if(img && img['type'].split('/')[0] === 'image') {
         setServer({...server, serverProfile: URL.createObjectURL(img) });
         setCheckImage(true);
@@ -102,7 +99,6 @@ export default function NewServerCompoennt() {
 
   const createServerFirebase = async(): Promise<void> => {
     try {
-      console.log(db);
       const newServerRef: any = await addDoc(collection(db, 'servers'), {
         serverName: server.serverName,
         serverProfile: server.serverProfile,
@@ -110,10 +106,7 @@ export default function NewServerCompoennt() {
         serverTemplate: server.serverTemplate,
         serverType: server.serverType,
       })
-      console.log(newServerRef.id);
-      const id = newServerRef.id 
-      console.log(id)
-      createChannelsFirebase(id, server.serverType);
+      createChannelsFirebase(newServerRef.id, server.serverTemplate);
 
     } catch(error) { if(error instanceof Error) return console.log(error) };
     /* 
@@ -122,22 +115,47 @@ export default function NewServerCompoennt() {
     3. then update doc from step 1 with a reference to the firebase storage image.
     */
   }
-  const createChannelsFirebase = async(docID: string, serverType: string): Promise<void> => {
+  const createChannelsFirebase = async(docID: string, serverTemplate: string): Promise<void> => {
     try {
-      const textChannelRef = await addDoc(collection(db, `servers/${docID}/textChannels/${templates[serverType].textChannels.category}`), {
-        messages: [],
-        archived: [],
-        userPermissions: [],
-        channelID: `${uuidv4()}`,
-        channelName: '',
+      // const categoryRef = await setDoc(doc(db, `servers/${docID}/textChannels/`)
+      const noCategoryRef = await setDoc(doc(db, `servers/${docID}/textChannels/`, 'no category'), { 
+        categoryID: `${uuidv4()}` 
       });
-      console.log(`text channel success ${textChannelRef.id}`);
-      const voiceChannelsRef = await addDoc(collection(db, `servers/${docID}/voiceChannels`), {
-        currentUsers: [],
-        userPermissions: [],
-        channelID: `${uuidv4()}`,
-      })
-      console.log(`voice channel success ${voiceChannelsRef.id}`);
+      for (const item of templates[serverTemplate].textChannels) {
+        const categoryRef = await setDoc(doc(db, `servers/${docID}/textChannels/`, item.category), {
+          categoryID: `${uuidv4()}`,
+        });       
+        console.log(item)
+        for (const channelItem of item.channels) {
+          const textChannelRef = await setDoc(doc(db, `servers/${docID}/textChannels/${item.category}`, `${channelItem}`), {
+            messages: [],
+            archived: [],
+            userPermissions: {},
+            channelID: `${uuidv4()}`,
+            channelName: '',
+          });
+        }
+      }
+      // for (const item of templates[serverTemplate].voiceChannels) {
+      //   const categoryRef = await setDoc(doc(db, `servers/${docID}/voiceChannels/`, item.category), {
+      //     categoryID: `${uuidv4()}`,
+      //   });
+      //   console.log(categoryRef);        
+      //   for (const channelItem of item.channels) {
+      //     const voiceChannelRef = await setDoc(doc(db, `servers/${docID}/voiceChannels/${item.category}`, `${channelItem}`), {
+      //       currentUsers: [],
+      //       userPermissions: [],
+      //       channelID: `${uuidv4()}`,
+      //     });
+      //   }
+      // }
+
+
+      // const voiceChannelsRef = await addDoc(collection(db, `servers/${docID}/voiceChannels`), {
+      //   currentUsers: [],
+      //   userPermissions: [],
+      //   channelID: `${uuidv4()}`,
+      // })
     } catch(error) { if (error instanceof Error) return console.log(error) };
   }
 
