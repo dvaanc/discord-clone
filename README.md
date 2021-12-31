@@ -8,7 +8,7 @@ I plan on making this web application mobile responsive once I finish the applic
 ### Live Preview: **https://dvaanc.github.io/discord-clone/**
 
 ## Special notes
- (Notes for myself and others who want to understand how and why I made these design choices);
+ (Notes incase I forget;
  subject to change
 ### Server data and management
 an example object holding data for a server

@@ -48,16 +48,9 @@ export default function SidebarComponent() {
   //   console.log(servers)
   // }, [servers])
 
-//   useEffect(() => {
-//     onAuthStateChanged(auth, (currentUser) => {
-//     dispatch(setCurrentUser(currentUser));
-//   });
-// }, [])
-  // useEffect(() => {
-  //   if(currentUser === null) {
-  //     navigate("/login");
-  //   }
-  // }, [currentUser])
+  const fetchServerList = () => {
+    
+  }
   const createServer = () => dispatch(toggleNewServerPanel(true))
   const loadServer = () => {
     return (

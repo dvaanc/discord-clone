@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { SectionOne } from '../../../../styles/appStyles/Overlay/NewServerPanelStyles/CreateAServerStyles'
 import { FileUploadInput, SectionTwo, ServerNameInputContainer, ServerNameInput, ServerCreationDisclaimer, SectionThree } from '../../../../styles/appStyles/Overlay/NewServerPanelStyles/CustomizeYourServerStyles'
 import Image from '../../../../utility/imagesObj'
+import { serverProps } from '../../../../firebase/firebase';
 interface CustomizeYourServerProps {
   hideNewServerPanel(e: React.MouseEvent): void,
   handleCustomizeServerName(e: React.ChangeEvent): void,
   cycleSlideShowDown(e: React.MouseEvent): void,
   handleCustomizeServerImage(e: React.ChangeEvent): void,
-  createServerFirebase(): Promise<void>,
+  submitNewServer(e: React.MouseEvent): void,
   checkImage: boolean,
   serverName: string,
-  serverProfile: string | null,
+  serverProfile: any,
 }
 export default function CustomizeYourServerComponent({ 
   hideNewServerPanel, 
   handleCustomizeServerName, 
   cycleSlideShowDown,
   handleCustomizeServerImage,
-  createServerFirebase,                                                                                                                                                                   
+  submitNewServer,                                                                                                                                                               
   serverName,
   serverProfile,
   checkImage,
@@ -26,7 +27,7 @@ export default function CustomizeYourServerComponent({
 
     useEffect(() => {
       if(serverProfile === null) return setCurrentImage(Image.uploadImageIcon);
-      if(serverProfile !== null) return setCurrentImage(serverProfile);
+      if(serverProfile !== null) return setCurrentImage(URL.createObjectURL(serverProfile));
     }, [serverProfile])
   return (
     <div>
@@ -55,7 +56,7 @@ export default function CustomizeYourServerComponent({
       </SectionTwo>
       <SectionThree>
         <button onClick={cycleSlideShowDown}>Back</button>
-        <button onClick={createServerFirebase}>Create</button>
+        <button onClick={submitNewServer}>Create</button>
       </SectionThree>
     </div>
   )

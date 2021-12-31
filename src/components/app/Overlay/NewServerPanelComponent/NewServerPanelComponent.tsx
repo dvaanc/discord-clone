@@ -5,12 +5,9 @@ import CreateAServerComponent from './CreateAServerComponent';
 import TellUsMoreComponent from './TellUsMoreComponent';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import { doc, addDoc, setDoc, Timestamp, collection, getFirestore } from 'firebase/firestore/lite';
-import { ref, uploadBytes } from 'firebase/storage';
-import { db, storage } from '../../../../firebase/firebase';
-import { templates } from '../../../../utility/serverTemplates';
 import CustomizeYourServerComponent from './CustomizeYourServerComponent';
-import { v4 as uuidv4 } from 'uuid';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, createServerFirebase } from '../../../../firebase/firebase';
 
 export default function NewServerCompoennt() {
   const dispatch = useDispatch();
@@ -20,7 +17,7 @@ export default function NewServerCompoennt() {
   const [checkImage, setCheckImage] = useState(false as boolean);
   const [server, setServer]  = useState({
     serverName: '',
-    serverProfile: null as string | null,
+    serverProfile: null as any,
     creationDate: '' as any,
     serverTemplate: '',
     serverType: '',
@@ -38,6 +35,9 @@ export default function NewServerCompoennt() {
   //       .then((blob) => console.log(blob.type));
   //   }
   // }, [server.serverProfile])
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   console.log(currentUser!.uid)
+  // })
   useEffect(() => {
     if(slideshow[0]) setHeight('558');
     if(slideshow[1]) setHeight('396');
@@ -88,7 +88,7 @@ export default function NewServerCompoennt() {
     if (target.files && target.files[0]) {
       const img = target.files[0];
       if(img && img['type'].split('/')[0] === 'image') {
-        setServer({...server, serverProfile: URL.createObjectURL(img) });
+        setServer({...server, serverProfile: img });
         setCheckImage(true);
         return;
       }
@@ -97,73 +97,8 @@ export default function NewServerCompoennt() {
     }
   }
 
-  const createServerFirebase = async(): Promise<void> => {
-    try {
-      const newServerRef: any = await addDoc(collection(db, 'servers'), {
-        serverName: server.serverName,
-        serverProfile: server.serverProfile,
-        creationDate: Timestamp.now(),
-        serverTemplate: server.serverTemplate,
-        serverType: server.serverType,
-      })
-      createChannelsFirebase(newServerRef.id, server.serverTemplate);
+  const submitNewServer = (e: React.MouseEvent): any => createServerFirebase(server);
 
-    } catch(error) { if(error instanceof Error) return console.log(error) };
-    /* 
-    1. addDoc to firestore with a auto generated ID with serverProfile key with an empty string.
-    2. then upload image to firebase storage into a folder with the id of doc from step 1.
-    3. then update doc from step 1 with a reference to the firebase storage image.
-    */
-  }
-  const createChannelsFirebase = async(docID: string, serverTemplate: string): Promise<void> => {
-    try {
-      // const categoryRef = await setDoc(doc(db, `servers/${docID}/textChannels/`)
-      const noCategoryRef = await setDoc(doc(db, `servers/${docID}/textChannels/`, 'no category'), { 
-        categoryID: `${uuidv4()}` 
-      });
-      for (const item of templates[serverTemplate].textChannels) {
-        const categoryRef = await setDoc(doc(db, `servers/${docID}/textChannels/`, item.category), {
-          categoryID: `${uuidv4()}`,
-        });       
-        console.log(item)
-        for (const channelItem of item.channels) {
-          const textChannelRef = await setDoc(doc(db, `servers/${docID}/textChannels/${item.category}`, `${channelItem}`), {
-            messages: [],
-            archived: [],
-            userPermissions: {},
-            channelID: `${uuidv4()}`,
-            channelName: '',
-          });
-        }
-      }
-      // for (const item of templates[serverTemplate].voiceChannels) {
-      //   const categoryRef = await setDoc(doc(db, `servers/${docID}/voiceChannels/`, item.category), {
-      //     categoryID: `${uuidv4()}`,
-      //   });
-      //   console.log(categoryRef);        
-      //   for (const channelItem of item.channels) {
-      //     const voiceChannelRef = await setDoc(doc(db, `servers/${docID}/voiceChannels/${item.category}`, `${channelItem}`), {
-      //       currentUsers: [],
-      //       userPermissions: [],
-      //       channelID: `${uuidv4()}`,
-      //     });
-      //   }
-      // }
-
-
-      // const voiceChannelsRef = await addDoc(collection(db, `servers/${docID}/voiceChannels`), {
-      //   currentUsers: [],
-      //   userPermissions: [],
-      //   channelID: `${uuidv4()}`,
-      // })
-    } catch(error) { if (error instanceof Error) return console.log(error) };
-  }
-
-  const uploadServerProfile = async(docID: string): Promise<void> => {
-    try {
-      const storageRef = ref(storage, `serverAssets/${docID}/serverProfile.png`);
-    } catch(error) { if(error instanceof Error) return console.log(error) };
-  }
   const hideNewServerPanel = (e: React.MouseEvent) => {
     e.stopPropagation();
     if((e.target as HTMLDivElement).id === 'newServerModal') {
@@ -217,7 +152,7 @@ export default function NewServerCompoennt() {
         checkImage={checkImage}
         serverName={server.serverName}
         serverProfile={server.serverProfile}
-        createServerFirebase={createServerFirebase}
+        submitNewServer={submitNewServer}
         />
         );
     } 
