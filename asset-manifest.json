@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/discord-clone/static/css/main.2760ca18.css",
-    "main.js": "/discord-clone/static/js/main.ecaf7982.js",
+    "main.css": "/discord-clone/static/css/main.8f1e7134.css",
+    "main.js": "/discord-clone/static/js/main.4731a5a4.js",
     "static/media/characterBackground.svg": "/discord-clone/static/media/characterBackground.037040d8d3b28edb6a7e7cb817b5ae96.svg",
     "static/media/createStudyGroupIcon.svg": "/discord-clone/static/media/createStudyGroupIcon.9ab631e1d1a164dc7ef037097a73f078.svg",
     "static/media/createMyIcon.svg": "/discord-clone/static/media/createMyIcon.c4b7801fb3f0df3378617f386f91820f.svg",
@@ -62,11 +62,11 @@
     "static/media/replyIcon.svg": "/discord-clone/static/media/replyIcon.6db9efccaf13c3df9c779aa496a30f27.svg",
     "static/media/playIcon.svg": "/discord-clone/static/media/playIcon.491f07539052dd71da3a87298bed775e.svg",
     "static/media/chevronRightIcon.svg": "/discord-clone/static/media/chevronRightIcon.48340e291a1e5f7e391d20ed91e0ded4.svg",
-    "main.2760ca18.css.map": "/discord-clone/static/css/main.2760ca18.css.map",
-    "main.ecaf7982.js.map": "/discord-clone/static/js/main.ecaf7982.js.map"
+    "main.8f1e7134.css.map": "/discord-clone/static/css/main.8f1e7134.css.map",
+    "main.4731a5a4.js.map": "/discord-clone/static/js/main.4731a5a4.js.map"
   },
   "entrypoints": [
-    "static/css/main.2760ca18.css",
-    "static/js/main.ecaf7982.js"
+    "static/css/main.8f1e7134.css",
+    "static/js/main.4731a5a4.js"
   ]
 }
