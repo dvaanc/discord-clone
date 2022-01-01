@@ -15,6 +15,7 @@ export default function NewServerCompoennt() {
     (state: RootState) => state.newServerPanel.value);
   const [height, setHeight] = useState('558' as string);
   const [checkImage, setCheckImage] = useState(false as boolean);
+  const [currentUser, setCurrentUser] = useState('' as any);
   const [server, setServer]  = useState({
     serverName: '',
     serverProfile: null as any,
@@ -22,7 +23,6 @@ export default function NewServerCompoennt() {
     serverTemplate: '',
     serverType: '',
   })
-
   const [slideshow, setSlideshow] = useState([true, false, false, false] as Array<boolean>);
   // useEffect(() => {
   //   console.log(server)
@@ -35,9 +35,13 @@ export default function NewServerCompoennt() {
   //       .then((blob) => console.log(blob.type));
   //   }
   // }, [server.serverProfile])
-  // onAuthStateChanged(auth, (currentUser) => {
-  //   console.log(currentUser!.uid)
-  // })
+
+  onAuthStateChanged(auth, (currentUser) => {
+    if(currentUser) return setCurrentUser(currentUser.uid);
+  })
+  // useEffect(() => {
+  //   console.log(currentUser)
+  // }, [currentUser])
   useEffect(() => {
     if(slideshow[0]) setHeight('558');
     if(slideshow[1]) setHeight('396');
@@ -97,7 +101,9 @@ export default function NewServerCompoennt() {
     }
   }
 
-  const submitNewServer = (e: React.MouseEvent): any => createServerFirebase(server);
+  const submitNewServer = (e: React.MouseEvent): any => {
+    createServerFirebase(server, currentUser);
+  }
 
   const hideNewServerPanel = (e: React.MouseEvent) => {
     e.stopPropagation();

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { SectionOne } from '../../../../styles/appStyles/Overlay/NewServerPanelStyles/CreateAServerStyles'
 import { FileUploadInput, SectionTwo, ServerNameInputContainer, ServerNameInput, ServerCreationDisclaimer, SectionThree } from '../../../../styles/appStyles/Overlay/NewServerPanelStyles/CustomizeYourServerStyles'
 import Image from '../../../../utility/imagesObj'
-import { serverProps } from '../../../../firebase/firebase';
 interface CustomizeYourServerProps {
   hideNewServerPanel(e: React.MouseEvent): void,
   handleCustomizeServerName(e: React.ChangeEvent): void,
@@ -28,6 +27,7 @@ export default function CustomizeYourServerComponent({
     useEffect(() => {
       if(serverProfile === null) return setCurrentImage(Image.uploadImageIcon);
       if(serverProfile !== null) return setCurrentImage(URL.createObjectURL(serverProfile));
+      console.log(serverProfile)
     }, [serverProfile])
   return (
     <div>

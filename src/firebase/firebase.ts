@@ -3,9 +3,10 @@ import { getFirestore } from 'firebase/firestore/lite';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
-import { doc, addDoc, setDoc, Timestamp, collection } from 'firebase/firestore/lite';
+import { doc, addDoc, setDoc, Timestamp, collection, query, where, getDocs, getDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore/lite';
 import { ref, uploadBytes } from 'firebase/storage';
 import { templates } from '../utility/serverTemplates';
+import { ServerChannelList } from '../styles/appStyles/ServerContainer/ServerSidebarStyles';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -47,7 +48,7 @@ const logout = async () => {
   }
 }
 
-const createServerFirebase = async(server: serverProps): Promise<void> => {
+const createServerFirebase = async(server: serverProps, userID: string): Promise<void> => {
   try {
     const newServerRef: any = await addDoc(collection(db, 'servers'), {
       serverName: server.serverName,
@@ -57,6 +58,7 @@ const createServerFirebase = async(server: serverProps): Promise<void> => {
     })
     createChannelsFirebase(newServerRef.id, server.serverTemplate);
     uploadServerProfile(server, newServerRef.id);
+    addServerToUserServerList(userID, newServerRef.id);
     
   } catch(error) { if(error instanceof Error) return console.log(error) };
 }
@@ -102,6 +104,32 @@ const uploadServerProfile = async(server: serverProps, docID: string): Promise<v
   } catch(error) { if(error instanceof Error) return console.log(error) };
 }
 
+const addServerToUserServerList = async(userID: string, serverID: string) => {
+  const userRef = doc(db, 'users', userID);
+  await updateDoc(userRef, {
+    serverList: arrayUnion(`${serverID}`),
+  })
+}
 
-export { login, logout, auth, db, storage, createServerFirebase, createChannelsFirebase, uploadServerProfile }
+const fetchUserServerList = async(userID: string) => {
+  const userRef = doc(db, 'users', userID);
+  const userSnap = await getDoc(userRef);
+  if(userSnap.exists()) {
+    console.log(userSnap.data());
+    const serverList = userSnap.data().serverList;
+    console.log(serverList);
+  }
+}
+
+export { 
+  login,
+  logout, 
+  auth,
+  db, 
+  storage, 
+  createServerFirebase, 
+  createChannelsFirebase, 
+  uploadServerProfile, 
+  fetchUserServerList 
+}
 export default app;
