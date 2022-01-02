@@ -41,6 +41,7 @@ const LoadWindow = keyframes`
   }
 `
 const LoginFormContainer = styled.div`
+  position: fixed;
   display: block;
   width: 480px;
   height: 415px;
@@ -52,7 +53,6 @@ const LoginFormContainer = styled.div`
   animation: ${LoadWindow} 0.17s 0s both;
   animation-delay: 0.1s;
 `
-
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -166,8 +166,8 @@ const RegisterWrapper = styled.div`
   margin-top: 10px;
   & p {
     color: #72767d;
-    font-size: 14px;
-    margin-right: 5px;
+    font-size: 12px;
+    margin-right: 3px;
   }
   & button {
     color: #01ACF0;
@@ -181,6 +181,11 @@ const RegisterWrapper = styled.div`
     }
   }
 `
+const DemoWrapper = styled(RegisterWrapper)`
+  & p {
+    color: #B9BBBE;
+  }
+`;
 
 export {
   LoginForm, 
@@ -194,4 +199,5 @@ export {
   LoginFormContainer,
   LoadWindow,
   Loading,
+  DemoWrapper,
 }

@@ -12,16 +12,24 @@ export default function SidebarComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [servers, setServers] = useState([] as any);
+  const [serverList, setServerList] = useState([] as any);
   const [currentUser, setCurrentUser] = useState('' as any);
 
-    onAuthStateChanged(auth, (currentUser: any) => {
-    if(currentUser === null || undefined ) navigate("/login");
-    if(currentUser) return setCurrentUser(currentUser.uid);
-
+  onAuthStateChanged(auth, (currentUser: any) => {
+  if(currentUser === null || undefined ) navigate("/login");
+  if(currentUser) return setCurrentUser(currentUser.uid);
   });
   useEffect(() => {
-    fetchUserServerList(currentUser);
-  },[])
+    if(currentUser !== '') {
+      fetchUserServerList(currentUser)
+        .then((res) => {
+          setServerList(res)
+          console.log(currentUser)
+          console.log(res)
+        })
+    }
+  },[currentUser])
+
   // useEffect(() => {
   //   const getServers = async () => {
   //     let isMounted: boolean = true; 
@@ -44,6 +52,9 @@ export default function SidebarComponent() {
   //   console.log(servers)
   // }, [servers])
 
+  const test = () => {
+    console.log(serverList);  
+  }
   const createServer = () => dispatch(toggleNewServerPanel(true))
   const loadServer = () => {
     return (
@@ -80,6 +91,11 @@ export default function SidebarComponent() {
         </GreenButton>
       </SidebarItem>
       <SidebarItem onClick={() => signOut(auth)} >
+        <GreenButton>
+          <img src={Image.downloadAppIcon} alt="" />
+        </GreenButton>
+      </SidebarItem>
+      <SidebarItem onClick={test} >
         <GreenButton>
           <img src={Image.downloadAppIcon} alt="" />
         </GreenButton>

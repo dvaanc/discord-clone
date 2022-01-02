@@ -8,7 +8,8 @@ import {
   RegisterWrapper,
   ErrMessage,
   MessageField,
-  LoginInput 
+  LoginInput, 
+  DemoWrapper
 } from '../../styles/loginStyles/LoginFormContainer';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase/firebase';
@@ -34,19 +35,17 @@ export default function LoginFormComponent() {
   displayEmailErr(false);
   displayPassErr(false);
   // if(checkEmptyLoginFields()) return;
-  login();
+  login(loginEmail, loginPassword);
   }
 
-  const login = async () => {
+  const login = async (email: string, password: string) => {
     try {
       const user = await signInWithEmailAndPassword(
         auth,
-        loginEmail,
-        loginPassword
+        email,
+        password
       );
       navigate("/app");
-      // console.log(user);
-      // console.log('Successfully logged in')
     } catch (error) {
       if(error instanceof Error) {
         console.log(error);
@@ -55,11 +54,12 @@ export default function LoginFormComponent() {
       } 
     }
   };
-  // const setLoginDisplay = (e: React.MouseEvent) => {
-  //   e.preventDefault();
-  //   dispatch(toggleLoginDisplay(false)); 
-  //   dispatch(toggleRegisterDisplay(true));
-  // }
+
+  const loginAsDemo = async () => {
+    setLoginEmail('');
+    setLoginPassword('');
+    login('test@gmail.com', '123456');
+  }
   
   const checkEmptyLoginFields = (): boolean => {
     if(loginEmail === '') setErrMsg('emptyEmail');
@@ -103,41 +103,44 @@ export default function LoginFormComponent() {
 
   return (
   <LoginFormContainer>
-      <LoginForm onSubmit={submitLoginForm}>
-          <h2>Welcome back!</h2>
-          <h4>We're so excited to see you again!</h4>
-          <InputGroup>
-              <MessageField err={showEmailErr}>
-                  <label htmlFor="email">EMAIL OR PHONE NUMBER</label>
-                  <ErrMessage err={showEmailErr}>
-                      <span></span>
-                      {emailErr}
-                  </ErrMessage>
-              </MessageField>
-              <LoginInput err={showEmailErr} type="text" name="email" onChange={onChangeLoginEmail} value={loginEmail} />
-          </InputGroup>
-          <InputGroup>
-              <MessageField err={showPassErr}>
-              <label htmlFor="pass">PASSWORD</label>
-              <ErrMessage err={showPassErr}>
+    <LoginForm onSubmit={submitLoginForm}>
+      <h2>Welcome back!</h2>
+      <h4>We're so excited to see you again!</h4>
+      <InputGroup>
+          <MessageField err={showEmailErr}>
+              <label htmlFor="email">EMAIL OR PHONE NUMBER</label>
+              <ErrMessage err={showEmailErr}>
                   <span></span>
-                  {passErr}
+                  {emailErr}
               </ErrMessage>
-              </MessageField>
-          <LoginInput err={showPassErr} type="password" name="pass" onChange={onChangeLoginPassword} value={loginPassword}/>
-          </InputGroup>
-              <ForgotPassButtonWrapper>
-                  <button>Forgot your password?</button>
-              </ForgotPassButtonWrapper>
-              <LoginButton type="submit" onSubmit={submitLoginForm}>Login</LoginButton>
-              <RegisterWrapper>
-                  <p>Need an account?</p>
-                  <Link to="/register">
-                    <button>Register</button>
-                  </Link>
-                  
-              </RegisterWrapper>
-      </LoginForm>
+          </MessageField>
+          <LoginInput err={showEmailErr} type="text" name="email" onChange={onChangeLoginEmail} value={loginEmail} />
+      </InputGroup>
+      <InputGroup>
+          <MessageField err={showPassErr}>
+          <label htmlFor="pass">PASSWORD</label>
+          <ErrMessage err={showPassErr}>
+              <span></span>
+              {passErr}
+          </ErrMessage>
+          </MessageField>
+      <LoginInput err={showPassErr} type="password" name="pass" onChange={onChangeLoginPassword} value={loginPassword}/>
+      </InputGroup>
+      <ForgotPassButtonWrapper>
+          <button>Forgot your password?</button>
+      </ForgotPassButtonWrapper>
+      <LoginButton type="submit" onSubmit={submitLoginForm}>Login</LoginButton>
+      <RegisterWrapper>
+          <p>Need an account?</p>
+          <Link to="/register">
+            <button>Register</button>
+          </Link>
+      </RegisterWrapper>
+      <DemoWrapper>
+        <p>Just looking around? Skip to the demo version</p>
+        <button>here.</button>
+      </DemoWrapper>
+    </LoginForm>
   </LoginFormContainer>
   )
 }

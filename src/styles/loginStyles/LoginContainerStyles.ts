@@ -15,11 +15,7 @@ const CharacterBackground = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
   object-fit: fill;
 `
-
-
-
 
 export { CharacterBackground, LoginContainer };

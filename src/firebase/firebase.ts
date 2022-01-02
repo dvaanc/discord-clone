@@ -49,16 +49,18 @@ const logout = async () => {
 }
 
 const createServerFirebase = async(server: serverProps, userID: string): Promise<void> => {
+  const newUUID = uuidv4();
   try {
-    const newServerRef: any = await addDoc(collection(db, 'servers'), {
+    const newServerRef: any = await setDoc(doc(db, 'servers', newUUID), {
       serverName: server.serverName,
       creationDate: Timestamp.now(),
       serverTemplate: server.serverTemplate,
       serverType: server.serverType,
+      serverID: newUUID,
     })
-    createChannelsFirebase(newServerRef.id, server.serverTemplate);
-    uploadServerProfile(server, newServerRef.id);
-    addServerToUserServerList(userID, newServerRef.id);
+    createChannelsFirebase(newUUID, server.serverTemplate);
+    uploadServerProfile(server, newUUID);
+    addServerToUserServerList(userID, newUUID);
     
   } catch(error) { if(error instanceof Error) return console.log(error) };
 }
@@ -115,10 +117,13 @@ const fetchUserServerList = async(userID: string) => {
   const userRef = doc(db, 'users', userID);
   const userSnap = await getDoc(userRef);
   if(userSnap.exists()) {
-    console.log(userSnap.data());
     const serverList = userSnap.data().serverList;
-    console.log(serverList);
+    return serverList;
   }
+}
+const fetchServers = async(serverList: Array<string>) => {
+  const serversRef = collection(db, 'servers');
+const q = query(serversRef, where('serverID', 'in', [...serverList]))
 }
 
 export { 
