@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { doc, addDoc, setDoc, Timestamp, collection, query, where, getDocs, getDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore/lite';
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { templates } from '../utility/serverTemplates';
 import { ServerChannelList } from '../styles/appStyles/ServerContainer/ServerSidebarStyles';
 
@@ -123,7 +123,17 @@ const fetchUserServerList = async(userID: string) => {
 }
 const fetchServers = async(serverList: Array<string>) => {
   const serversRef = collection(db, 'servers');
-const q = query(serversRef, where('serverID', 'in', [...serverList]))
+  const q = query(serversRef, where('serverID', 'in', [...serverList]))
+  const snapshot = await getDocs(q);
+  const serverArr: Array<object> = [];
+  snapshot.forEach((doc) => serverArr.push(doc.data()))
+  return serverArr;
+}
+
+const fetchServerImage = async(docID: string) => {
+  const storageRef = ref(storage, `serverAssets/${docID}/serverProfile.png`);
+  const serverImage = await getDownloadURL(storageRef)
+  return serverImage;
 }
 
 export { 
@@ -135,6 +145,8 @@ export {
   createServerFirebase, 
   createChannelsFirebase, 
   uploadServerProfile, 
-  fetchUserServerList 
+  fetchUserServerList,
+  fetchServers,
+  fetchServerImage,
 }
 export default app;
