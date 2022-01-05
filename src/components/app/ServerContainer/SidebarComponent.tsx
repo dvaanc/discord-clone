@@ -14,73 +14,53 @@ export default function SidebarComponent() {
   const [servers, setServers] = useState([] as any);
   const [serverList, setServerList] = useState([] as any);
   const [currentUser, setCurrentUser] = useState('' as any);
+  const [isMounted, setIsMounted] = useState(true as boolean);
+  const [serversTrue, setServersTrue] = useState(false as boolean);
 
   onAuthStateChanged(auth, (currentUser: any) => {
-    if(currentUser === null || undefined ) navigate("/login");
-    if(currentUser) return setCurrentUser(currentUser.uid);
+    if(currentUser === null) return navigate("/login");
+    setCurrentUser(currentUser.uid);
   })
 
   useEffect(() => {
-    if(currentUser === '') return;
-    fetchUserServerList(currentUser)
-      .then((res) => setServerList(res))
-  },[currentUser])
+    if(isMounted) {
+      if(currentUser === '') return;
+      fetchUserServerList(currentUser)
+        .then((res) => setServerList(res));
+    }
+
+  },[currentUser, isMounted])
 
   useEffect(() => {
-    if(serverList.length === 0) return;
-    fetchServers(serverList)
-      .then((res) => setServers(res))
-      // .then(() => console.log(servers))
+    if(isMounted) {
+      if(serverList.length === 0) return;
+      fetchServers(serverList)
+        .then((res) => setServers(res))
+    }
   }, [serverList])
 
   useEffect(() =>  {
     if(servers.length === 0) return;
+      setServers(servers)
     // servers.forEach((server: any, i: number) => {
     //   fetchServerImage(server.serverID)
-    //     .then((res) => servers[i].serverProfile = res);
+    //     .then((res) => {
+    //       servers[i].serverProfile = res
+    //       return setServersDataExist(true);
+    //     })
     // })
-    console.log(servers);
   }, [servers])
-  // useEffect(() => {
-  //   if(servers.length > 0) console.log(servers);
-  //   if(serverList.length >  0) console.log(serverList);
-  // }, [servers, serverList])
-  // useEffect(() => {
-  //   const getServers = async () => {
-  //     let isMounted: boolean = true; 
-      
-  //     const serversSnapshot = await getDocs(serverCollectionRef);
-  //     // if(isMounted) console.log(data.forEach((doc) => console.log(doc.data())))
-  //     const data = [] as any;
-  //     if(isMounted) {
-  //       serversSnapshot.forEach((doc) => {
-  //         data.push({ ...doc.data(), id: doc.id});
-  //         // const serverImage = ref(storage, `serverAssets/${doc.id}/serverImage.png`)
-  //         // console.log(serverImage);
-  //       });
-  //       setServers(data);
-  //     }
-  //   }
-  //   getServers();
-  // }, [])
-  // useEffect(() => {
-  //   console.log(servers)
-  // }, [servers])
 
   const test = () => {
     console.log(servers);  
   }
   const createServer = () => dispatch(toggleNewServerPanel(true))
-  const loadServer = () => {
-    return (
-      <SidebarItem onClick={() => signOut(auth)} >
-        <Pill />
-        <HomeButton>
-          Quit
-        </HomeButton>
-      </SidebarItem>
-    )
-  }
+  // const renderServersToSidebar = () => {
+  //   console.log(servers.length)
+  //   return (
+
+  //   )
+  // }
   return(
     <Sidebar>
       <SidebarItem>
@@ -90,16 +70,16 @@ export default function SidebarComponent() {
         </HomeButton>
       </SidebarItem>
       { servers.forEach((server: any) => {
-        
-        return(
+        return (
           <SidebarItem>
             <Pill />
-            <HomeButton>
-              <img src={Image.discordLogo} alt="" />
-            </HomeButton>
-        </SidebarItem>
+            <Icon>
+              <img src={server.serverProfile} alt="" />
+            </Icon>
+          </SidebarItem>
         )
-      })}
+      }) }
+
       <SidebarItem onClick={createServer} >
         <GreenButton>
           <img src={Image.createServerIcon} alt="" />

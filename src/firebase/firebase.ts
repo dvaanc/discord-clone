@@ -99,10 +99,14 @@ const createChannelsFirebase = async(docID: string, serverTemplate: string): Pro
   } catch(error) { if (error instanceof Error) return console.log(error) };
 }
 
-const uploadServerProfile = async(server: serverProps, docID: string): Promise<void> => {
+const uploadServerProfile = async(server: serverProps, serverID: string): Promise<void> => {
   try {
-    const storageRef = ref(storage, `serverAssets/${docID}/serverProfile.png`);
-    await uploadBytes(storageRef, server.serverProfile).then((snapshot) => console.log(snapshot))
+    const storageRef = ref(storage, `serverAssets/${serverID}/serverProfile.png`);
+    await uploadBytes(storageRef, server.serverProfile).then(() => {
+      fetchServerImage(serverID).then((res) => {
+        const serverRef = setDoc(doc(db, 'servers', serverID), { serverProfile: res }, { merge: true });
+      })
+    })
   } catch(error) { if(error instanceof Error) return console.log(error) };
 }
 
@@ -126,14 +130,42 @@ const fetchServers = async(serverList: Array<string>) => {
   const q = query(serversRef, where('serverID', 'in', [...serverList]))
   const snapshot = await getDocs(q);
   const serverArr: Array<object> = [];
-  snapshot.forEach((doc) => serverArr.push(doc.data()))
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    fetchServerImage(data.serverID).then((res) => data.serverProfile = res);
+    serverArr.push(data)
+  })
   return serverArr;
 }
 
-const fetchServerImage = async(docID: string) => {
-  const storageRef = ref(storage, `serverAssets/${docID}/serverProfile.png`);
+const fetchServerImage = async(serverID: string) => {
+  const storageRef = ref(storage, `serverAssets/${serverID}/serverProfile.png`);
   const serverImage = await getDownloadURL(storageRef)
   return serverImage;
+}
+
+const newChatMessage = async(serverID: string, categoryName: string, channelName: string, userID: string, message: string) => {
+  const uuid = uuidv4();
+  try {
+    const channelRef = await setDoc(doc(db,
+      `servers/${serverID}/textChannels/${categoryName}/channels/${channelName}/chatMessages/${uuid}`, uuid), {
+        chatID: uuid,
+        userID,
+        message,
+      });
+  } catch(error) { if(error instanceof Error) console.log(error) }
+
+    // try {
+    //   const newServerRef: any = await setDoc(doc(db, 'servers', newUUID), {
+    //     serverName: server.serverName,
+    //     creationDate: Timestamp.now(),
+    //     serverTemplate: server.serverTemplate,
+    //     serverType: server.serverType,
+    //     serverID: newUUID,
+    //   })
+
+      
+    // } catch(error) { if(error instanceof Error) return console.log(error) };
 }
 
 export { 

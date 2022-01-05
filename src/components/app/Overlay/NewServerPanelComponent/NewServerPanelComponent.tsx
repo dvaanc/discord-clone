@@ -43,10 +43,14 @@ export default function NewServerCompoennt() {
   //   console.log(currentUser)
   // }, [currentUser])
   useEffect(() => {
-    if(slideshow[0]) setHeight('558');
-    if(slideshow[1]) setHeight('396');
-    if(slideshow[2]) setHeight('405');
-    if(slideshow[3]) setHeight('436');
+    const isMounted = true;
+    if(isMounted) {
+      if(slideshow[0]) setHeight('558');
+      if(slideshow[1]) setHeight('396');
+      if(slideshow[2]) setHeight('405');
+      if(slideshow[3]) setHeight('436');
+    }
+
   }, [slideshow])
 
   const cycleSlideShowUp = (): void => {

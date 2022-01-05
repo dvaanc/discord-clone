@@ -20,12 +20,11 @@ import { InputGroup, RegisterWrapper, ErrMessage, MessageField } from '../../sty
 import { DateOfBirthObj } from '../../utility/DateOfBirthObj';
 import Image from '../../utility/imagesObj';
 import { Link, useNavigate } from 'react-router-dom';
-import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth';
+import { onAuthStateChanged } from '@firebase/auth';
 import { auth } from '../../firebase/firebase';
+import { registerToAuth } from '../../firebase/firestore/userAuth';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store'
-
 interface DropUpMenuProps { 
   [key: string]: boolean;
 };
@@ -58,25 +57,13 @@ export default function RegisterFormComponent() {
     if(currentUser !== null) return navigate("/app")
   });
 
-
-
-  const register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
-      console.log(user);
-      console.log('Successfully registered')
-    } catch (error) {
-      if(error instanceof Error) console.log(error.message);
-    }
-  };
-
   const submitRegisterForm = (e: React.FormEvent): void => {
     e.preventDefault();
     // if(checkEmptyFields()) return;
     // displayPassErr(false);
     // displayEmailErr(false);
     console.log(registerEmail, registerPassword)
-    register();
+    registerToAuth(registerEmail, registerPassword);
   }
   const setDateOfBirthInfo = (e: React.MouseEvent) => {
     const target = e.target as any;
