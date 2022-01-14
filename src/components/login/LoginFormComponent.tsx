@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { 
   LoginFormContainer,
   LoginForm,
@@ -13,28 +13,30 @@ import {
 } from '../../styles/loginStyles/LoginFormContainer';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase/firebase';
-import { onAuthStateChanged, signInWithEmailAndPassword } from '@firebase/auth';
+import { signInWithEmailAndPassword } from '@firebase/auth';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store'
 
 export default function LoginFormComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loginEmail, setLoginEmail] = useState("" as string);
+  const [loginPassword, setLoginPassword] = useState("" as string);
+  const [showEmailErr, displayEmailErr] = useState(false as boolean); 
+  const [showPassErr, displayPassErr] = useState(false as boolean);
+  const [emailErr, setEmailErr] = useState('test' as string);
+  const [passErr, setPassErr] = useState('test' as string);
+  const [signInWithDemo, setSignInWithDemo] = useState(false as boolean);
 
-  const [loginEmail, setLoginEmail] = React.useState("" as string);
-  const [loginPassword, setLoginPassword] = React.useState("" as string);
-  const [showEmailErr, displayEmailErr] = React.useState(false as boolean); 
-  const [showPassErr, displayPassErr] = React.useState(false as boolean);
-  const [emailErr, setEmailErr] = React.useState('test' as string);
-  const [passErr, setPassErr] = React.useState('test' as string);
-
+  useEffect(() => {
+    const mounted = true;
+    if(mounted && signInWithDemo) login(loginEmail, loginPassword)
+  }, [signInWithDemo])
 
   const submitLoginForm = (e: React.FormEvent): void => {
   e.preventDefault();
   displayEmailErr(false);
   displayPassErr(false);
-  // if(checkEmptyLoginFields()) return;
   login(loginEmail, loginPassword);
   }
 
@@ -55,10 +57,10 @@ export default function LoginFormComponent() {
     }
   };
 
-  const loginAsDemo = async () => {
-    setLoginEmail('');
-    setLoginPassword('');
-    login('test@gmail.com', '123456');
+  const loginAsDemo = async (e: React.MouseEvent): Promise<void> => {
+    setLoginEmail('test@gmail.com');
+    setLoginPassword('123456');
+    setSignInWithDemo(true);
   }
   
   const checkEmptyLoginFields = (): boolean => {
@@ -138,7 +140,7 @@ export default function LoginFormComponent() {
       </RegisterWrapper>
       <DemoWrapper>
         <p>Just looking around? Skip to the demo version</p>
-        <button>here.</button>
+        <button onClick={loginAsDemo}>here.</button>
       </DemoWrapper>
     </LoginForm>
   </LoginFormContainer>

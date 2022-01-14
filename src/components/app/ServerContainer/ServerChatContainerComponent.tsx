@@ -12,11 +12,12 @@ import {
   UploadIconWrapper,
 } from '../../../styles/appStyles/ServerContainer/ServerChatContainerStyles'
 import ServerNavBarComponent from './ServerNavBarComponent'
+import newChatMessage from '../../../firebase/firebase'
 export default function ServerChatContainerComponent() {
   const [chat, setChatMessage] = useState('' as string);
   const handleFormInputSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log(chat);
+    
   }
   const handleChatInput = (e: React.ChangeEvent) => setChatMessage((e.target as HTMLInputElement).value);
 

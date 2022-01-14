@@ -1,5 +1,5 @@
 import Container from '../../styles/appStyles/AppContainer';
-import SidebarComponent from './ServerContainer/SidebarComponent';
+import SidebarComponent from './SidebarComponent';
 import ServerContainerComponent from './ServerContainer/ServerContainerComponent';
 import LayerContainerComponent from './Overlay/Overlay';
 import { useSelector } from 'react-redux';

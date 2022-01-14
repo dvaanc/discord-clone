@@ -112,9 +112,7 @@ const uploadServerProfile = async(server: serverProps, serverID: string): Promis
 
 const addServerToUserServerList = async(userID: string, serverID: string) => {
   const userRef = doc(db, 'users', userID);
-  await updateDoc(userRef, {
-    serverList: arrayUnion(`${serverID}`),
-  })
+  await updateDoc(userRef, { serverList: arrayUnion(`${serverID}`) });
 }
 
 const fetchUserServerList = async(userID: string) => {
@@ -132,7 +130,6 @@ const fetchServers = async(serverList: Array<string>) => {
   const serverArr: Array<object> = [];
   snapshot.forEach((doc) => {
     const data = doc.data();
-    fetchServerImage(data.serverID).then((res) => data.serverProfile = res);
     serverArr.push(data)
   })
   return serverArr;
