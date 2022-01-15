@@ -40,7 +40,7 @@ export default function SidebarComponent() {
 
   useEffect(() =>  {
     if(servers.length === 0) return;
-      renderServersToSidebar()
+      console.log(servers)
     // servers.forEach((server: any, i: number) => {
     //   fetchServerImage(server.serverID)
     //     .then((res) => {
@@ -50,9 +50,6 @@ export default function SidebarComponent() {
     // })
   }, [servers])
 
-  const test = () => {
-    console.log(servers);  
-  }
   const grabServerData = async () => {
     try {
       setIsLoading(true)
@@ -63,23 +60,16 @@ export default function SidebarComponent() {
     } catch(err) {
       if(err instanceof Error) console.error(err)
     }
-
   }
   const createServer = () => dispatch(toggleNewServerPanel(true))
-  const renderServersToSidebar = () => {
-    console.log(servers.length)
-    servers.forEach((server: any) => {
-      return (
-        <SidebarItem>
-        <Pill />
-        <Icon>
-          <img src={server.serverProfile} alt="" />
-        </Icon>
-      </SidebarItem>
-      )
-    })
-
+  const handleClickServer = (e: React.MouseEvent): void => {
+    e.stopPropagation();
+    const target = e.target as HTMLDivElement;
+    const serverID = target.dataset.serverid;
+    const serverName = target.dataset.servername;
+    console.log(serverID, serverName)
   }
+
   return(
     <Sidebar>
       <SidebarItem>
@@ -88,19 +78,33 @@ export default function SidebarComponent() {
           <img src={Image.discordLogo} alt="" />
         </HomeButton>
       </SidebarItem>
-    { !isLoading && 
-      servers.forEach((server: any) => {
-        return (
-          <SidebarItem>
+    { servers.map((server: any) => {
+      const pic = server.serverProfile;
+      const name = server.serverName.slice(0, 1);
+      return (
+        <SidebarItem>
           <Pill />
-          <Icon>
-            <img src={server.serverProfile} alt="" />
-          </Icon>
-        </SidebarItem>
-        )
-      })
+            { pic ? 
+            <Icon>
+              <img 
+              onClick={handleClickServer} 
+              src={pic} alt="" 
+              data-serverid={server.serverID} 
+              data-servername={server.serverName}
+              /> 
+            </Icon>
+            : 
+            <HomeButton 
+            onClick={handleClickServer} 
+            data-serverid={server.serverID} 
+            data-servername={server.serverName}>
+              { name }
+            </HomeButton>
+            }
+      </SidebarItem>
+      )
+    }) }
 
-    }
       <SidebarItem onClick={createServer} >
         <GreenButton>
           <img src={Image.createServerIcon} alt="" />
@@ -121,11 +125,6 @@ export default function SidebarComponent() {
         <HomeButton>
           Quit
         </HomeButton>
-      </SidebarItem>
-      <SidebarItem onClick={test} >
-        <GreenButton>
-          test
-        </GreenButton>
       </SidebarItem>
     </Sidebar>
   )

@@ -34,6 +34,8 @@ const Icon = styled.div`
   transition: border-radius 0.15s ease-out;
   margin: 0 auto;
   cursor: pointer;
+  color: white;
+  font-size: 14px;
   &:hover {
     border-radius: 38%;
   }
