@@ -2,33 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Sidebar, SidebarItem, HomeButton, Icon, Pill, GreenButton } from '../../styles/appStyles/SidebarStyles';
 import Image from '../../utility/imagesObj';
 import { signOut } from "@firebase/auth"
-import { Link, useNavigate } from 'react-router-dom';
-import { onAuthStateChanged } from '@firebase/auth';
-import { auth, db, fetchServerImage, fetchServers } from '../../firebase/firebase';
 import { toggleNewServerPanel } from '../../redux/features/newServerPanelSlice';
-import { useDispatch } from 'react-redux';
-import { fetchUserServerList } from '../../firebase/firebase'
-export default function SidebarComponent() {
+import { auth } from '../../firebase/firebase'
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/store';
+
+interface SidebarComponentProps {
+  isLoading: boolean | null
+}
+export default function SidebarComponent( { isLoading }: SidebarComponentProps ) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [servers, setServers] = useState([] as any);
-  const [currentUser, setCurrentUser] = useState('' as any);
-  const [isMounted, setIsMounted] = useState(true as boolean);
-  const [isLoading, setIsLoading] = useState(null as null | boolean);
-  onAuthStateChanged(auth, (currentUser: any) => {
-    if(currentUser === null) return navigate("/login");
-    setCurrentUser(currentUser.uid);
-  })
-
-  useEffect(() => {
-    if(isMounted) {
-      if(currentUser === '') return;
-      grabServerData()
-      // fetchUserServerList(currentUser)
-        // .then((res) => setServerList(res));
-    }
-
-  }, [currentUser, isMounted])
+  const servers = useSelector (
+    (state: RootState) => state.servers.servers);
+    
 
   // useEffect(() => {
   //   if(isMounted) {
@@ -50,17 +36,7 @@ export default function SidebarComponent() {
     // })
   }, [servers])
 
-  const grabServerData = async () => {
-    try {
-      setIsLoading(true)
-      const serverList = await fetchUserServerList(currentUser)
-      const servers = await fetchServers(serverList)
-      setServers(servers)
-      setIsLoading(false)
-    } catch(err) {
-      if(err instanceof Error) console.error(err)
-    }
-  }
+
   const createServer = () => dispatch(toggleNewServerPanel(true))
   const handleClickServer = (e: React.MouseEvent): void => {
     e.stopPropagation();
@@ -124,6 +100,12 @@ export default function SidebarComponent() {
         <Pill />
         <HomeButton>
           Quit
+        </HomeButton>
+      </SidebarItem>
+      <SidebarItem onClick={() => console.log(servers)} >
+        <Pill />
+        <HomeButton>
+          test
         </HomeButton>
       </SidebarItem>
     </Sidebar>
