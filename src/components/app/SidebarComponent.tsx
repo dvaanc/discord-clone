@@ -5,15 +5,16 @@ import { signOut } from "@firebase/auth"
 import { toggleNewServerPanel } from '../../redux/features/newServerPanelSlice';
 import { auth } from '../../firebase/firebase'
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux/store';
-
+import { setCurrentServer } from '../../redux/features/currentServerSlice';
+import { v4 as uuidv4 } from 'uuid'
 interface SidebarComponentProps {
-  isLoading: boolean | null
+  isLoading: boolean | null,
+  servers: Array<any>
 }
-export default function SidebarComponent( { isLoading }: SidebarComponentProps ) {
+export default function SidebarComponent( { isLoading, servers }: SidebarComponentProps ) {
   const dispatch = useDispatch();
-  const servers = useSelector (
-    (state: RootState) => state.servers.servers);
+  // const servers = useSelector (
+  //   (state: RootState) => state.servers.servers);
     
 
   // useEffect(() => {
@@ -26,7 +27,7 @@ export default function SidebarComponent( { isLoading }: SidebarComponentProps )
 
   useEffect(() =>  {
     if(servers.length === 0) return;
-      console.log(servers)
+      // console.log(servers)
     // servers.forEach((server: any, i: number) => {
     //   fetchServerImage(server.serverID)
     //     .then((res) => {
@@ -43,8 +44,10 @@ export default function SidebarComponent( { isLoading }: SidebarComponentProps )
     const target = e.target as HTMLDivElement;
     const serverID = target.dataset.serverid;
     const serverName = target.dataset.servername;
-    console.log(serverID, serverName)
+    dispatch(setCurrentServer(serverID));
   }
+
+
 
   return(
     <Sidebar>
@@ -57,8 +60,9 @@ export default function SidebarComponent( { isLoading }: SidebarComponentProps )
     { servers.map((server: any) => {
       const pic = server.serverProfile;
       const name = server.serverName.slice(0, 1);
+      const uuid = uuidv4();
       return (
-        <SidebarItem>
+        <SidebarItem key={uuid}>
           <Pill />
             { pic ? 
             <Icon>

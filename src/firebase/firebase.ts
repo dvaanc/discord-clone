@@ -81,6 +81,7 @@ const createChannelsFirebase = async(docID: string, serverTemplate: string): Pro
           userPermissions: {},
           channelID: `${uuidv4()}`,
           channelName: `${channelItem}`,
+          category: item.category,
         });
       }
     }
@@ -150,8 +151,7 @@ const newChatMessage = async(serverID: string, categoryName: string, channelName
         userID,
         message,
       });
-  } catch(error) { if(error instanceof Error) console.log(error) }
-
+  } catch(err) { if(err instanceof Error) console.error(err) }
     // try {
     //   const newServerRef: any = await setDoc(doc(db, 'servers', newUUID), {
     //     serverName: server.serverName,
@@ -163,6 +163,28 @@ const newChatMessage = async(serverID: string, categoryName: string, channelName
 
       
     // } catch(error) { if(error instanceof Error) return console.log(error) };
+}
+const fetchChannels = async (serverID: string) => {
+  try {
+    const categoriesRef = collection(db, `servers/${serverID}/textChannels`);
+    const categoriesQuerySnapshot = await getDocs(categoriesRef);
+    const channelData: Array<any> = []; 
+      categoriesQuerySnapshot.forEach((doc) => {
+        // console.log(doc.id, '==>', doc.data())
+        const data = doc.data()
+        const child = { categoryName: doc.id, categoryID: data.categoryID }
+        const channelsRef = collection(db, `servers/${serverID}/textChannels/${data.id}`)
+        // add another forEach loop for channels and push to array in category obj
+        channelData.push(child)
+      })
+      return channelData
+  } catch(err) { if(err instanceof Error) console.error(err) }
+}
+
+const fetchTextChannels = async(serverID: string, categoryName: string) => {
+  try {
+    const textChannelsRef = collection(db, `servers/${serverID}/textChannels/${categoryName}`)
+  } catch(err) { if(err instanceof Error) console.error(err) }
 }
 
 export { 
@@ -177,5 +199,6 @@ export {
   fetchUserServerList,
   fetchServers,
   fetchServerImage,
+  fetchChannels
 }
 export default app;

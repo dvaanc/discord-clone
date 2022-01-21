@@ -5,6 +5,7 @@ import currentUserReducer from "./features/currentUserSlice";
 import userSettingsPanelReducer from './features/userSettingsPanelSlice';
 import newServerPanelReducer from './features/newServerPanelSlice';
 import serversSliceReducer from './features/serversSlice'
+import currentServerSliceReducer from './features/currentServerSlice'
 export const store = configureStore({
   reducer: {
     userStatusPanel: userStatusPanelReducer,
@@ -13,6 +14,7 @@ export const store = configureStore({
     userSettingsPanel: userSettingsPanelReducer,
     newServerPanel: newServerPanelReducer,
     servers: serversSliceReducer,
+    currentServer: currentServerSliceReducer,
   },
 })
 
