@@ -6,6 +6,9 @@ Recreation of Discord on the web. Current iteration will not have support for mo
 the actual discord web app online has no mobile support and focus on learning CRUD and learning the different services that firebase offers. There may be plans to make it responsive in the future but I would have most likely moved on to other projects.
 
 ### Live Preview: **https://dvaanc.github.io/discord-clone/**
+Dummy user credentials (feel free to make your own account or use the provided credentials below to login):
+User: test@gmail.com
+Pass: 123456
 
 ## Special notes
  - Notes for myself and for others who want to understand my design choices.
